@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="考实真政绩  画准实干人（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="考实真政绩  画准实干人（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>考实真政绩  画准实干人（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">考实真政绩  画准实干人（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">考实真政绩  画准实干人（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年04月28日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0428/c461529-40709864.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                全方位、多渠道了解干部，近距离、全过程描绘政绩画像，把研究事和研究人结合起来，既在小事上识德辨才，更在大事上看德识才
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">干部干得好不好，如何更科学地评价？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">到基层干部群众中、从百姓口碑中了解干部，是重要途径。天津市和平区设立70余名“政绩观察员”，到一线看实景、听口碑，深入了解和掌握干部担当作为情况，让干部政绩画像更写实传神。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">干部业绩在实践，干部口碑在民间。近距离观察，有助于拉近观察视角，让埋头苦干的人赢得更多掌声。作为和平区排水管理所的干部，25岁的王晗负责巡查管网、清掏排污，工作又脏又累，不显山不露水。而到现场考察的“政绩观察员”，看到了台账背后的付出，也看到了暴雨中的坚守。王晗所在单位先后3次获评天津市特等模范集体。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">功夫下在平时，考核瞄准实绩。将组织资源前置到实践一线，从事后评价转为动态跟踪，这样的场景式考察，也是“陪伴式成长”，可以更好掌握干部的日常状态和一贯表现，把真政绩和实干人凸显出来，进而促进干部成长与事业发展同频共振。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">考核是“指挥棒”和“风向标”，指向哪些方面、重点考核什么，党员干部往往会把更多精力和行动投向哪里。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">如何涵养“功成不必在我、功成必定有我”的精神境界和历史担当？考核就要既用望远镜又用显微镜，既看显绩又看潜绩。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">如何遏制那些做表面文章、劳民伤财的“形象工程”和“政绩工程”？考核中就要常念“紧箍咒”、多些“回头看”，既审视决策过程又评估实际成效。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">全方位、多渠道了解干部，近距离、全过程描绘政绩画像，把研究事和研究人结合起来，既在小事上识德辨才，更在大事上看德识才，才能树立正确导向，营造崇尚实干、主动担当、加油鼓劲的浓厚氛围。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">考核干部，要做到经常化、制度化、全覆盖。进一步完善政绩考核体系，需要在多样实践、动态变化中考准考实干部的状态和作为。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">考核是一把量尺，但各地资源禀赋、基础水平、发展阶段、功能定位并不相同，不可能一种考核办法包打天下，而要立足实际探索分类考核方式。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">比如，浙江实施综合考核时，将县（市、区）划分为山区县和非山区县两个类别，对省直部门单位、省属企业实行“一单位一策”差异化考核，既全量化开展指标评分，又尽量把同一个量级的“选手”放在一起考核，进一步提升了针对性和公平性。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">考核政绩，不仅仅是评判优劣、实施奖惩，还在于通过激励先进、鞭策后进，充分调动各方面积极性、主动性、创造性，凝聚干事创业的最大合力。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">例如，福建泉州紧扣审批创新、监管执法、应急处置等10类高频履职场景，明确容错纠错适用条件与负面清单，既划定“可为、不可为”清晰边界，又动态更新清单，为干部履职提供“导航图”。明确“警戒线”，设置“防护栏”，把严格管理干部和热情关心干部结合起来，在更好的干事创业环境中，“老黄牛”不会被埋没，“闯将”亦无后顾之忧，更多“实干家”将脱颖而出。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">科学合理考核干部，旨在推动事业发展、更好为民造福。科学精准的政绩考核制度，是干事创业的有力推进器。关注平时，瞄准实绩，着眼长远，动态追踪，进一步完善激励机制和容错纠错机制，让每一个岗位的价值得到认可，让每一分辛勤的付出都有回响，广大党员干部必将在新征程上不断焕发新活力、展现新作为。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+科学精准的政绩考核应坚持一线动态观察、分类差异化评价与激励容错并重，从而考实真政绩、画准实干人，激发干部队伍干事创业的内生动力。
+
+**分论点：**
+1. 考核视角需下沉一线，从事后评价转向动态跟踪与“陪伴式”考察，在细微处识才辨德。
+2. 考核导向需辩证统一，既看显绩更重潜绩，严防“形象工程”，树立重实干的正确用人导向。
+3. 考核机制需因地制宜与严管厚爱结合，推行分类考核并完善容错纠错清单，为担当者撑腰鼓劲。
+
+**立意高度：**
+紧扣新时代党的组织路线与干部队伍建设核心要求，立足高质量发展新征程的时代背景，将政绩考核从单一的“指挥棒”升维为高质量发展的“推进器”，彰显了以人民为中心的发展思想和实事求是的思想路线，具有鲜明的政治引领性与现实针对性。
+
+## 【结构】
+
+**结构类型：**
+递进式（融合总分总）
+
+**结构图示：**
+设问破题引入基层案例 → 提出“近距离动态考核”方法论 → 深化“显潜兼顾/防形象工程”价值导向 → 拓展“分类考核/容错纠错”制度创新 → 结尾升华点明为民造福与新征程担当
+
+**过渡技巧：**
+采用“设问引路+概念复现+逻辑递进”的衔接方式。以“干部业绩在实践，干部口碑在民间”承接开篇案例，自然引出动态考察；以连续两个“如何……”设问实现从考核方法向考核导向的平滑转折；再以“考核政绩，不仅仅是……”递进至机制创新。段落间依靠核心概念（考核、政绩、实干）的反复叩问与逻辑关联词串联，形成严密的论证闭环。
+
+## 【佳句】
+
+1. 全方位、多渠道了解干部，近距离、全过程描绘政绩画像，把研究事和研究人结合起来，既在小事上识德辨才，更在大事上看德识才。
+2. 明确“警戒线”，设置“防护栏”，把严格管理干部和热情关心干部结合起来，在更好的干事创业环境中，“老黄牛”不会被埋没，“闯将”亦无后顾之忧，更多“实干家”将脱颖而出。
+3. 关注平时，瞄准实绩，着眼长远，动态追踪，进一步完善激励机制和容错纠错机制，让每一个岗位的价值得到认可，让每一分辛勤的付出都有回响，广大党员干部必将在新征程上不断焕发新活力、展现新作为。
+
+## 【解析】
+
+本文以“政绩考核如何科学化”为**切入点**，立足新时代干部队伍建设与高质量发展的**时代背景**，政治站位高远且极具现实关怀。文章采用**层层递进**的逻辑架构，从“一线动态观察”破题，纵深推进至“显潜辩证统一”的价值导向，最终落脚于“分类考核与容错纠错”的制度创新，构建了从理念认知到机制落地的严密**逻辑闭环**。在**素材论证**上，巧妙化用天津“政绩观察员”、浙江差异化考核、泉州容错清单等基层一线实践，以**小切口折射大主题**，案例鲜活、针对性强，极大提升了论证的说服力。语言风格上，党报特有的政治话语与文学修辞相得益彰，“望远镜与显微镜”“警戒线与防护栏”“老黄牛与闯将”等意象对仗工整、**节奏感**强，在严肃议题中注入**烟火气**，实现了政治高度与表达温度的有机统一。全文不仅为破除“唯分数、唯台账”考核顽疾提供了可操作的**方法论指导**，更以鲜明的实干导向强化**舆论引导**，对激发干部队伍内生动力、涵养风清气正政治生态具有显著的**现实意义**，堪称一篇**入脑入心**的政论佳作。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1286</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>15</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>

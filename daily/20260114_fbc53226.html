@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="“颗粒度”更细，幸福度更高（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="“颗粒度”更细，幸福度更高（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>“颗粒度”更细，幸福度更高（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">“颗粒度”更细，幸福度更高（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">“颗粒度”更细，幸福度更高（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年01月14日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0114/c461529-40644658.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">习近平主席在二〇二六年新年贺词中回顾2025年“我们共创共享美好生活”，并深情寄语：“柴米油盐、三餐四季，每个‘小家’热气腾腾，中国这个‘大家’就蒸蒸日上。”即日起，本版推出系列评论，与广大读者一起总结这些年来民生改善的新成效、新特点、新趋势。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">把民生价值融入经济社会发展全过程、各环节，在国家治理和发展的方方面面都彰显民生关怀</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">“民生无小事，枝叶总关情。”改善民生必须办好一件件“小事”，那些细节处的用心用情，给人别样的温暖。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">生活中，人们寄快递时常遇到这样的小烦恼：计费重量的“零头”应该怎么算？曾经，寄件“向上取整”成常态，比如将2.1千克“向上取整”为3千克，快递费也相应增加。“向上取整”让老百姓多掏快递费，应如何规范？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">针对这一情况，国家邮政局迅速开展核查，优化完善计重规则，计费重量以千克为单位，保留小数点后至少1位，“向上取整”的问题迎刃而解。为保护老百姓权益而分厘必争、不厌其细，正是“死磕”细节的努力，让老百姓真切感受到改善民生的诚意和暖意。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">在二〇二六年新年贺词中，习近平主席总结道：“过去一年，新就业群体权益有了进一步保障，适老化改造给老年人带来方便，育儿家庭每月多了300元补贴。”每一个普通家庭的生活都与国家的发展息息相关，人民领袖的人民情怀温润人心，世界规模最大执政党的价值理念璀璨生辉。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">柴米油盐、三餐四季，道尽了生活日常、岁月绵长。这些年来，我们矢志不渝保障和改善民生，不尚空谈、不务虚功，在基本保障基础上，更加关注个性化、差异化的民生诉求，让民生改善的“颗粒度”更细，不断以精细化提升幸福度。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">比如，在机构床位紧张的前提下，如何提升居家养老的品质？贵州贵阳观山湖区探索“机构+社区+居家”模式，就近就便提供长期照护、短期托养、日间照料等多种养老服务。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">比如，在外出务工和照顾家庭之间，如何解决农民工面临的两难？不少地方以多种形式推进就近就业。云南镇雄县通过“家门口的务工车间”建设，搭建“园区+车间+工坊”平台，多措并举促进群众在“家门口就业”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">“颗粒度”更细，才能更好聚焦民生痛点难点，有针对性地解决问题，把民生工作做到老百姓的心坎上。同时，随着社会分工日益细化，“颗粒度”更细还意味着精准把握不同群体的不同特点，更好满足分众化诉求。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">在上海，“新时代城市建设者管理者之家”面向一线劳动者，价格亲民、设施齐全。“一张张温暖的床”，托举起“一个个安居的梦”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">在杭州，青荷驿站为参加求职面试的青年群体，提供不超过7天（6晚）的免费住宿。这个“全域覆盖、多点分布、拎包入住”的房源服务网，实打实缓解着求职年轻人“落脚难”的焦虑。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">“颗粒度”更细，还蕴含着一种治理智慧，既体现为下足“绣花”功夫、治理更加精准有效，更意味着把民生价值融入经济社会发展全过程、各环节，在国家治理和发展的方方面面都彰显民生关怀。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">重庆轨道交通有一条特殊的“背篓专线”，每天早上把菜农从农村地区运到中心城区，满载瓜果飘香更满载民生希冀；广东率先推出“妈妈岗”就业模式，工作时间、管理模式相对灵活，帮助育儿妇女实现“带娃”、就业两不误；北京“挤”出数百个口袋公园，让市民可以推门见绿、转角遇美，为超大城市带来宝贵的方寸之美……</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">15</span>
+                <div class="para-text">不断细化“颗粒度”、增强针对性，就是让相关制度设计和实施更加贴合百姓需求，让政策的暖流润泽更多细分需求。在民生细微处加大力度，在日常生活中接续用力，不仅折射出我国民生改善的巨大成就，更彰显着大党大国的价值追求和力量之源。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">16</span>
+                <div class="para-text">家事国事天下事，让人民过上幸福生活是头等大事。无数个普通家庭的幸福灯火，共同点亮中国的灿烂星空。一个“为了人民”的中国，将不断为14亿多人民带来更多福祉；一个“依靠人民”的中国，将激发万马奔腾的活力，获得源源不断的发展动力。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+民生改善需要&#34;颗粒度&#34;更细，通过精细化治理将民生价值融入经济社会发展全过程，不断提升人民幸福度。
+
+**分论点：**
+1. 改善民生必须办好一件件&#34;小事&#34;，细节处的用心用情让人感受诚意和暖意
+2. &#34;颗粒度&#34;更细才能聚焦民生痛点难点，精准把握不同群体的分众化诉求3. 细化&#34;颗粒度&#34;蕴含治理智慧，把民生价值融入国家治理和发展的方方面面
+
+**立意高度：**
+文章立足以人民为中心的发展思想，呼应新时代民生工作从&#34;有没有&#34;向&#34;好不好&#34;转变的时代背景，体现大党大国&#34;为了人民、依靠人民&#34;的价值追求，政治站位高、时代感强。## 【结构】
+
+**结构类型：**
+递进式 + 并列式混合结构
+
+**结构图示：**
+开篇引入（新年贺词）→ 中心论点提出 → 分论点 1（快递计费案例）→ 分论点 2（养老/就业案例）→ 分论点 3（背篓专线/妈妈岗/口袋公园）→ 结尾升华（家事国事天下事）
+
+**过渡技巧：**
+采用&#34;关键词复现&#34;与&#34;举例衔接&#34;相结合的方式，&#34;颗粒度&#34;一词贯穿全文形成逻辑主线；段落间以&#34;比如&#34;自然引出案例，以&#34;同时&#34;&#34;还意味着&#34;等关联词实现层层递进，论证脉络清晰流畅。
+
+## 【佳句】
+
+1. 把民生价值融入经济社会发展全过程、各环节，在国家治理和发展的方方面面都彰显民生关怀
+2. 一张张温暖的床，托举起一个个安居的梦
+3. 无数个普通家庭的幸福灯火，共同点亮中国的灿烂星空
+
+## 【解析】
+
+**立意与选题**：文章以&#34;颗粒度&#34;这一新颖概念为切入点，将抽象的民生政策具象化为可感知的生活细节，选题精准对接新时代民生工作精细化趋势，政治站位鲜明，体现&#34;民生无小事&#34;的执政理念。
+
+**逻辑与结构**：全文采用递进式论证，从&#34;办好小事&#34;到&#34;聚焦痛点&#34;再到&#34;治理智慧&#34;，层层深入形成逻辑闭环。案例排列由点到面、由个体到群体，论证严密有序。
+
+**素材与论证**：选取快递计费、背篓专线、妈妈岗、口袋公园等一线素材，以小见大、贴近生活，增强说服力与代入感，让政策论述有烟火气、有温度。
+
+**语言与风格**：文字兼具政治性与文学性，&#34;柴米油盐、三餐四季&#34;&#34;幸福灯火&#34;&#34;灿烂星空&#34;等表达富有节奏感与画面感，实现严肃主题与生动表达的平衡。
+
+**价值与效果**：文章既总结民生改善成效，又提供方法论指导，对基层实践具有借鉴意义，能够有效引导舆论、凝聚共识，实现入脑入心的传播效果。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1526</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>16</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>

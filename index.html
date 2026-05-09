@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="baidu-site-verification" content="codeva-dQXZVGM85v" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Binjian - 高效办公、轻松生活、终身学习。分享技术、生活、思考与有趣的观点。">
+    <meta name="keywords" content="Binjian,效率工具,知识管理,AI,极简主义,个人博客">
+    <meta property="og:title" content="Binjian - 高效办公｜轻松生活｜终身学习">
+    <meta property="og:description" content="分享技术、生活、思考与有趣的观点">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://binjian.cloud">
+    <meta property="og:locale" content="zh_CN">
+    <title>Binjian - 高效办公｜轻松生活｜终身学习</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+        <link rel="stylesheet" href="/css/common.css">
+    <style>
+        /* 主页特有样式 */
+        :root {
+            --accent-color: #ff8c00;
+            --accent-gradient: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+        }
+        
+        /* 主页容器 - 三栏布局 */
+        .home-container {
+            max-width: 1200px;
+            margin: 24px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 200px 1fr 300px;
+            gap: 24px;
+        }
+        
+        /* 左侧边栏 */
+        .sidebar-left {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 16px 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            text-decoration: none;
+            color: var(--secondary-text);
+            font-size: 15px;
+            transition: all 0.2s;
+        }
+        
+        .sidebar-menu li a:hover,
+        .sidebar-menu li a.active {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+        }
+        
+        .sidebar-menu li a svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* 桌面端主题切换按钮 */
+        .theme-toggle-desktop {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--secondary-text);
+            padding: 12px 20px;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s;
+            width: 100%;
+        }
+
+        .theme-toggle-desktop:hover {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+        }
+
+        .theme-toggle-desktop svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        /* 中间内容区 */
+        .content-main {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        /* 轮播图 */
+        .banner {
+            background: var(--accent-gradient);
+            border-radius: 8px;
+            height: 320px;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+        
+        .banner-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        
+        .banner-desc {
+            font-size: 16px;
+            opacity: 0.95;
+        }
+        
+        /* 文章卡片 */
+        .article-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 24px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .article-card:hover {
+            box-shadow: 0 8px 24px var(--shadow-color);
+            transform: translateY(-2px);
+        }
+        
+        .article-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .article-summary {
+            font-size: 15px;
+            color: var(--secondary-text);
+            margin-bottom: 16px;
+            line-height: 1.7;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .article-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 13px;
+            color: var(--muted-text);
+        }
+        
+        .author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent-color);
+        }
+        
+        .tag {
+            background-color: var(--bg-color);
+            color: var(--accent-color);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        /* 右侧边栏 */
+        .sidebar-right {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        
+        .widget {
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 20px;
+        }
+        
+        .widget-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-color);
+        }
+        
+        .profile-card {
+            text-align: center;
+        }
+        
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            overflow: hidden;
+        }
+        
+        .profile-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        
+        .profile-name {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .profile-bio {
+            font-size: 14px;
+            color: var(--secondary-text);
+            margin-bottom: 16px;
+        }
+        
+        /* 快速入口卡片 */
+        .quick-entry {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .quick-card {
+            border-radius: 12px;
+            padding: 24px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        
+        .quick-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .quick-card-red {
+            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
+            box-shadow: 0 2px 12px rgba(200, 16, 46, 0.2);
+        }
+        
+        .quick-card-red:hover {
+            box-shadow: 0 8px 24px rgba(200, 16, 46, 0.3);
+        }
+        
+        .quick-card-purple {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .quick-card-purple:hover {
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        }
+        
+        .quick-card-green {
+            background: linear-gradient(135deg, #16a34a 0%, #047857 100%);
+            box-shadow: 0 2px 12px rgba(22, 163, 74, 0.2);
+        }
+        
+        .quick-card-green:hover {
+            box-shadow: 0 8px 24px rgba(22, 163, 74, 0.3);
+        }
+        
+        .quick-card-pink {
+            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+            box-shadow: 0 2px 12px rgba(236, 72, 153, 0.2);
+        }
+        
+        .quick-card-pink:hover {
+            box-shadow: 0 8px 24px rgba(236, 72, 153, 0.3);
+        }
+        
+        .quick-card-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        
+        .quick-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        
+        .quick-card-desc {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        /* 底部 */
+        footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            margin-top: 48px;
+            padding: 32px 0;
+            text-align: center;
+            color: var(--muted-text);
+            font-size: 14px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .home-container {
+                grid-template-columns: 1fr 300px;
+            }
+            .sidebar-left {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .home-container {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-right {
+                display: none;
+            }
+            .banner {
+                height: 240px;
+                padding: 24px;
+            }
+            .banner-title {
+                font-size: 22px;
+            }
+            .quick-entry {
+                grid-template-columns: 1fr;
+            }
+            .sidebar-left.open {
+                display: block;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: var(--bg-color);
+                padding: 20px;
+                z-index: 99;
+                overflow-y: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 移动端导航 -->
+    <div class="top-bar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span style="font-weight: 600; color: var(--text-color);">Binjian</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+    
+    <!-- 主内容 -->
+    <div class="home-container">
+        <!-- 左侧导航 -->
+        <aside class="sidebar-left" id="navSidebar">
+            <ul class="sidebar-menu">
+                <li><a href="/" class="active" aria-current="page">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                    推荐
+                </a></li>
+                <li><a href="/people-news.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    时政观点
+                </a></li>
+                <li><a href="/tech-news.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    科技资讯
+                </a></li>
+                <li><a href="/daily.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"></path></svg>
+                    时评精读
+                </a></li>
+                <li><a href="/articles.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    原创文章
+                </a></li>
+                                    <li>
+                    <button id="themeToggle" class="theme-toggle-desktop" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                        主题
+                    </button>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- 中间内容 -->
+        <main class="content-main">
+            <!-- 轮播 banner -->
+            <div class="banner">
+                <h1 class="banner-title">欢迎来到 Binjian 的个人主页</h1>
+                <p class="banner-desc">分享技术、生活、思考与有趣的观点</p>
+            </div>
+
+            <!-- 快速入口卡片 -->
+            <div class="quick-entry">
+                <a href="/people-news.html" class="quick-card quick-card-red" aria-label="查看时政观点">
+                    <div class="quick-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                    </div>
+                    <div class="quick-card-title">时政观点</div>
+                    <div class="quick-card-desc">官方观点 权威发布</div>
+                </a>
+                <a href="/tech-news.html" class="quick-card quick-card-purple" aria-label="查看科技资讯">
+                    <div class="quick-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
+                    </div>
+                    <div class="quick-card-title">科技资讯</div>
+                    <div class="quick-card-desc">少数派 + 36氪 每日更新</div>
+                </a>
+                <a href="/daily.html" class="quick-card quick-card-pink" aria-label="查看时评精读">
+                    <div class="quick-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"></path></svg>
+                    </div>
+                    <div class="quick-card-title">时评精读</div>
+                    <div class="quick-card-desc">人民时评 每日精读</div>
+                </a>
+                <a href="/articles.html" class="quick-card quick-card-green" aria-label="查看原创文章">
+                    <div class="quick-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                    </div>
+                    <div class="quick-card-title">原创文章</div>
+                    <div class="quick-card-desc">个人原创 深度思考</div>
+                </a>
+            </div>
+        </main>
+
+        <!-- 右侧边栏 -->
+        <aside class="sidebar-right">
+            <!-- 个人资料 -->
+            <div class="widget profile-card">
+                <div class="profile-avatar" aria-hidden="true"><img src="/profile.png" alt="Binjian"></div>
+                <h3 class="profile-name">Binjian</h3>
+                <p class="profile-bio">高效办公｜轻松生活｜终身学习</p>
+            </div>
+        </aside>
+    </div>
+
+    <!-- 底部 -->
+    <footer>
+        <p id="copyright">© <span id="year"></span> 我的主页. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+    <script src="/js/common.js"></script>
+</body>
+</html>

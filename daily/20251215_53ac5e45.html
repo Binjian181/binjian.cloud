@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="外国巨轮为何因中国法治更名（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="外国巨轮为何因中国法治更名（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>外国巨轮为何因中国法治更名（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">外国巨轮为何因中国法治更名（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">外国巨轮为何因中国法治更名（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年12月15日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/1215/c1003-40624021.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                中国走向世界，以负责任大国参与国际事务，必须善于运用法治
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">外国巨轮更名为“尊重”（RESPECT），只为向中国法治致敬。这不是文学创作，而是现实。不久前，最高人民法院关于人民法院海事审判工作情况的报告提到一起案例，青岛海事法院妥善处理马绍尔群岛籍“尼莉莎”轮扣押案，为多国当事人和利害关系人避免了巨额损失，化解了连环诉讼风险，为此希腊籍船东特意将船舶更名。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">这是中国司法服务高水平开放、中国法治赢得世界尊重的生动注脚。就拿海事审判来说，年收案量从1984年的18件增至2024年的3.44万件，累计受理涉外案件8.8万件，涉及146个国家和地区，越来越多外国当事人在所涉争议与我国没有实际联系情况下，主动选择在中国法院诉讼。再看规则引领，包括海事条例在内的50余件中国司法案例被联合国国际贸易法委员会等国际组织案例数据库收录，丰富了国际法实践和规则体系。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">中国法治，何以有这样的吸引力、影响力？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">一个答案，是“平等保护”。市场经济是法治经济，法治能够依法平等保护经营主体合法权益。通过厉行法治打造稳定、可预期的市场环境，能够让各类产权所有者和经营主体在投资兴业过程中安心放心。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">例如，在法律制度层面，出台外商投资法及其实施条例，加强对内外资企业的平等保护；在司法实践层面，注重平等保护中外当事人合法权益……打造良好营商环境、做实平等保护，不仅彰显我国法治建设成果和负责任大国形象，也提升了中国法治影响力。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">一个答案，是“中国速度”。公平正义不仅要实现，还要及时高效地实现。今年3月，中国（新疆）自由贸易试验区乌鲁木齐片区法庭揭牌成立。法庭成立后，成功化解一起乌兹别克斯坦籍与中国籍商人之间的国际货物买卖合同纠纷，用时45天。法庭通过在线视频认证减少诉讼成本、调配通晓乌兹别克语的工作人员扫清沟通障碍。追索货款不用出国，乌方当事人点赞中国法律的公正高效可知可感。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">类似案例不胜枚举。在上海，当地持续优化“调解、仲裁、诉讼”相衔接的国际商事一站式线上解纷平台，当事人可全天候网上立案、在线调解、远程参加庭审、在线接收材料。从“45天化解纠纷”到“一站式服务”，公正、高效、便捷、低成本解决国际商事纠纷的“中国方案”，正吸引着越来越多中外当事人的目光，为加快发展开放型经济护航。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">一个答案，是“东方经验”。调解，被国际社会誉为“东方经验”“东方之花”。在涉外纠纷化解中，善用“东方经验”能更好铺就中外当事人“握手言和”之路。在一起船舶碰撞纠纷中，双方对损失金额存在较大争议。宁波海事法院引入外国船东保赔协会参与调解，探索人民法院引导、船舶航运相关行业组织共同参与的涉外海事纠纷化解模式，为双方明确解纷路径，帮助寻找最佳利益平衡点。善用“东方经验”，既有助于实现个案定分止争，也为国际纠纷解决提供更多“中国智慧”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">中国走向世界，以负责任大国参与国际事务，必须善于运用法治。“十五五”规划建议提出，“加快涉外法治体系和能力建设”。坚持在法治基础上推进高水平对外开放，在扩大开放中推进涉外法治建设，不断夯实高水平开放的法治根基，中国必将以自身的新发展为世界提供新机遇，书写更多合作共赢的新篇章。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+中国法治凭借平等保护、高效解纷与“东方经验”赢得国际尊重，必须以高水平涉外法治护航高水平对外开放。
+
+**分论点：**
+1. “平等保护”依法保障中外主体合法权益，打造稳定可预期的营商环境。
+2. “中国速度”通过数字化与机制创新实现公平正义高效落地，提供低成本解纷方案。
+3. “东方经验”（调解机制）融合行业智慧与利益平衡，贡献国际商事纠纷解决的“中国智慧”。
+
+**立意高度：**
+文章紧扣新时代高水平对外开放与涉外法治体系建设的中央部署，将具体司法个案上升至大国法治软实力与国际规则话语权层面。契合“坚持在法治基础上推进高水平对外开放”的战略导向，并前瞻呼应“十五五”规划建议，政治站位高远，时代针对性强。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（设问引题 + 并列递进式）
+
+**结构图示：**
+巨轮更名案例切入 → 数据佐证影响力 → 抛出核心设问 → 分论点一（平等保护） → 分论点二（中国速度） → 分论点三（东方经验） → 政策呼应与价值升华
+
+**过渡技巧：**
+文章采用“设问破题+排比式提示语”（“一个答案，是……”）实现段落间的强逻辑衔接，使并列分论点呈现清晰的板块感；同时以“类似案例不胜枚举”“善用‘东方经验’”等承上启下句式串联一线素材，配合首尾“善于运用法治”的复沓呼应，形成严密的论证闭环，文气贯通无滞涩。
+
+## 【佳句】
+
+1. 中国走向世界，以负责任大国参与国际事务，必须善于运用法治。
+2. 公正、高效、便捷、低成本解决国际商事纠纷的“中国方案”，正吸引着越来越多中外当事人的目光，为加快发展开放型经济护航。
+3. 坚持在法治基础上推进高水平对外开放，在扩大开放中推进涉外法治建设，不断夯实高水平开放的法治根基，中国必将以自身的新发展为世界提供新机遇，书写更多合作共赢的新篇章。
+
+## 【解析】
+
+本文以“巨轮更名”这一极具新闻张力的微观切口破题，巧妙对接新时代高水平对外开放与涉外法治体系建设的宏大命题，切入点精准，时代背景清晰。在逻辑架构上，文章采用“总-分-总”范式，以设问引出三大并列支点，层层递进又互为支撑，从理念保障到效率落地再到文化智慧，构建起从基层实践到顶层设计的严密逻辑闭环。素材运用上，精选青岛、新疆、宁波等地一线司法案例，辅以历年收案量与联合国收录数据，以小见大，既具现实针对性又富实证说服力，有效打破了法治论述的抽象壁垒。语言风格上，摒弃空洞说教，将政治话语转化为具象表达，“追索货款不用出国”“握手言和之路”等表述兼具烟火气与节奏感，实现了政治性与文学性的有机平衡。整体而言，该文不仅是一篇优秀的舆论引导范文，更提供了“以法治稳预期、促开放”的方法论指导。其将中国司法实践置于全球治理坐标系中审视，入脑入心地展现了中国法治的软实力，对当下优化涉外营商环境、提升国际规则话语权具有深刻的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1283</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>10</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>

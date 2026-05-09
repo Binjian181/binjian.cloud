@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    /* 页面主题色 */
+    :root {
+        --accent-color: {{ theme_color | default('#667eea') }};
+        --accent-gradient: linear-gradient(135deg, {{ theme_color | default('#667eea') }} 0%, {{ theme_color_secondary | default('#764ba2') }} 100%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="main-content">
+    <header class="page-header" style="background: var(--accent-gradient);">
+        <h1>{{ page_title }}</h1>
+        <div class="update-time">最后更新：{{ update_time }}{% if update_schedule %} | {{ update_schedule }}{% endif %}</div>
+    </header>
+    
+    <div class="article-list">
+        {% if articles %}
+            {% for article in articles %}
+            <a href="{{ article.url }}" rel="noopener noreferrer" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">{{ article.title | e }}</h2>
+                        {% if article.source %}
+                        <span class="article-source source-{{ article.source | replace(' ', '') | lower }}"> {{ article.source }}</span>
+                        {% endif %}
+                    </div>
+                    <div class="article-meta">
+                        <span>🕒 {{ article.time }}</span>
+                        {% if article.author %}
+                        <span>✍️ {{ article.author | e }}</span>
+                        {% endif %}
+                    </div>
+                    {% if article.summary %}
+                    <p class="article-summary">{{ article.summary | e }}</p>
+                    {% endif %}
+                    {% if (article.like_count or article.comment_count) and article.source != '澎湃' %}
+                    <div class="article-stats">
+                        {% if article.like_count > 0 %}
+                        <span>👍 {{ article.like_count }}</span>
+                        {% endif %}
+                        {% if article.comment_count > 0 %}
+                        <span>💬 {{ article.comment_count }}</span>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+                </article>
+            </a>
+            {% endfor %}
+        {% else %}
+        <div class="empty-state">
+            <p>暂无文章，请稍后再试~</p>
+        </div>
+        {% endif %}
+    </div>
+</main>
+{% endblock %}

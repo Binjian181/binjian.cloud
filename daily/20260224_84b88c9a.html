@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="“祝薪雁们”为啥动人（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="“祝薪雁们”为啥动人（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>“祝薪雁们”为啥动人（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">“祝薪雁们”为啥动人（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">“祝薪雁们”为啥动人（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年02月24日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0224/c461529-40668696.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                他们的文字本真、质朴，其中有生活的美好、有人生的智慧、有向上的力量
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">这段时间，56岁的贵州护发店店主“祝薪雁”，在短视频平台上因为文案走红。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">写团圆，“饺子齐齐的，思念长长的，妈妈叨叨的”；写搓“白粑粑”，“人生大抵也是这般，熬着熬着就有了颜色”；写一天工作结束，“忙着成长，忙着创造，未来自有更甜的收获”……</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">年轻人一边积极点赞，称她为“诗意孃孃”，一边温柔调侃“老一辈写文案没轻没重”——因为字字都浸润着生活的烟火气和时光，让人不知不觉就红了眼眶。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">不只是“祝薪雁”。这些年，从“外卖诗人”王计兵，到因手写作文《我的母亲》而在网络上广为人知的农民工大爷安三山，再到“沂蒙二姐”吕玉霞，他们以“素人”的身份吟咏生活，记录自己的人生轨迹与内心感悟，作品也屡屡在年轻群体中引发共鸣。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">“祝薪雁们”为何能打动人心？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">有人将这些素人创作者的走红，归因为草根身份与文学创作之间的反差。不可否认，护发店店主的文学表达、烧烤摊摊主的诗意吟唱、外卖骑手的哲思感悟，粗粝日常与诗意文字的反差感，确实具有传播力。但这恐怕只是表层原因，更深层来看，打动年轻人的，还是他们的作品。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">他们的作品，让人重新发现生活。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">前几天刷到一条“年度视频日记”短视频，浏览量过亿、点赞超1300万，拍摄主体是四川成都的一名90后外卖小哥。他没有刻意煽情，只是以头盔视角进行拍摄，把一年里在送餐路上的点点滴滴剪辑成合集。让人动容的，不仅是外卖小哥总是“电量”满满、乐观逗趣，更是镜头里的日常生活、温暖瞬间。柴米油盐、四季更迭里，有升腾的烟火气、有普通人家的温情、有邻里互助的暖意。而这，恰恰是生活本来的纹路。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">“祝薪雁们”在讲述自己的故事，又何尝不是在描述“我们”的生活？因为扎根生活，所以引人共鸣；因为充满感情，所以直抵人心。我们在看他们的作品，也在重新发现生活中的美好。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">他们的作品，给人以人生的智慧。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">“祝薪雁们”不仅是在叙述生活，也是在分享人生感悟。生活是什么？在“祝薪雁”眼里，是“一块磨石”。在体验过其沉甸甸的重量后，她告诉年轻人：“三餐暖，四季安，怀里揣着热望，脚下踩着从容，慢慢走，好好活。”</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">我们该过怎么样的人生？这个问题或许没有标准答案。有着几十年走南闯北经历的“矿工作家”陈年喜认为，“不管怎样的人生，高光也好，苦难也罢，骨子里都奔腾着一条河流”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">来源于生活，但又不被生活所累，他们的作品里有体悟、有哲思、有智慧。这些来自人生的真实感悟，没有说教，只有自然流露，给人以思考和启迪。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">他们的作品，给人以向上的力量。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">15</span>
+                <div class="para-text">“祝薪雁们”大多没有经过专业的训练，却总能以独特的笔触，描绘生命的韧性、不屈的信念、顽强的意志。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">16</span>
+                <div class="para-text">清洁女工王瑛写保洁员的艰辛和劳苦，更写她们的坚韧与刚毅，“她们会把这项技能带到以后的生活中，把自己的人生擦亮”；面对寒冷，白天经营小店、夜晚在烧烤店兼职的温雄珍写道，“你若给她微笑，她会张开手掌，看，春天翻了个身”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">17</span>
+                <div class="para-text">生活总是有顺有逆，他们选择以积极乐观的心态接纳生活的不完美，以坚定执着的努力对抗人生的困境。从他们的故事和作品中，更多人懂得，生活的样子如何，从来不只在于外部环境，更在于自己能否坚守善良的本心，保持对生活的热爱、对未来的希望。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">18</span>
+                <div class="para-text">一名网友说得好：“中国的文学生长在土地上，字里行间质朴得像地里的麦子。麦子不问喧嚣，只管日升日落按时生长。”他们的文字本真、质朴，其中有生活的美好、有人生的智慧、有向上的力量。而这，正是“祝薪雁们”动人的原因。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+&#34;祝薪雁们&#34;之所以动人，是因为他们的文字本真、质朴，其中有生活的美好、有人生的智慧、有向上的力量。
+
+**分论点：**
+1. 他们的作品，让人重新发现生活
+2. 他们的作品，给人以人生的智慧
+3. 他们的作品，给人以向上的力量
+
+**立意高度：**
+文章立足于新时代基层群众文化创造的繁荣景象，关注普通劳动者的精神世界和文化表达，体现了以人民为中心的创作导向，呼应了文化自信和精神文明建设时代主题。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总结构，主体部分采用并列式论证
+
+**结构图示：**
+开篇引入（祝薪雁走红）→ 设问提出（为何动人）→ 分论点 1（重新发现生活）→ 分论点 2（人生智慧）→ 分论点 3（向上力量）→ 结尾升华（引用网友话收束）
+
+**过渡技巧：**
+采用设问过渡（&#34;祝薪雁们为何能打动人心？&#34;）引出核心论证；三个分论点以相同句式&#34;他们的作品……&#34;形成排比式段首，结构清晰、层次分明；段落间用&#34;不只是&#34;&#34;更深层来看&#34;等连接词实现逻辑递进。
+
+## 【佳句】
+
+1. 他们的文字本真、质朴，其中有生活的美好、有人生的智慧、有向上的力量。
+2. 因为扎根生活，所以引人共鸣；因为充满感情，所以直抵人心。
+3. 中国的文学生长在土地上，字里行间质朴得像地里的麦子。麦子不问喧嚣，只管日升日落按时生长。
+
+## 【解析】
+
+本文选题精准，以&#34;祝薪雁&#34;等素人创作者走红为切入点，敏锐捕捉基层群众文化表达的时代现象，政治站位体现对人民精神文化需求的深切关照，呼应文化自信与精神文明建设主题。
+
+逻辑结构严密，采用总 - 分 - 总框架，主体部分三个分论点并列展开，形成完整的逻辑闭环。从&#34;发现生活&#34;到&#34;人生智慧&#34;再到&#34;向上力量&#34;，层层递进，由表及里，辩证统一地阐释了素人创作的价值内核。
+
+素材运用以小见大，选取外卖小哥、矿工作家、清洁女工等一线素材，案例鲜活、针对性强，增强了论证的说服力与感染力。语言风格兼具政治性与文学性，既有&#34;烟火气&#34;的温度，又有&#34;节奏感&#34;的韵律，如&#34;麦子不问喧嚣&#34;的比喻质朴而富有诗意。
+
+整体而言，文章起到了良好的舆论引导作用，传递了积极向上的价值导向，为读者提供了观察基层文化现象的方法论指导，真正做到了入脑入心，具有鲜明的现实意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1408</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>19</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>

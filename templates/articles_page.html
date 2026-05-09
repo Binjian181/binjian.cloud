@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --accent-color: #ff8c00;
+        --accent-gradient: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<main class="main-content">
+    <header class="page-header" style="background: var(--accent-gradient);">
+        <h1>📝 原创文章</h1>
+        <div class="update-time">最后更新：{{ update_time }}</div>
+    </header>
+    
+    <div class="article-list">
+        {% for article in articles %}
+        <article class="article-card">
+            <div class="article-header">
+                <h2 class="article-title">{{ article.title | e }}</h2>
+                <span class="article-source source-original">{{ article.tag | default('原创') }}</span>
+            </div>
+            <div class="article-meta">
+                <span>🕒 {{ article.time }}</span>
+                <span>✍️ {{ article.author | default('Binjian') | e }}</span>
+            </div>
+            <p class="article-summary">{{ article.summary | e }}</p>
+        </article>
+        {% endfor %}
+    </div>
+</main>
+{% endblock %}

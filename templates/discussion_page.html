@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --accent-color: #ff8c00;
+        --accent-gradient: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
+    }
+    
+    .discussion-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .coming-soon {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 60px 20px;
+        text-align: center;
+        color: var(--muted-text);
+        box-shadow: 0 2px 12px var(--shadow-color);
+    }
+    
+    .coming-soon-icon {
+        font-size: 64px;
+        margin-bottom: 20px;
+        opacity: 0.5;
+    }
+    
+    .coming-soon-title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: var(--text-color);
+    }
+    
+    .coming-soon-desc {
+        font-size: 16px;
+        line-height: 1.8;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="nav-sidebar" id="navSidebar">
+        <nav class="nav-bar" aria-label="主导航">
+            <a href="/" class="nav-btn">🏠 返回主页</a>
+            <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+            <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+            <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+            <a href="/discussion.html" class="nav-btn active">💬 讨论区</a>
+            <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                <span class="theme-text">主题</span>
+            </button>
+        </nav>
+    </div>
+    
+    <main class="main-content">
+        <header class="page-header" style="background: var(--accent-gradient);">
+            <h1>💬 讨论区</h1>
+            <div class="update-time">最后更新：{{ update_time }}</div>
+        </header>
+        
+        <div class="discussion-container">
+            <div class="coming-soon">
+                <div class="coming-soon-icon">🚧</div>
+                <h2 class="coming-soon-title">功能开发中</h2>
+                <p class="coming-soon-desc">
+                    讨论区功能正在开发中，敬请期待~<br>
+                    后续将支持评论、留言、互动等功能
+                </p>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock %}

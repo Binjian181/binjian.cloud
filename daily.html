@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="每日人民时评精读，持续积累申论写作素材">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="时评精读">
+    <meta property="og:description" content="每日人民时评精读，持续积累申论写作素材">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="时评精读">
+    <meta name="twitter:description" content="每日人民时评精读，持续积累申论写作素材">
+    <link rel="canonical" href="https://binjian.cloud/daily.html">
+    <title>时评精读</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+<style>
+    /* 每日申论精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+    
+    /* 今日更新置顶样式 */
+    .article-card.is-today {
+        border: 2px solid var(--accent-color);
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
+    }
+
+    .article-card.is-today .today-badge {
+        background: var(--accent-gradient);
+        color: white;
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        flex-shrink: 0;
+        line-height: 1.4;
+    }
+    
+    
+    /* 暗色模式适配 */
+    @media (prefers-color-scheme: dark) {
+    .article-card.is-today {
+        border: 2px solid var(--accent-color);
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
+    }
+
+    .article-card.is-today .today-badge {
+        background: var(--accent-gradient);
+        color: white;
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        flex-shrink: 0;
+        line-height: 1.4;
+    }
+    }
+    
+    .article-card.is-today {
+        border: 2px solid var(--accent-color);
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
+    }
+
+    .article-card.is-today .today-badge {
+        background: var(--accent-gradient);
+        color: white;
+        padding: 3px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+        font-weight: 500;
+        white-space: nowrap;
+        flex-shrink: 0;
+        line-height: 1.4;
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">时评精读</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <header class="page-header" style="background: var(--accent-gradient);">
+        <h1>📖 时评精读</h1>
+        <div class="update-time">最后更新：2026-05-09 07:03:01 | 每日早上 7 点更新</div>
+    </header>
+
+    <div class="article-list">
+        
+            <a href="/daily/20260508_50067958.html" class="article-link">
+                <article class="article-card is-today">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年05月08日 05:57 - “向东看”见证中国感召力（人民时评）</h2>
+                        <span class="today-badge">📌 今日更新</span>
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年05月08日 05:57</span>
+                        
+                        <span>📝 1451 字</span>
+                        
+                        
+                        <span>📊 15 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">一个“赋能型大国”，秉计利天下之胸怀，行务实可行之举措，担立己达人之责任，日益成为道义之锚、信心之源、希望之光</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260507_0a2b4796.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年05月07日 06:04 - 电商下半程从哪发力（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年05月07日 06:04</span>
+                        
+                        <span>📝 1063 字</span>
+                        
+                        
+                        <span>📊 8 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">中国电商正从规模扩张走向质量提升，从流量红利转向价值红利</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260429_0d45aa7f.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月29日 06:10 - 用好标准这个“通用语言”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月29日 06:10</span>
+                        
+                        <span>📝 1243 字</span>
+                        
+                        
+                        <span>📊 12 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">标准是行业安全的“守护盾”，是产业发展的“指南针”，是国际贸易的“通行证”</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260428_4a79ed16.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月28日 - 考实真政绩  画准实干人（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月28日</span>
+                        
+                        <span>📝 1286 字</span>
+                        
+                        
+                        <span>📊 15 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">全方位、多渠道了解干部，近距离、全过程描绘政绩画像，把研究事和研究人结合起来，既在小事上识德辨才，更在大事上看德识才</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260427_acdaee1b.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月27日 - 以微改革撬动外贸大棋局（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月27日</span>
+                        
+                        <span>📝 1089 字</span>
+                        
+                        
+                        <span>📊 8 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">推进改革，也要讲究因地制宜的方法论，针对问题精准发力，根据实际灵活应变</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260424_af636350.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月24日 - 让科技话语权与科研实力共生长（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月24日</span>
+                        
+                        <span>📝 1262 字</span>
+                        
+                        
+                        <span>📊 8 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">科技话语权，很大程度上影响着科研成果的评价、创新方向的选择，进而影响国际顶尖人才、资金等创新要素的流动</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260422_1d49d745.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月22日 - 锻造科技创新的“体系化能力”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月22日</span>
+                        
+                        <span>📝 1250 字</span>
+                        
+                        
+                        <span>📊 9 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">当自主技术以开源形式汇聚全球开发者、推动共建共享，便会形成难以替代的技术生态，成为突破技术封锁的有效路径</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260421_7f17540a.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月21日 06:01 - “拨投结合”，浇灌创新之花（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月21日 06:01</span>
+                        
+                        <span>📝 1263 字</span>
+                        
+                        
+                        <span>📊 11 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">有一定前景的科创项目，在萌芽阶段想获得资金支持，困难有多大？</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260420_61f7f87d.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月20日 06:00 - 以“法治臂膀”守护“少年的你”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月20日 06:00</span>
+                        
+                        <span>📝 1257 字</span>
+                        
+                        
+                        <span>📊 13 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">把“最有利于未成年人”的原则刻进有关司法举措，让未成年人能够更好摆脱迷茫、抵御风险、逐梦前行</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260417_5a6c2e4b.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月17日 06:29 - 微改造背后有三变（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月17日 06:29</span>
+                        
+                        <span>📝 1057 字</span>
+                        
+                        
+                        <span>📊 11 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">从基本满足到精准适配，从普惠覆盖到精细提质，民生改善会给群众带来更实在的获得感</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260415_9086b789.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月15日 06:14 - 承包稳预期，信心地里来（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月15日 06:14</span>
+                        
+                        <span>📝 1239 字</span>
+                        
+                        
+                        <span>📊 12 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">“延包30年”，延长的不仅是30年的承包期，更是亿万农民对美好生活的信心、农业农村高质量发展的成效</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260414_ebe7499a.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月14日 06:10 - 感悟能源安全的智慧（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月14日 06:10</span>
+                        
+                        <span>📝 1267 字</span>
+                        
+                        
+                        <span>📊 13 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">深入实施能源安全新战略，绝非简单的环保叙事、成本叙事，而是蕴含以系统思维统筹发展和安全的战略智慧和长远眼光</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260410_432cad88.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月10日 06:13 - 以城市更新促消费焕新（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月10日 06:13</span>
+                        
+                        <span>📝 1279 字</span>
+                        
+                        
+                        <span>📊 16 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">如今的消费市场有个现象值得琢磨：越来越多人重回大型综合商场、特色主题街区、创意市集等线下空间。商务部相关负责人介绍，今年春节假期，线下实体消费增速反超线上，是近年来首次。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260408_d99a00b7.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年04月08日 06:08 - 珍视寻常生灵的生态价值（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年04月08日 06:08</span>
+                        
+                        <span>📝 1227 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">珍稀或濒危动物需要保护，那生活中常见的动物，可以随意捕获吗？答案是否定的。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260330_0398f228.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月30日 - 解好“企业出海服务”这道综合题（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月30日</span>
+                        
+                        <span>📝 1240 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">“以前需要辗转多个渠道找信息，现在一个平台就搞定，大幅节省了时间成本，也降低了投资风险。”河北省沧州市某跨境装备企业负责人刘青说。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260326_ec37ebd8.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月26日 - 以法治护航高品质消费（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月26日</span>
+                        
+                        <span>📝 1364 字</span>
+                        
+                        
+                        <span>📊 11 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">推动生活性服务业高质量发展，关键在于深化供给侧结构性改革，同时也需要用好法治方式和法治思维，绘就一幅供需两旺、活力有序、温情满满的工笔画</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260325_07bfb989.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月25日 - 把昨天的温暖带给明天（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月25日</span>
+                        
+                        <span>📝 1224 字</span>
+                        
+                        
+                        <span>📊 12 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">记忆，是昨天留下的余温。有时，它就藏在某处，等待一个被触碰的瞬间。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260323_3ac58f42.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月23日 - 以“共赢思维”服务好新就业群体（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月23日</span>
+                        
+                        <span>📝 1339 字</span>
+                        
+                        
+                        <span>📊 15 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">服务好新就业群体，是在为稳就业添底气，也是在为经济增强内生动力，还是在为城市发展赋能</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260318_396f4e1b.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月18日 - “温暖的世界让我能说走就走”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月18日</span>
+                        
+                        <span>📝 1089 字</span>
+                        
+                        
+                        <span>📊 11 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">视障人士，能探寻多广的世界？</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260313_075be1a1.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月13日 - 变压器为何热销海外（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月13日</span>
+                        
+                        <span>📝 1323 字</span>
+                        
+                        
+                        <span>📊 14 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">看似不起眼的变压器，如今成了海外市场“香饽饽”。海关总署数据显示：2025年变压器出口总值超646亿元，同比增长近36%；出口单台变压器均价达20.5万元，同比上涨约1/3。许多变压器企业在手订单充足，部分面向数据中心的订单已排到2027年。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260303_d0879cc7.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月03日 - 以思维升级做好“农业+”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月03日</span>
+                        
+                        <span>📝 1202 字</span>
+                        
+                        
+                        <span>📊 12 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">带有玫瑰青提香气的瑞雪苹果，鸡蛋般大小的广西融安脆蜜金柑，富含花青素的云南花香蓝莓……春节假期，一些“隐藏款”特产走俏市场，成为许多家庭的消费“新宠”。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260302_06483d0f.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年03月02日 - 读懂AI红包大战（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年03月02日</span>
+                        
+                        <span>📝 1237 字</span>
+                        
+                        
+                        <span>📊 7 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">马年春节，抢AI红包成了新现象。几家互联网企业合计豪掷超45亿元，把人工智能应用“塞”进亿万用户手机里。AI红包大战之热，令人不禁想起11年前那个改写移动支付格局的除夕之夜。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260226_fe324fc4.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年02月26日 - 以共治消除“舌尖焦虑”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年02月26日</span>
+                        
+                        <span>📝 1230 字</span>
+                        
+                        
+                        <span>📊 11 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">愿每一份热气腾腾的外卖，都承载着商家的诚信、骑手的担当与监管的力量，暖胃更暖心</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260225_9abeb7ae.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年02月25日 - 破“内卷”需用好法治之钥（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年02月25日</span>
+                        
+                        <span>📝 1286 字</span>
+                        
+                        
+                        <span>📊 17 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">法治既是抵御不正当竞争的“防火墙”，也是企业安心发展的“定心丸”，是破解“内卷式”竞争的重要手段</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260224_84b88c9a.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年02月24日 - “祝薪雁们”为啥动人（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年02月24日</span>
+                        
+                        <span>📝 1408 字</span>
+                        
+                        
+                        <span>📊 19 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">他们的文字本真、质朴，其中有生活的美好、有人生的智慧、有向上的力量</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260212_5abd59a0.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年02月12日 - 破立并举抓减负（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年02月12日</span>
+                        
+                        <span>📝 1290 字</span>
+                        
+                        
+                        <span>📊 16 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">“该立的积极主动立起来，该破的在立的基础上及时破”，坚持破和立的辩证统一，也是整治形式主义为基层减负的重要方法。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260211_8ca42c87.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年02月11日 - 精准聚力托举失能照护（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年02月11日</span>
+                        
+                        <span>📝 1129 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">“以前每月带老人跑医院，现在护理员上门服务，长护险还能报销大半费用。”山东毕大妈家人的感慨，让笔者感受到失能老年人家庭的获得感。如今，长护险团队每周上门为瘫痪在床的毕大妈护理、采血，大大减轻了家庭照护负担。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260202_f8b6b777.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年02月02日 - 以法治之力让彩礼归“礼”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年02月02日</span>
+                        
+                        <span>📝 1114 字</span>
+                        
+                        
+                        <span>📊 8 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">岁末年初，正是喜结良缘的高峰时段，彩礼话题也受到关注。说到高额彩礼及其衍生出的社会问题，一名网友的留言令人感慨：多少刻骨铭心的爱情，跨越了山海相隔，挺过了雨雪风霜，最终却倒在了高额彩礼前。如何治理高额彩礼，是关乎群众幸福生活的民生大事，也是一个重要的治理命题。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260130_0379b27a.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月30日 - 见证统一大市场的成长性（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月30日</span>
+                        
+                        <span>📝 1361 字</span>
+                        
+                        
+                        <span>📊 19 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">市场成长性越强，对全球资源越具有吸引力。中国市场正是凭借极强的成长性，吸引外资布局中国</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260129_b4d03a29.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月29日 - 中国经济何以向新而行（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月29日</span>
+                        
+                        <span>📝 1303 字</span>
+                        
+                        
+                        <span>📊 15 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">发展如同跑马拉松，谁看得远、耐得住、干得实，谁就拥有持续向前的澎湃动能</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260128_156ce0f5.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月28日 - 读懂外贸年报的韧性密码（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月28日</span>
+                        
+                        <span>📝 1390 字</span>
+                        
+                        
+                        <span>📊 15 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">近日，2025年中国经济成绩单发布，展现出顶压前行、向新向优发展的非凡韧性。本版今起推出系列评论，透过数据感悟中国经济潜能，以更好把握发展大势、坚定发展信心。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260127_924ce54b.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月27日 - 从种子创新看三重优势（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月27日</span>
+                        
+                        <span>📝 1186 字</span>
+                        
+                        
+                        <span>📊 11 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">种业振兴与创新密不可分，激荡着我们的志气和底气，一颗颗种子也将成长为农业现代化的累累硕果</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260126_1a14b88d.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月26日 - 让志愿服务在阳光下闪耀（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月26日</span>
+                        
+                        <span>📝 1112 字</span>
+                        
+                        
+                        <span>📊 9 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">美好的事业，值得用心守护。让每一次善举都清澈透明，必能为社会文明添砖加瓦，让生活更有温度、更具希望</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260120_1e36acea.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月20日 - 优质资源“沉下去”，美好生活“托起来”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月20日</span>
+                        
+                        <span>📝 1397 字</span>
+                        
+                        
+                        <span>📊 16 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">民生保障的“托举力”，体现着为百姓解忧、为未来投资的力度与决心</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260116_765b1887.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月16日 - 给法规做“体检”  让立法更科学（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月16日</span>
+                        
+                        <span>📝 1147 字</span>
+                        
+                        
+                        <span>📊 9 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">法规、司法解释等规范性文件，不是一成不变的教条，只有不断修订、持续更新、与时俱进，才能延续其生命力。给它们做“体检”，及时发现其中的“不适”“漏洞”与“冲突”，方能筑牢法治之基。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260115_f2b76ed2.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月15日 - 守质量安全  护三餐四季（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月15日</span>
+                        
+                        <span>📝 1198 字</span>
+                        
+                        
+                        <span>📊 12 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">让每个“小家”热气腾腾，必须增强时时放心不下的责任感，深化源头治理、标本兼治，不断提升治理能力、健全治理体系，有效防范化解各类风险</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260114_fbc53226.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月14日 - “颗粒度”更细，幸福度更高（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月14日</span>
+                        
+                        <span>📝 1526 字</span>
+                        
+                        
+                        <span>📊 16 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">习近平主席在二〇二六年新年贺词中回顾2025年“我们共创共享美好生活”，并深情寄语：“柴米油盐、三餐四季，每个‘小家’热气腾腾，中国这个‘大家’就蒸蒸日上。”即日起，本版推出系列评论，与广大读者一起总结这些年来民生改善的新成效、新特点、新趋势。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260113_ff21de14.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月13日 - 为子孙积累更多生态资产（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月13日</span>
+                        
+                        <span>📝 1098 字</span>
+                        
+                        
+                        <span>📊 9 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">治污不是乡村全面振兴的负担，而是为农业农村积累宝贵的生态资产</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260109_f9fd685d.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月09日 - 法治展长卷  碧水入画来（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月09日</span>
+                        
+                        <span>📝 1266 字</span>
+                        
+                        
+                        <span>📊 14 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">近段时间，两部关于生态文明建设的法律法规正式施行。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260106_b8eeed29.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月06日 - 从“汗滴禾下土”到“数据入云端”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月06日</span>
+                        
+                        <span>📝 1104 字</span>
+                        
+                        
+                        <span>📊 7 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">四川丘陵山地稻田，智能农机以厘米级精度，完成不规则田块的插秧作业；内蒙古智慧牧场，挤奶机器人、饲喂机器人、清粪机器人协同运转；广东荔枝园，“空天地”多模态监测数据经过智慧农业大脑学习分析，实现花量果情精准监测、灾害及时预警……</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20260105_bb0d656e.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2026年01月05日 - 筑牢有效辩护的程序防线（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2026年01月05日</span>
+                        
+                        <span>📝 1186 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">在一环扣一环的司法实践中，程序被恪守、道理被辨明、权利被尊重，人们对司法的信任将不断提升，对法治的信仰将更加坚定</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251224_b9fe775f.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月24日 - 一减一增看教育改革（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月24日</span>
+                        
+                        <span>📝 1209 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">近期，两个关于中小学教育的政策文件接连出台，结合起来看意味深长。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251223_1a521ce2.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月23日 - 打好治理欠薪主动仗（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月23日</span>
+                        
+                        <span>📝 1214 字</span>
+                        
+                        
+                        <span>📊 9 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">治理欠薪不能坐等群众上门，应主动向前一步，改变“事后追讨、被动应对”的局面，形成“事前预防、主动治理”的格局</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251222_3e504017.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月22日 - 促发展要善于“找问题”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月22日</span>
+                        
+                        <span>📝 1369 字</span>
+                        
+                        
+                        <span>📊 16 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">问题是改革的起点、政策的发力点、发展的突破口</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251219_4afc41cc.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月19日 - 政策再接力  初心恒久远（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月19日</span>
+                        
+                        <span>📝 1356 字</span>
+                        
+                        
+                        <span>📊 15 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">——中国减贫脱贫启示录⑤</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251218_6cf72a04.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月18日 - 为高校青年教师松绑赋能（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月18日</span>
+                        
+                        <span>📝 1219 字</span>
+                        
+                        
+                        <span>📊 7 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">高校青年教师是教育事业发展的未来，肩负着培养下一代、推动科技创新的重任。科研经费难觅、职称晋升通道拥堵、教学评估难测、生活压力加大……这些成长中的烦恼影响着高校青年教师的发展。如何解决高校青年教师的现实困难，助力其更好成为发挥高等教育龙头作用的生力军？</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251217_8848757d.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月17日 - 用数据要素激活生态价值（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月17日</span>
+                        
+                        <span>📝 1128 字</span>
+                        
+                        
+                        <span>📊 7 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">让数据基础设施真正成为高质量发展的动力引擎，促进“绿水青山”向“金山银山”的转化路径更宽、效益更高</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251216_53081f81.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月16日 - 带头绷紧“法治弦”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月16日</span>
+                        
+                        <span>📝 1137 字</span>
+                        
+                        
+                        <span>📊 8 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">法律的权威在于实施。全链条构建国家工作人员学法用法制度，人民群众看在眼里、记在心上，也会在行动中效仿</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251215_53ac5e45.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月15日 - 外国巨轮为何因中国法治更名（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月15日</span>
+                        
+                        <span>📝 1283 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">中国走向世界，以负责任大国参与国际事务，必须善于运用法治</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251212_c6a82e7d.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月12日 - 发挥主体作用  激发内生动力（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月12日</span>
+                        
+                        <span>📝 1458 字</span>
+                        
+                        
+                        <span>📊 16 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">——中国减贫脱贫启示录④</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251211_3e6c7e41.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月11日 - 从政府采购新规看开放气度（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月11日</span>
+                        
+                        <span>📝 971 字</span>
+                        
+                        
+                        <span>📊 7 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">政府采购使用的是财政资金，对本国产品提供合理支持，符合国际惯例，关键在于能否科学界定其范围和标准，确保平等对待各类经营主体</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251210_538d30e1.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月10日 - 良性互动促善治（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月10日</span>
+                        
+                        <span>📝 1135 字</span>
+                        
+                        
+                        <span>📊 10 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">党员干部倾听原汁原味的民意，从中找准工作短板和改进方向；群众了解政策的来龙去脉，更好理解治理背后的考量</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251209_dc12e1c2.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月09日 - 刚柔并济促进信用修复（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月09日</span>
+                        
+                        <span>📝 1112 字</span>
+                        
+                        
+                        <span>📊 7 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">开辟信用修复通道，既维护了司法权威的刚性底色，又释放了制度执行的人文关怀</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20251208_ab75951d.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年12月08日 - 产业有活力，发展增动力（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年12月08日</span>
+                        
+                        <span>📝 1441 字</span>
+                        
+                        
+                        <span>📊 17 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">——中国减贫脱贫启示录③</p>
+                    
+                </article>
+            </a>
+        
+    </div>
+</main>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+</body>
+</html>
