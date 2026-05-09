@@ -24,8 +24,11 @@ mkdir -p ${LOCAL_BACKUP_DIR}
 cp ${DB_DIR}/${DB_NAME}_${DATE}.sql.gz ${LOCAL_BACKUP_DIR}/${DB_NAME}_$(date +%Y%m%d_%H%M%S).sql.gz
 find ${LOCAL_BACKUP_DIR} -name "${DB_NAME}_*.sql.gz" -type f -mtime +7 -delete
 
+# --- Sync scripts ---
+cp -u /home/ubuntu/*.py /home/ubuntu/backup_database.sh /home/ubuntu/backup_binjian.sh scripts/ 2>/dev/null
+
 # --- Git backup ---
-# Add all changes (website files + database dump)
+# Add all changes (website files + database dump + scripts)
 git add -A
 
 # Check if there are changes to commit
@@ -38,4 +41,4 @@ fi
 git commit -m "auto backup: $(date '+%Y-%m-%d %H:%M')"
 git push origin main
 
-echo "[$(date)] Backup completed (website + database)"
+echo "[$(date)] Backup completed (website + database + scripts)"
