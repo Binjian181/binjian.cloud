@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="“精准”的要义（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="“精准”的要义（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>“精准”的要义（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">“精准”的要义（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">“精准”的要义（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年12月02日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/1202/c1003-40615320.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                ——中国减贫脱贫启示录②
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">精准，是一种思维方法和工作方法，蕴含“一把钥匙开一把锁”的智慧；表现为一种制度优势，彰显“如身使臂，如臂使指”的自如；意味着一种长期主义，激发“看准了就坚定不移抓”的执着</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">“这里的经验让我意识到，通过政府、村级企业、合作社和居民参与的结合，可以实现经济发展、社会秩序和民生保障的良性循环。”不久前，第五届印度尼西亚农村干部研修班的26名学员参访山东，东加里曼丹省东库台县特皮安朗萨村村长泽基·哈姆扎发出感慨。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">像这样的“村长班”，自2019年启动已历五届，给印尼乡村发展和减贫事业带去新变化。为什么印尼的村长要到中国学习？一个重要原因在于：中国精准减贫的效果，全世界有目共睹。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">贫困治理是全球性难题，尤其对发展中国家而言，减贫是重大挑战。2013年11月，习近平总书记到湖南湘西十八洞村考察，同村干部和村民代表亲切地拉家常、话发展，在这里首次提出“精准扶贫”理念。分类施策、对症下药，做到扶持对象、项目安排、资金使用、措施到户、因村派人、脱贫成效“六个精准”，使扶贫减贫的效益实现最大化。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">如今，“精准扶贫”理念被写入联合国大会文件，“建档立卡”“驻村干部”等扶贫举措也被多国借鉴。精准，不仅是中国解决贫困问题的关键，也成为广受全球认可的有效经验，值得从不同角度深入总结。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">精准，是一种思维方法和工作方法，蕴含“一把钥匙开一把锁”的智慧。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">开对“药方子”，才能拔掉“穷根子”。据亲历者讲述，全国各地首次建档立卡时，大约有30%的贫困户是不准的。建立全国脱贫信息系统，连续开展“回头看”，进行调整、补漏，庞大的工程有了精准的数据库，为精准扶贫提供了清晰“靶向”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">新时代以来，精准思维贯穿治国理政实践，成为“中国之治”的重要方法论。从推进乡村产业振兴“要把‘土特产’这3个字琢磨透”，到“产业发展必须坚持有所为、有所不为”，从“城市管理应该像绣花一样精细”，到“因地制宜发展新质生产力”……不做表面文章，不耍花拳绣腿，以科学方法把握规律，以务实精神推进落实，这是共产党人的优良作风，为推进中国式现代化凝聚强大力量。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">精准，表现为一种制度优势，彰显“如身使臂，如臂使指”的自如。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">青海海东芦花乡，易地搬迁安置区东西部协作青绣帮扶车间里，绣娘们穿经引纬，一派繁忙。传统技艺变“指尖经济”，是易地扶贫搬迁、东西部协作、产业扶贫等综合施策的结果。精准扶贫从理念变为现实，背后是环环相扣的制度安排，是一整套制度体系的强大动员力和执行力。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">把制度优势更好转化为治理效能，“精准”是密钥。建设全国统一大市场，精准施策才能畅通循环；应对外部不确定性的冲击，精准调控才能化解风险；深入打好污染防治攻坚战，精准治污才能事半功倍……发挥中国特色社会主义制度优势，既在谋划时统揽大局，又在操作中细致精当，我们定能攻坚克难，始终掌握发展主动权。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">精准，意味着一种长期主义，激发“看准了就坚定不移抓”的执着。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">回望河南周口前何村驻村第一书记韩宇南的10年，村人均收入从1300多元增长到如今逾1.8万元，他留任5次，青丝变白发。中国共产党历史展览馆内，带有99个鲜红手印、挽留韩书记的信令人动容，这是他个人的荣耀，亦是无数党员干部扎根乡土、倾情奉献的动人见证。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">再宏大的擘画、再美好的前景，没有一锤接着一锤敲的精准聚焦与落实落细，只能是空中楼阁。新时代共产党人不松劲、不歇脚，正锚定“让人民过上更好的日子”的目标奋勇前行，把工作做得更细更扎实。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">15</span>
+                <div class="para-text">中国精准扶贫之路，启迪全球，昭示未来。保持战略定力，坚持“致广大而尽精微”，我们必将不断开创以中国式现代化全面推进强国建设、民族复兴伟业新局面，为世界贡献更多中国智慧与中国方案。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">16</span>
+                <div class="para-text">“牵挂”的力量——中国减贫脱贫启示录①</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+“精准”不仅是中国特色减贫道路的核心方法论，更是贯穿治国理政实践、彰显制度优势与长期主义的重要思维和工作准则。
+
+**分论点：**
+1. 精准是一种思维方法和工作方法，强调科学施策与靶向发力，蕴含“一把钥匙开一把锁”的智慧。
+2. 精准表现为一种制度优势，依托环环相扣的制度安排将动员力转化为治理效能，彰显“如身使臂，如臂使指”的自如。
+3. 精准意味着一种长期主义，依靠党员干部扎根基层、久久为功的实干作风，激发“看准了就坚定不移抓”的执着。
+
+**立意高度：**
+立足新时代脱贫攻坚伟大实践与全球减贫治理的时代背景，将中国具体经验上升为治国理政的普遍方法论，彰显“以人民为中心”的发展思想与中国式现代化的道路自信，兼具本土实践深度与全球治理视野。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总结构（主体为并列递进式）
+
+**结构图示：**
+国际案例破题 → 点明“精准扶贫”全球影响力 → 提出核心总论点 → 分论点1（思维方法/靶向施策） → 分论点2（制度优势/体系转化） → 分论点3（长期主义/久久为功） → 结尾升华（致广大尽精微，贡献中国方案）
+
+**过渡技巧：**
+采用“段首主旨句+经典引语”直接领起的方式实现板块切换，使论证脉络清晰可辨；段落间运用设问（“为什么印尼的村长要到中国学习？”）承上启下，并通过“精准，是……”的排比句式形成严密的逻辑闭环，气韵贯通、层层递进。
+
+## 【佳句】
+
+1. “精准，是一种思维方法和工作方法，蕴含‘一把钥匙开一把锁’的智慧；表现为一种制度优势，彰显‘如身使臂，如臂使指’的自如；意味着一种长期主义，激发‘看准了就坚定不移抓’的执着。”
+2. “开对‘药方子’，才能拔掉‘穷根子’。”
+3. “保持战略定力，坚持‘致广大而尽精微’，我们必将不断开创以中国式现代化全面推进强国建设、民族复兴伟业新局面，为世界贡献更多中国智慧与中国方案。”
+
+## 【解析】
+
+本文以“精准”为切入点，立足新时代脱贫攻坚与全球减贫治理的时代背景，将具体扶贫经验升华为治国理政的普遍方法论，政治站位高远且极具现实针对性。文章采用“总-分-总”的递进结构，以印尼村干部访华的鲜活案例破题，随后通过三个维度层层剥笋般阐释“精准”的深刻内涵，构建起从“理念提出”到“实践落地”再到“精神升华”的逻辑闭环。在素材与论证上，坚持一线视角，从全国建档立卡数据库的精准靶向，到青海青绣车间的综合施策，再到驻村干部的九年坚守，以小见大，数据与故事交织，论证扎实有力、针对性强。语言风格上，巧妙平衡了政治话语的庄重与基层表达的烟火气，“药方子”“绣花”等比喻生动贴切，政论性与文学性相得益彰。整体而言，该文不仅是对中国减贫道路的系统总结，更为当前统筹高质量发展、防范化解风险提供了精准施策的方法论指导，有效发挥了党报评论凝聚共识、引领舆论的现实效能，具有强烈的入脑入心效果。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1514</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>17</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
