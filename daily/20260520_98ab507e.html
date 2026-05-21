@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="给小店支招，护市井烟火（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="给小店支招，护市井烟火（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>给小店支招，护市井烟火（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">给小店支招，护市井烟火（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">给小店支招，护市井烟火（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年05月20日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0520/c461529-40723222.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">“优化人员配置，把固定支出压下来”“在门口做外摆，用现制、亮眼、味道香的产品吸引客人”“横向加一组灯箱，让路人远远看见店名”……这不是模块化的经营手册，而是有人专门为街边小店开出的“药方”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">近来，在各大平台，一种为小店“在线把脉、开方支招”的新业态悄然兴起，一些博主专门为小店主尤其是缺少经验的创业者提供支持。他们往往通过直播互动等方式开展服务，以“有偿连麦”“线上卖课”等途径营利，被称为“小店支招人”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">对小微经营主体而言，这种轻量化商务咨询服务十分接地气。跟随店主的镜头，就能“现场”探店，复盘经营状况，提出改进方案。从成本核算到客流运营，从线下布局到线上引流，都能获得可以参考的针对性建议。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">这样的“一对一”问诊、互动式支招，精准对接了许多小店的现实需求，填补了市场空白，有助于提升小店的竞争力，更好地激活经济“毛细血管”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">长期以来，遍布街巷的小店是许多人的创业起点。如今，随着观念变化和技术进步，创业图景变得更加丰富多元。在一些领域，创业门槛变低了，“一人公司”“超级个体”等新形态不断涌现。创业动机也更加多样，除传统的“谋生型”创业外，还有“体验型”和“兴趣驱动型”创业。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">更多元的创业者，意味着更活跃的市场生态。但店铺无论大小，经营本身是一个需要系统能力的行当。小本经营，抗风险能力低，试错机会少。选址、装潢、引流，成本控制、库存周转、客诉处理，哪一项没做好，生意都可能难以为继。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">如何提升小店的续航力，更好守护市井烟火气？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">以专业赋能锻长板、补短板。小店存在一些天然劣势，如采购成本高、融资难、数字化能力弱等。这些短板，仅凭自身难以补齐，需要引入外部支持，而且最好用低成本、轻量级的方式来弥补。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">从这个角度看，“小店支招人”的价值，就在于针对经营痛点和难点，提供经济管用的一站式咨询服务。这是一个专业化赛道，而不是博流量的舞台。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">在“互联网+”时代，拥有线上线下双重资源和渠道的平台机构，是小店的重要赋能者。比如，有的地方联合头部电商平台，为小微商户提供线上开店指导、线上运营培训等政策支持，既补上了小店缺流量、缺技能的短板，又放大了其服务灵活、有人情味的长处。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">以系统扶持增活力、挖潜力。小店业态繁杂、主体分散，经营状况、诉求痛点各不相同，需要从准入监管、金融服务、生态培育等方面系统布局，为其构建长效发展支持体系。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">现实中，不少小店面临经营压力，政策支持既要配套集成，还必须有穿透力，确保它们够得着、用得上。比如，浙江首创的“小店帮”，将融资贷款、法律援助、品牌推广等服务集于一个平台，既专业规范又便捷可及。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">优胜劣汰是市场竞争的基本法则。扶持小店，并非阻止淘汰，而在于帮助它们更好地适应现代商业生态，让更多有潜力的经营者在公平竞争中脱颖而出。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">便民小生意，发展大活力。街道上的小店，是优化供需、畅通循环的经济细胞，也是一个个持续在场、互相守望的生活节点。扶持它们，就是守护商业生态的多样性；活跃它们，就是点亮热气腾腾的生活。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+通过专业化市场赋能与系统化政策扶持双管齐下，提升小微经营主体抗风险能力与竞争力，从而有效激活经济“毛细血管”、守护市井烟火气。
+
+**分论点：**
+1. 以轻量化、专业化的咨询服务与平台资源精准补齐小店经营短板，提升其市场续航力。
+2. 以集成化、有穿透力的制度设计与系统布局构建长效支持体系，充分激发小店发展活力。
+3. 扶持小店并非干预市场优胜劣汰，而是助其适应现代商业生态，在公平竞争中实现生态多样性。
+
+**立意高度：**
+文章紧扣“稳就业、保民生、促消费”的宏观战略，将微观街边小店的生存发展置于高质量发展与基层治理现代化的时代坐标中，体现了“以人民为中心”的政治站位和对微观市场主体活力的深切关切。
+
+## 【结构】
+
+**结构类型：**
+总-分-总（递进式）
+
+**结构图示：**
+现象切入（“小店支招人”兴起） → 剖析背景与痛点（创业多元化与抗风险弱） → 设问引出对策 → 分论点一：专业赋能补短板（市场/平台层面） → 分论点二：系统扶持挖潜力（政策/制度层面） → 辩证阐释竞争法则 → 结尾升华（经济细胞与生活节点）
+
+**过渡技巧：**
+采用“设问承启”与“对仗引领”相结合。第7段以“如何提升小店的续航力……”自然承接上文痛点并引出下文对策；第8、11段分别以“以专业赋能锻长板、补短板”“以系统扶持增活力、挖潜力”形成工整的并列递进式分论点引领；结尾段以“便民小生意，发展大活力”实现从微观经营术到宏观发展观的逻辑跃升。
+
+## 【佳句】
+
+1. 这样的“一对一”问诊、互动式支招，精准对接了许多小店的现实需求，填补了市场空白，有助于提升小店的竞争力，更好地激活经济“毛细血管”。
+2. 街道上的小店，是优化供需、畅通循环的经济细胞，也是一个个持续在场、互相守望的生活节点。
+3. 扶持它们，就是守护商业生态的多样性；活跃它们，就是点亮热气腾腾的生活。
+
+## 【解析】
+
+本文选题切口精准，以“小店支招人”这一新兴业态为**切入点**，巧妙勾连起微观个体经营与宏观促消费、稳就业的**时代背景**，政治站位鲜明，体现了党报评论“见微知著”的敏锐度。在**逻辑与结构**上，文章采用“现象引入—痛点剖析—对策展开—价值升华”的递进脉络，通过设问自然过渡，以“专业赋能”与“系统扶持”双轮驱动，并辩证阐释“市场优胜劣汰”与“政策精准滴灌”的关系，构建起严密的**逻辑闭环**。在**素材与论证**方面，作者摒弃空泛说教，选取“在线连麦问诊”“浙江小店帮平台”等**一线素材**，**以小见大**，对策极具现实针对性与实操**说服力**。文字风格上，兼具市井**烟火气**与政策理论厚度，“经济细胞”“生活节点”等意象生动，实现了**政治性与文学性的有机平衡**。整体而言，该文不仅为基层小微主体提供了清晰的**方法论指导**，更在稳预期、强信心层面发挥了正向**舆论引导**效能，真正做到了**入脑入心**，彰显了服务高质量发展大局的深远**现实意义**。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1212</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>14</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
