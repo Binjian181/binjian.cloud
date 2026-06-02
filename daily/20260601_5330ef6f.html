@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="在重拾耕读中感悟知行合一（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="在重拾耕读中感悟知行合一（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>在重拾耕读中感悟知行合一（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">在重拾耕读中感悟知行合一（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">在重拾耕读中感悟知行合一（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年06月01日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0601/c461529-40731080.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">走出教室、走进田野，播种施肥、采茶除草，大学生们体验农耕之美、稼穑之艰，正悄然流行。一段时间以来，清华大学、北京大学、中央民族大学、上海财经大学等多所高校陆续开展耕读实践，引发关注热议。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">有人点赞，也有人不解：现代大学教育，为何要重拾“耕读”？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">“耕读传家久，诗书继世长”。在中华传统文化语境中，“耕”与“读”是经常相提并论的两件事。晴耕雨读、半农半学，既是一种生活方式，也是一种求知态度。随着城镇化进程加速和教育专业化水平提高，“耕”与“读”渐行渐远，如今不少大学生对耕作比较陌生。笔者采访中也曾遇到学生种薄荷时分不清哪棵是苗、哪棵是草，有学生说从未见过花生是怎么长出来的。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">当知识获取越来越依赖多媒体手段、智能化工具，年轻人和真实世界之间隔着屏幕，缺失了不少体验。知识与体验割裂开来，无异于让人在“空中楼阁”学习世界如何运转，这是现代教育面临的一个共性问题。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">耕读教育回归，补上的正是脚踏实地这一课。中央民族大学113名学生到河北农场劳动，有的女生穿着白帆布鞋下田摘毛豆，起初小心翼翼，很快就顾不上脏不脏了。北京大学学生在教学楼前种植物，遇上一场大风差点前功尽弃，“只能重新来过”。庄稼不等人、天气不如人意——这些在教室里难有深切认知的内容，到泥土中一学就会。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">不过，耕读不能仅仅停留在体验农活上。“耕”与“读”相贯通，才能真正凸显价值，提升育人质效。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">清华大学马克思主义学院的做法颇有启示。学生们在小凉山的茶园劳动半个月，白天采茶、走访村民，晚上一起阅读《摆脱贫困》等著作。当书本上的理论和脚下的土地对接起来，一名同学感慨：“和土地、人民相联系的学术研究才更有生命力。”</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">脚踩广袤大地，“耕”与“读”方能更好融合。白天在田地里弯腰，晚上再翻开书本时，纸面上的道理或许就被田垄和劳作讲清楚了。看似寻常的农情农事，会成为大学生们理解乡村、理解社会的一扇窗口。如此耕读，更易转化为学生的心灵体验，升华为理性认识。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">当然，耕读教育走热，也出现了一些需要留意的不良苗头。有的学校将其简化为一两天的参观体验，流于拍照打卡等形式；有的学校把日程安排得满满当当，今天摘茶明天插秧后天磨豆腐，看似丰富，实则浮光掠影。一名高校教师坦言：“我们在考虑‘缩’，不是缩短时间，而是缩小范围。学生不用体验那么多，在一个村子里待住就行，关键是要扎得深。”一个“深”字，道出了耕读教育的要害：深度比广度更重要，必须追求穿透力。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">形式可以多种多样，育人的初心不能忘。高校纷纷重拾耕读传统，如何进行效果评价？关键不在于开了多少门课、设置多少学分，而是能不能真正让年轻人在弯腰与抬头之间，在内心重建自我和脚下土地的联系。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">“耕读传家”，本质上体现着知行合一理念。创设条件、完善机制、突出实效，让学生在田地感受四季轮回更替，在村庄读懂时代变迁，耕读教育的价值与潜力难以估量。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+高校重拾耕读教育，关键在于将劳动实践与理论学习相贯通，引导青年在扎根大地中实现知行合一，重塑与真实世界和脚下土地的深度联系。
+
+**分论点：**
+1. 耕读教育能有效弥补现代青年脱离真实世界、知行割裂的短板，补上“脚踏实地”的一课。
+2. “耕”与“读”必须深度融合，将书本理论与乡土实践对接，才能实现从感性体验到理性认识的升华。
+3. 耕读教育需警惕形式主义，追求“扎得深”的穿透力，以重建青年与土地的联系为根本育人初心。
+
+**立意高度：**
+立足新时代“五育并举”与劳动教育全面回归的时代背景，精准回应高等教育中理论与实践脱节的现实痛点，将中华优秀传统文化中的“耕读传家”与现代“知行合一”育人理念相贯通，体现了培养堪当民族复兴大任、扎根中国大地的时代新人的鲜明政治站位。
+
+## 【结构】
+
+**结构类型：**
+递进式（兼有总-分-总特征）
+
+**结构图示：**
+现象引入与设问 → 剖析“知行割裂”痛点 → 肯定“脚踏实地”价值 → 强调“耕读贯通”关键 → 纠偏“形式浮浅”苗头 → 回归“育人初心”与“知行合一”升华
+
+**过渡技巧：**
+文章巧妙运用“设问引题”“转折递进”“引语点题”实现段落无缝衔接。开篇以“为何要重拾耕读”设问破题；中段以“不过，耕读不能仅仅停留在体验农活上”承上启下，将论述重心从“劳动体验”推向“知行融合”；后段以“当然，耕读教育走热，也出现了一些需要留意的不良苗头”进行辩证审视，使论证在肯定与纠偏中形成严密的逻辑闭环，文气贯通，张弛有度。
+
+## 【佳句】
+
+1. “耕”与“读”相贯通，才能真正凸显价值，提升育人质效。
+2. 白天在田地里弯腰，晚上再翻开书本时，纸面上的道理或许就被田垄和劳作讲清楚了。
+3. 让学生在田地感受四季轮回更替，在村庄读懂时代变迁，耕读教育的价值与潜力难以估量。
+
+## 【解析】
+
+本文以高校“耕读实践”热潮为切入点，精准回应新时代“五育并举”与劳动教育回归的时代背景，将传统耕读文化与现代育人理念相贯通，政治站位高远，现实针对性极强。在逻辑与结构上，文章采用递进式论证，遵循“现象设问—痛点剖析—价值阐释—纠偏规范—主旨升华”的严密逻辑闭环，层层剥笋，由表及里地厘清了“为何耕”与“如何读”的辩证关系。素材运用上，作者摒弃空泛说理，选取多所顶尖高校的一线实践案例与学生“分不清苗草”的真实细节，以小见大，一线素材扎实，极具说服力。语言风格上，文字兼具党报评论的政治高度与散文的文学质感，善用“空中楼阁”“田垄讲清道理”等具象化表达，在理性说理中注入泥土气息，节奏明快，实现了政治性与文学性的精准平衡。在价值与效果层面，文章不仅有效破除了“耕读即打卡体验”的认知误区，更提供了“深度重于广度”“知行合一”的方法论指导，充分发挥了主流舆论的引导功能，为高校完善实践育人机制提供了清晰路径，真正做到了入脑入心、启智润心。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1160</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>11</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
