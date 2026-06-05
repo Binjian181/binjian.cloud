@@ -64,6 +64,9 @@ body {
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
     overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 a {
@@ -73,6 +76,8 @@ a {
 
 /* ========== 布局容器 ========== */
 .container {
+    flex: 1;
+
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
@@ -393,4 +398,27 @@ a {
     .article-meta {
         gap: 8px;
     }
+}
+
+/* ========== 底部备案信息 ========== */
+.site-footer,
+footer {
+    background: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    padding: 16px 0;
+    text-align: center;
+    color: var(--muted-text);
+    font-size: 13px;
+}
+
+.site-footer a,
+footer a {
+    color: var(--muted-text);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.site-footer a:hover,
+footer a:hover {
+    color: var(--accent-color);
 }

@@ -23,6 +23,7 @@
         
         /* 主页容器 - 三栏布局 */
         .home-container {
+            flex: 1;
             max-width: 1200px;
             margin: 24px auto;
             padding: 0 20px;
@@ -314,17 +315,6 @@
             opacity: 0.9;
         }
         
-        /* 底部 */
-        footer {
-            background: var(--card-bg);
-            border-top: 1px solid var(--border-color);
-            margin-top: 48px;
-            padding: 32px 0;
-            text-align: center;
-            color: var(--muted-text);
-            font-size: 14px;
-        }
-        
         /* 响应式设计 */
         @media (max-width: 1024px) {
             .home-container {
@@ -467,12 +457,9 @@
 
     <!-- 底部 -->
     <footer>
-        <p id="copyright">© <span id="year"></span> 我的主页. All rights reserved.</p>
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
     </footer>
     
-    <script>
-        document.getElementById('year').textContent = new Date().getFullYear();
-    </script>
     <script src="/js/common.js"></script>
 </body>
 </html>

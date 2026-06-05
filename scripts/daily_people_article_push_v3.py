@@ -741,10 +741,16 @@ def generate_web_page(title: str, paragraphs: List[str], original_url: str, publ
     has_lead = False
     lead_text = ''
     
-    if paragraphs and is_lead_paragraph(paragraphs[0]):
+    lead_paragraphs = []
+    for para in paragraphs:
+        if is_lead_paragraph(para):
+            lead_paragraphs.append(para)
+        else:
+            break
+    if lead_paragraphs:
         has_lead = True
-        lead_text = paragraphs[0]
-        actual_paragraphs = paragraphs[1:]  # 剩余的是正式段落
+        lead_text = '<br><br>'.join(lead_paragraphs)
+        actual_paragraphs = paragraphs[len(lead_paragraphs):]
     else:
         actual_paragraphs = paragraphs
     
@@ -788,7 +794,7 @@ def generate_web_page(title: str, paragraphs: List[str], original_url: str, publ
     print(f"✅ 详情页已生成：/daily/{filename}")
     
     # 更新列表
-    update_article_list(title, display_datetime, original_url, filename, paragraphs, ai_result)
+    update_article_list(title, display_datetime, original_url, filename, actual_paragraphs, ai_result)
     
     # 重新生成列表页
     regenerate_list_page(env)
