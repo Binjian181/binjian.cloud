@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="以制度刚性护航基层治理（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="以制度刚性护航基层治理（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>以制度刚性护航基层治理（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">以制度刚性护航基层治理（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">以制度刚性护航基层治理（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年06月08日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0608/c461529-40735490.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                处理好活力和秩序的关系，让干部轻装上阵、举重若轻
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">一种文件夹的变化，直观反映为基层减负成效。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">吉林辽源西安区红城社区，4个文件夹存放着十几沓过去的证明存档。按照职能定位，很多证明超出社区权限；根据群众所盼、办事单位要求，又不得不开。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">而2025年以来的“证明”文件夹里，仅有寥寥10余张存档——吉林省出台相关办法，明确工作事项清单，取消多项村（社区）不合理证明事项。文件夹少了、负担减轻了，服务却不减，居民群众、基层干部都满意。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">前不久，中共中央办公厅、国务院办公厅印发《关于用好乡镇（街道）履行职责事项清单的具体措施》（以下简称《具体措施》），以清单的制度刚性，进一步为基层减负松绑、赋能增效。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">基层治理事关群众切身利益。为民造福，就要不断激发基层治理效能，破解基层“小马拉大车”难题。对于基层干部来说，工作任务层层加码、报表台账花样繁多等困扰仍时有出现。如果疲于应付不该管的事项，该管的却没管好，势必影响群众获得感。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">习近平总书记指出：“一个现代化的社会，应该既充满活力又拥有良好秩序，呈现出活力和秩序有机统一。”《具体措施》开出3张清单，明晰职责边界、减轻无谓负担，为基层更精准高效推进工作提供制度保障。递进一层看，理顺权责关系、激发治理效能，有利于更好统筹活力与秩序。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">如何科学处理二者关系，切实为基层减负、激活“神经末梢”？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">细化颗粒度，切忌眉毛胡子一把抓。理清脉络、精准施策，才能找准病灶、对症下药。四川成都华西医院附近，交通拥堵曾是“老大难”。以往关着门研究方案，干部很忙却成效不彰。如今“开门治堵”，面向医院、群众广纳良策，划分出3个功能区，既降低交通流量，又提升抵离效率；同时依靠技术赋能，用人工智能红绿灯实时优化通行策略……这样的“忙”，真正解决了问题，有意义、见成效。把潜功做精细，真正把情况摸清、把问题找准，才能把对策提实、让治理提效。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">增进协同度，跳出“一亩三分地”思维。治理上的小问题，背后往往有大文章，要求基层干部打开视野看问题、想办法。内蒙古通辽依托“党群通”智慧党建平台，推动1355个党组织与社区结对，主动“奉上”1137个服务供给资源清单。上海杨浦区平凉路街道推出“物业治理服务超市”，“货架”上是标准化服务包，“导购”是社区治理达人，各种实用文件陈列有序，“一站式”化解居民烦心事。弹好基层治理协奏曲，需以制度为基础，演绎“多手联弹”。搭好台、算大账，相互补位、相互成就，方能形成多方联动、携手并进的良性循环。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">增强预见性，既治“陈疾”，也防“未病”。治理“向前一步”，将事后处置变为事前预防，何尝不是为基层减负的有效之举？如今，不少地方都在推行观察员制度，调动网约车司机、外卖员、网络主播等新就业群体，及时发现反馈苗头性问题。这样的制度创新，让生活“末梢”变治理“前哨”，既是对社会治理体系的完善，也是对新形势下做好群众工作的深刻把握。与时俱进、把握规律，创新前置举措，能够惠及长远。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">“我国国家治理体系的一个优势就是把城乡社区基础筑牢。”处理好活力和秩序的关系，让干部轻装上阵、举重若轻，基层治理的高效能必将释放发展的新动能。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+必须以清单管理等制度的刚性约束厘清权责边界、为基层减负松绑，从而统筹活力与秩序，全面激发基层治理效能。
+
+**分论点：**
+1. 细化颗粒度，精准施策，把情况摸清、把问题找准，实现治理提效。
+2. 增进协同度，打破“一亩三分地”思维，推动多方联动与资源共享。
+3. 增强预见性，推动治理关口前移，变事后处置为事前预防。
+
+**立意高度：**
+立足新时代基层治理现代化与推进国家治理体系建设的宏观背景，紧扣党中央为基层减负赋能的顶层设计，将“活力与秩序有机统一”的重大政治命题转化为可操作的制度实践，彰显了以人民为中心的发展思想与破解“小马拉大车”难题的时代担当。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总结构（主体部分呈并列递进式）
+
+**结构图示：**
+微观现象切入（文件夹变化） → 政策引出与命题确立（制度刚性护航、活力与秩序辩证统一） → 设问过渡 → 分论点1（细化颗粒度/精准施策） → 分论点2（增进协同度/打破壁垒） → 分论点3（增强预见性/治未病） → 结尾呼应升华（筑牢基础、释放动能）
+
+**过渡技巧：**
+采用“设问引领+段首主题句排比+案例印证+理论升华”的衔接模式。文章以“如何科学处理二者关系……”承上启下，将宏观命题自然引向方法论层面；三个分论点段落均以“动词+名词度”的对仗短句领起，形成严密的并列排比阵型，段落内部则通过“案例叙述→经验提炼→对策延伸”的内在逻辑实现无缝过渡，确保论证脉络清晰、气韵贯通。
+
+## 【佳句】
+
+1. 《具体措施》开出3张清单，明晰职责边界、减轻无谓负担，为基层更精准高效推进工作提供制度保障。
+2. 弹好基层治理协奏曲，需以制度为基础，演绎“多手联弹”。
+3. 处理好活力和秩序的关系，让干部轻装上阵、举重若轻，基层治理的高效能必将释放发展的新动能。
+
+## 【解析】
+
+本文以“文件夹瘦身”的基层微观切口破题，精准对接中央为基层减负的顶层设计，立意高远且极具现实针对性。文章紧扣“活力与秩序的辩证统一”这一时代命题，采用“总-分-总”架构，通过设问自然过渡至“细化颗粒度、增进协同度、增强预见性”三大实践路径，构建起从“破除形式主义”到“重塑治理生态”的严密逻辑闭环。在论证策略上，作者深谙“以小见大”之法，横跨多地选取社区减负、智慧治堵、党建结对等一线鲜活素材，将抽象的制度刚性具象化为可操作的基层实践，有效破解了政论文章易流于空泛的难题，说服力显著。语言风格上，文本在保持党报评论庄重基调的同时，巧妙融入“眉毛胡子一把抓”“一亩三分地”“治陈疾防未病”等群众话语，富有烟火气与节奏感，实现了政治性与文学性的精准平衡。作为一篇兼具方法论指导与舆论引导功能的时评，该文不仅为破解“小马拉大车”困境开出制度良方，更以“让干部轻装上阵”的情感共鸣凝聚改革共识，对推动国家治理体系向基层延伸具有深远的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1274</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>12</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
