@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="提升供水质量  润泽广袤乡村（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="提升供水质量  润泽广袤乡村（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>提升供水质量  润泽广袤乡村（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">提升供水质量  润泽广袤乡村（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">提升供水质量  润泽广袤乡村（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年10月29日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/1029/c1003-40591689.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">以可持续的方式，为居住分散的农民提供长期、稳定、安全的供水服务，并非易事。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">有地形地貌的限制。湖北鹤峰县燕子镇东乡村，去年遭遇旱情，群众吃水告急，村干部和村民攀陡坡、找水源、铺管网，引来山泉水。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">有基础设施的缺口。山东嘉祥县，城乡共饮“一网水”，但一开始农村供水管网标准较低，水量少、水压低。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">如今，这种情况有了显著改善。在东乡村，村里建立管水制度，从水源保护到管网维护都有专人负责。在嘉祥县，“一根水管”通到底，水厂互通，管网互联，实现城乡饮水同源、同质、同服务。放眼全国，“十四五”时期，超半数的县域实现农村供水统一管理、统一监测、统一运维、统一服务，农村供水工程不断完善，管护机制日益健全。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">供水之变，深刻影响农村生活，有力彰显民生温度。当前，我国已建成世界上服务人口最多的农村集中供水体系，成为全球改善农村人口饮水状况力度最大的国家。预计“十四五”末，国家水网覆盖率达80.3%，耕地灌溉面积达10.9亿亩，农村自来水普及率达96%。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">不过，农村供水工程点多面广量大，它不仅仅是建设水利工程的问题，更是一个涉及资源、资金和社会管理的综合课题。实现“丰收水”畅流、干净水入户，必须有效统筹当前与长远、投入与产出、效率与公平等问题，有针对性地补短板、补欠账，不断提升水网整体的韧性和效率。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">从国家水网的构架来看，骨干水利工程侧重服务全局，小微水利工程立足一域所需。做好有机衔接，下好用水一盘棋，才能更好发挥水网整体效益。在河南焦作，南水北调中线穿城而过，当地建泵站、铺管线，微循环接入大通道，汩汩“南水”惠及范围更广。在甘肃临泽县，黑河干流、黑河西总干渠等大动脉，与农村安全饮水等输配水支线相互交织，筑牢县级水网。致广大而尽精微，在谋全局中打通“最后一公里”，许多问题就会有更好的解法。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">农村供水之难，并非完全难在有无，更是难在持续。设施建好以后，农村供水往往面临钱从哪来、谁来管、如何管等挑战。破解这些由来已久的问题，出路在制度创新。山西大禹渡灌区推行粮食作物、经济作物分类水价，对用水超定额部分实行累进加价，在总体不增加农民负担的基础上，缓解日常运行维护成本压力。宁夏吴忠市利通区探索“合同节水+水权交易”，把灌区节省出来的水量交易到企业，资源变资产，提升了节水效益。实践证明，抓住关键环节，增强改革主动性，不断优化制度，才能为农村水网稳定运行保驾护航。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">农村供水具有显著的公益属性，但要想持续提升服务品质，必须善用市场机制。一方面，要加强规划引领，规范农村水利建设，优化公共产品供给，筑牢供水保障底线。另一方面，要积极引入社会资本，创新投融资模式，以股权合作、合同节水等方式，不断拓宽资金来源，提升运营效率和管理水平。“有形之手”与“无形之手”协同发力、相互促进，才能构建起保障有力、可持续、高质量的农村供水新格局。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">党的二十届四中全会提出：“加快农业农村现代化，扎实推进乡村全面振兴。”贯通乡村的水脉，不仅是发展必需的源泉，更是驱动希望的活水。持续提升农村供水质量，让放心水长流千万家，必将持续滋养这片土地，不断绘就宜居宜业和美乡村的新篇章。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+提升农村供水质量需统筹工程建设与长效管护，通过系统衔接、制度创新与市场协同，构建可持续、高质量的农村供水新格局，以水脉畅通赋能乡村全面振兴。
+
+**分论点：**
+1. 坚持系统观念，做好骨干水网与小微水利的有机衔接，在谋全局中打通供水“最后一公里”。
+2. 聚焦长效运行，以分类水价、水权交易等制度创新破解资金筹措与日常管护难题。
+3. 强化政企协同，推动“有形之手”与“无形之手”互补发力，优化公共产品供给与运营效能。
+
+**立意高度：**
+紧扣“扎实推进乡村全面振兴”与“农业农村现代化”国家战略，将农村供水这一具体民生工程置于国家水网顶层设计与基层治理现代化的大坐标系中，深刻诠释以人民为中心的发展思想与高质量发展的时代要求。
+
+## 【结构】
+
+**结构类型：**
+递进式（兼具“总-分-总”特征）
+
+**结构图示：**
+破题引难（地形/基建短板） → 成效托底（地方实践/全国数据） → 逻辑转折（揭示综合课题） → 递进对策（宏观统筹衔接 → 制度创新管护 → 市场政府协同） → 结尾升华（呼应乡村振兴）
+
+**过渡技巧：**
+采用“事实承接+转折路标”实现自然过渡。以“如今，这种情况有了显著改善”平滑承接开篇困境；用“不过……不仅仅是……更是……”精准切换至深层矛盾剖析；后续段落分别以“从国家水网的构架来看”“农村供水之难，并非完全难在有无”“农村供水具有显著的公益属性，但……”作为段首逻辑锚点，形成层层递进、环环相扣的论证脉络。
+
+## 【佳句】
+
+1. 实现“丰收水”畅流、干净水入户，必须有效统筹当前与长远、投入与产出、效率与公平等问题，有针对性地补短板、补欠账，不断提升水网整体的韧性和效率。
+2. 致广大而尽精微，在谋全局中打通“最后一公里”，许多问题就会有更好的解法。
+3. 贯通乡村的水脉，不仅是发展必需的源泉，更是驱动希望的活水。
+
+## 【解析】
+
+本文以农村供水工程为精准切入点，锚定乡村振兴中的民生痛点，政治站位鲜明。文章摒弃就事论事，将单一水利工程升维至国家水网建设与基层治理现代化的系统课题，体现了党报评论一贯的大局观。逻辑建构上，采用“破题—立论—递进—升华”的严密闭环，以“不过”转折引出深层矛盾，随后按“空间统筹—制度创新—市场协同”层层剥笋，形成完整的逻辑闭环。素材运用坚持“一线调研+宏观数据”双线并行，鹤峰县引山泉、嘉祥县“一网水”等微观案例以小见大，焦作微循环、山西分类水价等实践则具强针对性，有效增强了策论的说服力。语言风格上，政治性与文学性高度平衡，既有规范严谨的政策话语，又穿插“汩汩南水”“驱动希望的活水”等充满烟火气的意象，节奏明快。整体而言，该文不仅是优质的舆论引导之作，更提供了“工程+制度+市场”三位一体的方法论指导，对各地破解农村基建“重建设、轻管护”顽疾具有极强的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1268</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>10</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
