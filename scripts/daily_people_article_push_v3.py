@@ -763,7 +763,17 @@ def generate_web_page(title: str, paragraphs: List[str], original_url: str, publ
     
     # 从 AI 结果中提取数据
     overall = ai_result.get('overall', {})
-    
+
+    # 修正统计：段落数和字数不包含导语
+    if has_lead:
+        actual_para_count = len(para_list)
+        actual_word_count = sum(len(p) for p in actual_paragraphs)
+        overall['total_paras'] = actual_para_count
+        overall['total_words'] = actual_word_count
+        if 'stats' in overall:
+            overall['stats']['total_paras'] = actual_para_count
+            overall['stats']['total_words'] = actual_word_count
+
     # 加载模板
     env = Environment(loader=FileSystemLoader(BASE_CONFIG['templates_dir']), autoescape=True)
     template = env.get_template('daily_detail.html')
