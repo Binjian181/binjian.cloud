@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="营造高品质城市生活空间（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="营造高品质城市生活空间（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>营造高品质城市生活空间（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">营造高品质城市生活空间（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">营造高品质城市生活空间（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年10月23日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/1023/c1003-40587316.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                城市公共空间的存量与增量并非简单的替代关系，以文化赋能激活存量可以在化学反应中创造增量
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">当下，到公共学习空间去学习日渐成为城市新风尚。不少城市公共图书馆的阅览室，出现“开馆即满”“一座难求”景象，24小时自助图书馆等新型阅读空间，灯火长明、座无虚席。据统计，2024年全国公共图书馆的总流通人次达13.4亿。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">这些鲜活画面，是群众精神文化需求日益增长的具体体现，也是城市生活空间不断优化的生动缩影。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">建设好现代化人民城市，必须营造高品质城市生活空间。城市的发展进步，生活品质的提升，不只在于摩天大楼的高度，更在于公共空间的温度。今年举行的中央城市工作会议提出建设现代化人民城市，要求“优化城市空间结构”“提高公共服务水平”。不久前，《中共中央国务院关于推动城市高质量发展的意见》发布，为加快城市发展方式转型、营造高品质城市生活空间指明了方向。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">科学规划是优化城市空间结构的基础。依托《北京花园城市专项规划（2023年—2035年）》等，北京着力塑造街道、商圈等8类花园场景，公园绿地500米服务半径覆盖率达到92.92%，九成以上的市民出门500米即可游园赏绿。咖啡书屋、草坪瑜伽、森林市集、潮玩IP等主题场景，为更多人提供了多元的休闲选择。把“宜居”的需求更好体现到城市规划中，才能营造高品质城市生活空间，让人们在城市诗意栖居。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">创造性地“变废为宝”，有利于提高城市公共空间使用效率。浙江温州注重城市有机更新，将建于上世纪80年代的废弃老水厂变成门庭若市的“水塔”图书馆，将C类危房改建为壹道音乐文化驿站。如今，各地类似探索层出不穷，通过打造更多融入城市记忆的公共文化空间，走出了拓展城市公共空间和保护传承历史文化、提升城市文化软实力相统一的新路径。这表明，城市公共空间的存量与增量并非简单的替代关系，以文化赋能激活存量可以在化学反应中创造增量。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">高品质城市生活空间，不仅是物理概念，更是治理目标。优化城市公共空间，还应该注重以更丰富贴心的服务、更可靠安全的环境吸引人。四川成都温江区依托24小时“留灯书屋”开办“留位艺术夜校”，让市民在业余时间有新追求、好去处；湖北潜江“播动潜江文化驿站”集直播培训与实践、社区阅读、文创产品展示等功能于一体，居民在“家门口”即可享受多样化文化服务。植根群众、优化服务，才能实现空间的高效复合利用。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">城市公共空间，也是面向未来的发展概念，由此衍生出的“公共空间+”，为人民城市延伸出更多可能性。“公共空间+传统农贸市场”，把“菜篮子”变成社区客厅；“公共空间+老年食堂”，以“餐饮+服务”综合体理念助力老有所养、老有所乐；“公共空间+书城”，通过举办作家签售会、摄影展、时装展、音乐会等活动，实现书城从图书卖场向文化生活空间转型。总之，从公共空间的多重功能出发，激活城市各项资源的发展潜力，有助于推动城市品质提升、治理增效，实现内涵式发展。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">期盼人们拥有更多享受知识、交流思想、放松身心的好去处，让城市成为人民群众的幸福家园。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+建设现代化人民城市，必须坚持科学规划、文化赋能、服务优化与功能拓展，以高品质公共空间提升城市生活品质与治理效能。
+
+**分论点：**
+1. 科学规划是优化城市空间结构、满足群众“宜居”需求的基础。
+2. 创造性盘活存量资源，以文化赋能实现公共空间的高效复合利用。
+3. 高品质空间更是治理目标，需以贴心服务提升空间使用效率。
+4. 拓展“公共空间+”跨界融合模式，激活城市资源推动内涵式发展。
+
+**立意高度：**
+紧扣中央城市工作会议精神与《关于推动城市高质量发展的意见》，立足“以人民为中心”的发展思想，将城市空间建设从传统的“规模扩张”转向“品质提升”与“内涵发展”，精准回应中国式现代化进程中新型城镇化建设与基层治理创新的时代命题。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（平行递进式）
+
+**结构图示：**
+现象引入（公共阅读热） → 政策定调与核心主张 → 科学规划（顶层设计） → 存量更新（文化赋能） → 精细治理（服务优化） → 跨界拓展（“公共空间+”） → 结尾升华（幸福家园）
+
+**过渡技巧：**
+采用“主题句领起+一线案例支撑+理论提炼”的段落内部逻辑；段落间以“科学规划是基础”“创造性地变废为宝，有利于…”“高品质城市生活空间，不仅是物理概念，更是治理目标”“也是面向未来的发展概念”等核心句进行平行铺排与逻辑递进，通过概念外延的不断拓宽，实现论证脉络的自然衔接与逻辑闭环。
+
+## 【佳句】
+
+1. 城市公共空间的存量与增量并非简单的替代关系，以文化赋能激活存量可以在化学反应中创造增量。
+2. 城市的发展进步，生活品质的提升，不只在于摩天大楼的高度，更在于公共空间的温度。
+3. 期盼人们拥有更多享受知识、交流思想、放松身心的好去处，让城市成为人民群众的幸福家园。
+
+## 【解析】
+
+本文以“城市阅读热”为微观切入点，精准对接建设现代化人民城市的宏观顶层设计，政治站位高、现实针对性强。文章采用“总—分—总”的递进式结构，逻辑严密。开篇由鲜活现象迅速上升至政策定调；主体部分以四个分论点平行展开，从“科学规划”的源头把控，到“盘活存量”的路径创新，再到“精细治理”的服务优化，最终延伸至“公共空间+”的未来图景，层层递进，构建起从物理空间建构到人文治理提升的完整逻辑闭环。素材运用上，文章精选北京花园城市规划、温州老水厂改造、成都温江夜校等一线案例，以“以小见大”的手法增强论证的说服力与烟火气。语言风格上，政治性与文学性高度平衡，“不只在于摩天大楼的高度，更在于公共空间的温度”等对仗句式节奏鲜明，将冷硬的规划术语转化为可感可知的民生温度。整体而言，该文是一篇兼具方法论指导与舆论引导功能的优秀范本，为各地推进城市更新提供了可复制的实践路径，真正做到了入脑入心、指导实践。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1181</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>8</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
