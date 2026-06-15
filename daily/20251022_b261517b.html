@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="由治水之道悟协调发展（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="由治水之道悟协调发展（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>由治水之道悟协调发展（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">由治水之道悟协调发展（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">由治水之道悟协调发展（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年10月22日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/1022/c1003-40586590.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">近期，两则关于治水的报道引发关注：2025年黄河汛期调水调沙结束，从2002年至今的31次调水调沙，把超35亿吨泥沙送入大海，黄河“地上悬河”态势有效缓解；南水北调东、中线一期工程累计调水超830亿立方米，为沿线48座大中型城市1.95亿人送来“放心水”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">一个“调”字，气象非凡。黄河调水调沙，水库群以大流量水流冲刷河道，让水沙关系更协调。南水北调，一张水网循环畅通，助力我国水资源配置格局实现全局性优化。不同的治水实践，回答相同命题——如何将不平衡调整至平衡。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">近年来，从江河间织水网，到一根“红线”管用水，再到深入实施国家“江河战略”……我们不断调整水资源投入与产出、需求与供给、保护与利用等关系，努力配平“夏汛冬枯、北缺南丰”的不等式，致力于实现相对平衡。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">总结治水之道，更能理解“不平衡是普遍的，要在发展中促进相对平衡”的治理之道。处理好经济和社会、政府和市场、效率和公平、活力和秩序、发展和安全等重大关系，实现从不平衡到平衡、不充分到充分，需要坚持系统思维、辩证思维，掌握协调发展的辩证法。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">不平衡中有势差，尊重规律顺势调。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">治水，贵在摸清水势、河势、地势，因势利导。黄河调水调沙，找准水库迎汛腾库等时机，塑造可控“人工洪峰”。南水北调中线工程借助地势自流，节省建设运行成本。把握规律、顺势而为，事半功倍。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">摸准规律，就能找到理清千头万绪的“线头”。比如，统筹好培育新动能和更新旧动能的关系，应遵循经济发展规律。江苏南通，纺织车间转型为智能工厂；浙江绍兴，一根丝线可“纺”成新一代人造血管、特种缆绳。处理好新与旧、破与立的关系，“嫁接”新质生产力，传统产业也可发“新枝”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">不平衡中蕴潜能，立足全局精准调。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">一水之变，激活区域发展“隐形优势”。南水北调东线工程抬高大运河水位，山东济宁梁山港从一片水洼地变身“十字路口”，成为通江达海水运网的枢纽。河南漯河，南水北调优质水源写进招商引资材料里，在好水润泽下，食品产业加快转型升级、总规模超2500亿元。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">打开视野，不平衡不协调中有潜力。安徽用好战略叠加优势，成为长三角的“超级接口”。新疆立足欧亚大陆中心地带，建设国际通道，西北内陆成为开放高地。“胡焕庸线”两侧，蕴藏产业梯度转移空间、弯道超车机遇。转换视角，立足“全域所需”补短板，释放“一域所能”新潜力，有利于促进区域协调发展。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">不平衡中育新机，化危为机辩证调。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">治水促发展、兴水惠民生，体现的是直面问题与解决问题的统一。曾经，“长江病了，而且病得还不轻。”共抓大保护、不搞大开发，随着长江经济带发展战略深入实施，一江碧水向东流的美景得以复现，绿色发展动能强劲。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">无惧难题，打开发展新天地。很多时候，克服困难的过程，也是抓住机遇的过程。面对“北京吃不完，天津吃不好，河北吃不饱”，牵住疏解北京非首都功能这个“牛鼻子”，京津冀协同发展不断迈上新台阶。面对“城乡二元结构”，推进新型城镇化和乡村全面振兴有机结合，城乡发展肩并肩。聚焦问题，迎难而上，集中攻坚，总能找到解决问题的钥匙。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">协调既是发展手段，又是发展目标。“十个指头弹钢琴”，定能奏响高质量发展的协奏曲。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+坚持系统思维与辩证思维，在发展中促进相对平衡，是实现高质量发展的协调发展之道。
+
+**分论点：**
+1. 不平衡中有势差，需尊重规律顺势调，找准新旧动能转换的“线头”。
+2. 不平衡中蕴潜能，需立足全局精准调，释放区域协同与产业转移的新潜力。
+3. 不平衡中育新机，需化危为机辩证调，在直面问题与集中攻坚中打开发展新天地。
+
+**立意高度：**
+立足新时代推进中国式现代化与高质量发展的宏观背景，将具体治水实践升华为国家治理的底层逻辑。文章政治站位高远，深刻契合中央关于统筹发展与安全、破除结构性矛盾、促进区域协调发展的战略部署，体现了“从具体实践中提炼普遍规律”的理论自觉。
+
+## 【结构】
+
+**结构类型：**
+总-分-总 + 并列递进式
+
+**结构图示：**
+治水案例引入（数据破题） → 提炼“调”字内核，提出“在发展中促进相对平衡”核心论点 → 分论点1（尊重规律·顺势调） → 分论点2（立足全局·精准调） → 分论点3（化危为机·辩证调） → 结尾升华（协调是手段与目标，奏响高质量发展协奏曲）
+
+**过渡技巧：**
+采用“概念引申”与“段首主旨句锚定”双重过渡。文章以自然界的“水势”巧妙过渡到经济社会发展的“大势”，实现从工程叙事到治理哲学的无缝切换。三个分论点均以“不平衡中……”的整齐句式开篇，形成强烈的逻辑排比与节奏锚点，使论证脉络在并列中呈现递进，段落衔接紧凑、气韵贯通。
+
+## 【佳句】
+
+1. 总结治水之道，更能理解“不平衡是普遍的，要在发展中促进相对平衡”的治理之道。
+2. 转换视角，立足“全域所需”补短板，释放“一域所能”新潜力，有利于促进区域协调发展。
+3. 协调既是发展手段，又是发展目标。“十个指头弹钢琴”，定能奏响高质量发展的协奏曲。
+
+## 【解析】
+
+本文以“治水”为精巧切入点，巧妙打通自然规律与治国理政的逻辑壁垒，展现出极高的政治站位与时代敏锐度。文章紧扣高质量发展主题，将“夏汛冬枯、北缺南丰”的水资源配置实践，升华为统筹经济与社会、效率与公平的宏观治理方法论，实现了从具体工程到战略部署的立意跃升。
+
+在逻辑与结构上，文章采用“总-分-总”与并列递进相融合的严密范式。开篇以权威数据锚定治水成效，顺势提炼“调”字内核，提出核心命题。随后以三个“不平衡中……”的段首句为逻辑支点，从尊重客观规律、立足全局视野到坚持辩证思维层层推进，构建起环环相扣的逻辑闭环。素材运用坚持“以小见大”，精准嵌入南通智造转型、济宁港口崛起、京津冀协同等一线案例，将抽象的“新质生产力”与“区域协调”具象化，极具现实针对性与说服力。语言风格上，政治话语与文学表达高度平衡，“线头”“牛鼻子”“十个指头弹钢琴”等隐喻兼具烟火气与节奏感。整体而言，该文不仅发挥了强大的舆论引导效能，更提供了破解结构性矛盾的方法论指导，入脑入心地阐明了协调发展的现实路径，对基层实践具有鲜明的现实指导价值。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1274</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>14</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
