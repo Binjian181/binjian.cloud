@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="以千年智慧润泽现代文明（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="以千年智慧润泽现代文明（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>以千年智慧润泽现代文明（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">以千年智慧润泽现代文明（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">以千年智慧润泽现代文明（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年10月15日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/1015/c1003-40582182.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">不久前，云南元阳哈尼梯田、江苏句容赤山湖灌溉工程、四川彭州湔江堰、北京门头沟永定河古渠灌溉工程成功入选2025年世界灌溉工程遗产。这不仅表明我国灌溉工程遗产保护获得国际认可，也意味着我国世界级遗产再度扩容。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">习近平总书记强调：“进一步加强文化和自然遗产的整体性、系统性保护，切实提高遗产保护能力和水平，守护好中华民族的文化瑰宝和自然珍宝。”元阳哈尼梯田森林、村寨、梯田、水系“四素同构”，湔江堰平梁分水，句容赤山湖塘闸调控，门头沟永定河古渠分洪沉沙，它们皆以天人合一的智慧，在渠线规划、工程设计、用水方式上顺应自然、巧用规律。灌溉工程穿越时空、滋养古今，体现着民生价值、生态智慧和文化传承。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">总结“十四五”时期文化和自然遗产的保护传承，民生、生态和文化，提供了3个有意思的观察视角。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">重视活化利用，体现民生价值。北京门头沟永定河古渠，现在仍灌溉约2000亩农田，还为约2万亩果园及生态区补水，彰显民生温度。不仅如此，“遗产+”还能催生多种业态。福建泉州依托22个遗产点打造海丝寻踪、宗教探秘等主题旅游线路，开发蟳埔女“簪花围”等文创产品，以世遗风华不断提升城市吸引力。文化和自然遗产不仅承载历史光辉，更具有当代价值。让文化和自然遗产与民众生产生活深度融合，就能激活其经济效益，实现保护传承与赋能发展、改善民生的良性互动。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">突出修复保护，释放生态效益。北京中轴线既是文化的轴线，也是生态的轴线，在保护中对遗产缓冲区内8753棵古树名木进行实时监测保护，连通城市水系、织补绿色空间。在云南普洱景迈山古茶林，智慧平台实现对191平方公里遗产区和缓冲区全天候守护，人、茶、林、地和谐共生，农文旅融合发展。在文化和自然遗产保护传承中突出生态智慧，不仅能更好领悟传统文化的思想精髓，也能为现代生活注入生态滋养。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">强调以文化人，突出文化功能。“长江长城，黄山黄河，在我心中重千斤”，一首《我的中国心》总能激发人们的爱国情怀，正因为这些标志性的元素承载着历史记忆和文化血脉。因此，对文化和自然遗产的保护传承，本身就具有凝聚人心、塑造认同的作用。今年，西夏陵被列入《世界遗产名录》，当地以数字化技术复原西夏陵规模、建筑特色及祭祀场景，直观展现中华民族多元一体的魅力，让人们在参观时自然产生对中华民族共同体的认同。加强文化和自然遗产保护传承，就要让流动的历史可感可及，让抽象的文化获得具象表达，为人们打开一扇扇思接千载的窗户。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">守护文化和自然遗产，是守护民族的基因和血脉，也是开启未来的智慧之门。在文化和自然遗产保护传承中更好体现民生价值、生态智慧和文化传承，不仅能赋予其新的时代生命，而且能让蕴含其中的千年智慧润泽现代文明，为推进中国式现代化建设注入精神动力。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+在文化和自然遗产保护传承中统筹民生价值、生态智慧与文化传承，以千年智慧润泽现代文明，为推进中国式现代化建设注入精神动力。
+
+**分论点：**
+1. 重视活化利用，推动遗产与民众生产生活深度融合，彰显民生价值。
+2. 突出修复保护，在遗产管护中融入生态智慧，释放生态效益。
+3. 强调以文化人，让流动的历史可感可及，发挥遗产凝聚人心、塑造认同的文化功能。
+
+**立意高度：**
+文章立足“十四五”时期文化与自然遗产系统性保护的时代背景，深入贯彻习近平总书记关于遗产保护的重要指示精神。将具体的遗产保护工作上升至守护民族基因血脉、坚定文化自信、赋能生态文明建设的高度，政治站位鲜明，契合中国式现代化进程中物质文明与精神文明相协调的战略要求。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总结构（主体部分为并列式）
+
+**结构图示：**
+新闻事实引入破题 → 引语定调提炼内核 → 提出“民生、生态、文化”三大视角（总） → 视角一：活化利用体现民生价值 → 视角二：修复保护释放生态效益 → 视角三：以文化人突出文化功能（分） → 总结升华，呼应标题（总）
+
+**过渡技巧：**
+文章采用“枢纽提示+段首引领”的过渡手法。第三段以“总结‘十四五’时期……提供了3个有意思的观察视角”承上启下，完成从具体新闻到宏观论述的切换；第四至六段段首分别以“重视活化利用，体现民生价值”“突出修复保护，释放生态效益”“强调以文化人，突出文化功能”作为核心句，形成工整的排比引领，逻辑脉络清晰，段落衔接如行云流水。
+
+## 【佳句】
+
+1. 在文化和自然遗产保护传承中更好体现民生价值、生态智慧和文化传承，不仅能赋予其新的时代生命，而且能让蕴含其中的千年智慧润泽现代文明，为推进中国式现代化建设注入精神动力。
+2. 守护文化和自然遗产，是守护民族的基因和血脉，也是开启未来的智慧之门。
+3. 让流动的历史可感可及，让抽象的文化获得具象表达，为人们打开一扇扇思接千载的窗户。
+
+## 【解析】
+
+本文紧扣“文化和自然遗产保护传承”这一时代命题，以四项灌溉工程入选世界遗产为切入点，巧妙破题。文章政治站位鲜明，将微观的遗产保护置于文化自信与生态文明建设的大局中审视，立意高远且紧扣顶层设计。逻辑架构上，全文采用经典的“总 - 分 - 总”范式，以“民生、生态、文化”三大视角为枢纽提纲挈领，随后三段并列展开，构建起严密的逻辑闭环。论证过程中，作者善用“以小见大”的一线素材，从门头沟古渠补水、景迈山智慧守护到西夏陵数字复原，案例鲜活且极具针对性，将宏观政策转化为具象实践，说服力极强。语言风格上，文章兼具政治高度与文学质感，段首句整齐划一、节奏明快；“让流动的历史可感可及”“思接千载的窗户”等表述富有诗意，实现了政治性与文学性的有机平衡。整体而言，该文不仅是一篇出色的舆论引导之作，更提供了遗产活化利用的方法论指导。文章将历史文脉与现代文明相贯通，入脑入心，对当下各地推进遗产系统性保护、以文化赋能高质量发展具有强烈的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1115</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>7</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
