@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="为市场“新陈代谢”主动清障（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="为市场“新陈代谢”主动清障（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>为市场“新陈代谢”主动清障（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">为市场“新陈代谢”主动清障（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">为市场“新陈代谢”主动清障（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年06月25日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0625/c461529-40746879.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                经营主体退出制度，是现代化经济体系的重要组成部分。当前，要素市场化改革持续深化，要求我们加快推进企业注销配套改革，完善企业退出制度
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">让“僵尸企业”退出市场，一直是个难题。如今，解决这一棘手问题有了新抓手。不久前，市场监管总局选取北京、河北、江苏等7省（市）开展由登记机关向人民法院申请强制清算试点工作。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">这一新举措，源于修订后的公司法专门增加的一项规定，有关部门或者公司登记机关可以作为申请人向人民法院申请清算。这不只是让“僵尸企业”的退出多了一种方式，而且大大增强了治理的主动性。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">以往，那些经营异常的企业，主要由公司股东、债权人等利害关系人向人民法院申请强制清算。由于这样的企业往往没有多少财产可供清偿，债权人推动强制清算的收益不大。退出市场需要完成清算、还债、销户等多个步骤，企业主动退出的动力也不足。此外，也有些地方担心企业退出带来不良影响，会对“僵尸企业”进行“输血”。多种原因交织，导致市场难以真正实现优胜劣汰。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">打破这样的不良循环，必须找准症结、精准发力。此次市场监管总局开展强制清算试点，正是抓住申请主体这一关键环节，由登记机关主动作为，为市场“新陈代谢”清除障碍。登记机关作为申请主体，可以更好整合多部门数据，提供更完整的证据链，缩短强制清算工作的周期，节约宝贵的行政和司法资源。比如，江苏构建经营异常企业公益强制清算退出的常态化机制，截至今年5月底，共办理公益强制清算注销登记1.8万余件。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">强制清算“僵尸企业”，并非单纯的司法或行政问题，而是涉及提升政府效能、优化要素配置的系统工程。清退的目的，是让土地、劳动力等生产要素重新流动起来，配置到更有活力的新产业、新业态中去。因此，必须同步完善资产处置、职工安置、债务化解等配套机制。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">此外，强制清算之前，应做好“帮扶疏导”，提升企业自主退出的便利度。比如，今年前5个月，北京通过简易注销程序退出市场的企业占注销企业总数的64.95%。把破与立、退与进统筹起来，才能让市场上的无效供给尽快出清，为高质量发展腾出宝贵的空间。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">企业退出市场，会造成广泛的经济社会影响，主动积极作为、增强制度刚性的同时，必须做好精准识别，进行分类处置。比如，四川内江市在开展经营异常企业公益清算试点的过程中，建立起“诊疗式”分级分类挽救与处置机制：对有潜在风险的“未病”企业提前预警，对有经营隐患的“小毛病”企业精准帮扶，对患有“大病”的企业通过庭外重组、预重整、司法重整等方式救治，对“病入膏肓”的“僵尸企业”通过公益清算引导有序退出。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">经营主体退出制度，是现代化经济体系的重要组成部分。当前，要素市场化改革持续深化，要求我们加快推进企业注销配套改革，完善企业退出制度。更好发挥市场优胜劣汰作用，促进更多资源向高效领域集聚，方能以高水平社会主义市场经济体制建设，激活高质量发展的澎湃动力。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+以登记机关主动申请强制清算为突破口，完善企业退出配套机制与分类处置体系，破除市场“新陈代谢”障碍，从而优化要素配置、激活高质量发展动力。
+
+**分论点：**
+1. 找准症结，由登记机关主动作为申请强制清算，打破以往利害关系人动力不足、地方“输血”兜底的退出僵局。
+2. 系统施策，同步完善资产处置、职工安置等配套机制，并前置“帮扶疏导”提升企业自主退出的便利度。
+3. 精准识别，建立分级分类挽救与处置机制，统筹“破与立、退与进”，实现无效供给有序出清与优质资源高效集聚。
+
+**立意高度：**
+立足要素市场化改革持续深化与高水平社会主义市场经济体制建设的时代背景，将企业退出机制从单纯的司法行政程序，上升为优化资源配置、推动经济高质量发展的关键制度安排，体现了鲜明的改革导向、底线思维与系统观念。
+
+## 【结构】
+
+**结构类型：**
+递进式（融合总-分-总逻辑）
+
+**结构图示：**
+开篇定调（制度重要性） → 引出新策（强制清算试点） → 剖析旧弊（退出难症结） → 核心举措（登记机关主动清障） → 系统配套（要素配置与前置帮扶） → 精准分类（诊疗式处置） → 结尾升华（完善制度、激活动力）
+
+**过渡技巧：**
+采用“问题导向+对策递进”的衔接方式。以“打破这样的不良循环”“并非单纯的……而是……”“此外”“必须做好精准识别”等逻辑提示语承上启下，实现从“点”（清算主体变更）到“面”（配套机制、前置服务）再到“体”（分类治理体系）的平滑过渡，段落间咬合紧密，形成层层深入的论证链条。
+
+## 【佳句】
+
+1. 此次市场监管总局开展强制清算试点，正是抓住申请主体这一关键环节，由登记机关主动作为，为市场“新陈代谢”清除障碍。
+2. 对有潜在风险的“未病”企业提前预警，对有经营隐患的“小毛病”企业精准帮扶，对患有“大病”的企业通过庭外重组、预重整、司法重整等方式救治，对“病入膏肓”的“僵尸企业”通过公益清算引导有序退出。
+3. 更好发挥市场优胜劣汰作用，促进更多资源向高效领域集聚，方能以高水平社会主义市场经济体制建设，激活高质量发展的澎湃动力。
+
+## 【解析】
+
+本文紧扣要素市场化改革的时代命题，以企业强制清算试点为关键切入点，精准切中“僵尸企业”退出难的治理痛点，政治站位鲜明，体现了从“被动应对”向“主动清障”的治理思维跃升。在逻辑架构上，文章采用递进式论证，遵循“破题定调—剖析旧弊—推出新策—系统配套—精准分类—升华主旨”的脉络，形成严密的逻辑闭环。论证由单一制度突破自然延伸至要素重新配置、前置帮扶疏导与分级分类处置，层层剥茧，将政府主动作为与市场优胜劣汰规律辩证统一。素材运用上，文章精选江苏、北京、四川内江等地的一线改革实践，数据翔实、案例鲜活，既具极强的现实针对性，又大幅增强了政策落地的说服力，有效实现了以小见大。语言风格上，行文兼具政治高度与文字质感，巧妙借用“新陈代谢”“诊疗式”“未病”等医学隐喻，赋予刚性经济制度以生动的节奏感，实现了政策话语与大众表达的精准平衡。整体而言，该文不仅为地方优化营商环境提供了清晰的方法论指导，更在舆论引导上凝聚了“畅通退出渠道方能激活发展动能”的社会共识，兼具现实破局价值与长远制度意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1095</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>8</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
