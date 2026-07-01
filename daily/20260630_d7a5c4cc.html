@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="谋在先、干在前（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="谋在先、干在前（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>谋在先、干在前（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">谋在先、干在前（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">谋在先、干在前（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年06月30日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0630/c461529-40750263.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                机遇稍纵即逝，增强行动力，看准了就抓紧干，方能把战略远见转化为实实在在的发展成效
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">观察我国“新三样”发展会发现，产业在跑出加速度的同时，“如何提前做好后端利用规划”的课题也摆在了面前。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">我国新能源汽车保有量已突破4300万辆，作为新能源汽车“心脏”的动力电池将迎来规模化退役阶段；光伏装机规模连续多年全球第一，早期光伏组件陆续达到使用年限，退役潮渐行渐近……</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">如何应对好这一课题？前不久，商务部召开“新三样”固废回收利用工作座谈会，部署加快完善顶层制度设计，推动出台政策文件。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">前瞻布局应对“新三样”退役潮，简单看是部署发展固废回收产业，往深处看，则有着着眼全局的考量。一块标准的光伏组件富含银、铝、硅、铜等资源，退役的动力电池更是被视为蕴含锂、钴、镍等关键金属的“城市矿山”……这些有不少是我国对外依存度较高的资源。在产业蓬勃发展时、在新课题到来之前，就尽早着手构建闭环的回收体系，是提早布局的“远虑”，也是降低产业原料成本、保障产供链安全的“先手”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">前瞻布局“新三样”退役潮，体现这样一种清醒：发展越往前走，越需要把目光投向远方，把工作做到前头。推动高质量发展没有坦途，机遇与挑战并存，只有凡事谋在先、干在前，尽早行动才能牢牢掌握发展主动。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">谋在先、干在前，首在“看得准”，增强前瞻性。尽早行动不是急躁冒进、盲目行动，而是在摸清发展规律、深入调查研究的基础上找准赛道，谋定后动。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">比如，人工智能浪潮推动算力需求日益增长，地面数据中心正面临能源、土地、散热等多重挑战。在满足现有需求的同时，多地开始部署太空算力等新型算力，丰富未来算力的供给路径。又如，多年前，我国在存储芯片领域几乎一片空白，安徽合肥结合国家战略和地方比较优势，选定存储芯片赛道久久为功，在这一轮人工智能浪潮中实现本地产业的异军突起。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">胸怀大局、登高望远，着眼发展全局、洞悉时代趋势，找到适合自己的发展路子，才能更好发挥比较优势，打开发展新空间。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">谋在先、干在前，要着眼“留得足”，打足提前量。适度超前布局，留足冗余空间，是统筹发展和安全的必然举措。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">加快构建多元清洁、安全韧性的能源供给新体系，让我们在面对国际地缘冲突造成的能源市场波动时，有充足底气和能力抵御冲击；推动建立适度超前的充换电基础设施体系，打通补能网络堵点，有力支撑新能源汽车产业快速迭代、市场渗透率稳步提升……</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">留足冗余空间，既体现居安思危的底线思维，也彰显谋远育新的前瞻考虑，既能为应对不确定性留出缓冲，也有利于为创新突破提供成长空间。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">谋在先、干在前，落脚在行动。无论多前瞻的布局，最终都要靠真抓实干来绘就蓝图。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">特斯拉上海超级工厂从开工到首批整车交付不到一年，以“当年开工、当年投产、当年交付”的效率跑出“中国速度”。正是这样的“中国速度”，推动新能源汽车供应链持续迭代升级，为国产新能源品牌崛起铺就更成熟的产业底座。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">机遇稍纵即逝，增强行动力，看准了就抓紧干，方能把战略远见转化为实实在在的发展成效。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">15</span>
+                <div class="para-text">眼下，无论是建设现代化产业体系，还是加快高水平科技自立自强，都对我们长远谋划和落地执行的能力提出了更高要求。坚持谋在先、干在前，以前瞻布局夯实发展根基，我们定能在新一轮科技革命和产业变革中赢得更多主动。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+面对高质量发展进程中的新机遇与新挑战，必须坚持“谋在先、干在前”，以前瞻布局与真抓实干将战略远见转化为实实在在的发展成效。
+
+**分论点：**
+1. 谋在先、干在前，首在“看得准”，增强前瞻性，摸清规律谋定后动。
+2. 谋在先、干在前，要着眼“留得足”，打足提前量，统筹发展与安全。
+3. 谋在先、干在前，落脚在行动，增强行动力，以真抓实干绘就蓝图。
+
+**立意高度：**
+紧扣新时代高质量发展与高水平科技自立自强的时代命题，站位统筹发展和安全的国家战略全局，彰显在新一轮科技革命和产业变革中牢牢掌握发展主动权的政治自觉与历史担当。
+
+## 【结构】
+
+**结构类型：**
+递进式（总-分-总结构嵌套逻辑递进）
+
+**结构图示：**
+现象切入（“新三样”退役潮） → 提炼核心（谋在先、干在前） → 分论一（看得准/重前瞻） → 分论二（留得足/打提前量） → 分论三（落脚行动/重实干） → 总结升华（赢得发展主动）
+
+**过渡技巧：**
+采用“设问破题+核心词复沓+逻辑词承接”的复合技巧。开篇以“如何应对好这一课题？”自然过渡至顶层设计部署；主体部分连续使用“谋在先、干在前，首在……”“谋在先、干在前，要着眼……”“谋在先、干在前，落脚在……”构成段首排比，形成严密的逻辑阶梯与阅读节奏，段落衔接如行云流水，层层剥笋、环环相扣。
+
+## 【佳句】
+
+1. 发展越往前走，越需要把目光投向远方，把工作做到前头。
+2. 留足冗余空间，既体现居安思危的底线思维，也彰显谋远育新的前瞻考虑，既能为应对不确定性留出缓冲，也有利于为创新突破提供成长空间。
+3. 坚持谋在先、干在前，以前瞻布局夯实发展根基，我们定能在新一轮科技革命和产业变革中赢得更多主动。
+
+## 【解析】
+
+本文以“新三样”规模化退役这一产业新课题为精准切入点，紧扣高质量发展与统筹发展和安全的时代背景，展现出鲜明的政治站位与全局视野。文章采用“总-分-总”递进结构，逻辑闭环严密。以“谋在先、干在前”为核心主轴，通过“看得准”“留得足”“重行动”三个维度层层递进，将宏观战略拆解为具象化的方法论，论证脉络由表及里、由知到行。在素材运用上，文章摒弃空泛说理，精选太空算力布局、合肥存储芯片突围、适度超前基建及上海超级工厂等一线鲜活案例，以小见大、虚实相济，极大增强了论证的针对性与说服力。语言风格上，政治性与文学性达成精妙平衡，段首排比句式铿锵有力，兼具理论深度与阅读节奏感。整体而言，该文不仅有效发挥了主流媒体的舆论引导功能，更为各地应对产业变革、夯实发展根基提供了清晰的方法论指导，兼具思想穿透力与现实指导意义，是一篇入脑入心、催人奋进的精品时评。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1270</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>15</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
