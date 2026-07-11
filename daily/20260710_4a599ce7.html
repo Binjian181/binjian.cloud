@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="既有目标意识，也有阶段意识（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="既有目标意识，也有阶段意识（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>既有目标意识，也有阶段意识（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">既有目标意识，也有阶段意识（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">既有目标意识，也有阶段意识（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年07月10日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0710/c461529-40757152.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                既要有目标意识，锚定改善民生的大方向不动摇，尽力而为；也要有阶段意识，量力而行，不好高骛远，成熟一个推进一个、实施一项做成一项
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">近段时间，民生领域出现不少新变化，让更多人切实感受到“身边的改革红利”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">比如，以前去药店买药，常要“货比三家”地跑，如今，依靠药品比价小程序，参保人动动手指，就能买到更实惠的药品。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">又如，职工基本医疗保险个人账户跨省共济有了经办规程，医保个账资金成为“家庭健康金”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">再如，超60个城市调整优化住房公积金政策，涉及贷款额度、提取范围等方面，更好满足人们居住需求。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">稳扎稳打向前进，一步一步向上攀，一系列惠民政策带来看得见的变化，让人倍感暖心。从中，也能感悟做好民生工作的智慧：既要有目标意识，锚定改善民生的大方向不动摇，尽力而为；也要有阶段意识，量力而行，不好高骛远，成熟一个推进一个、实施一项做成一项。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">民生工作关键在实。实现目标，不同阶段会有不同问题。民生难题每破解一个，民生工作就会向前推进一步。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">孩子入托后，怎么提升日常照护专业性？云南文山壮族苗族自治州马关县探索将医疗资源嵌入托育服务全流程，组建由儿童保健科医生、护士和营养指导员组成的专业团队，为相关托育园的儿童建立专属健康档案，实施个性化健康管理，有效解决孩子入托后的健康保障难题。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">失能、半失能老人洗澡难咋解决？重庆持续推进“助浴快车”公益项目，以“流动助浴车+固定助浴点+上门服务”相结合的助老服务，提升居家养老舒适度。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">群众的呼声，就是努力的方向；群众的所忧所盼，就是改进工作的发力点和突破口。扑下身子、迈开步子，把情况摸清楚、把实情了解透，就能找到更多解题思路，进而把经验成果化为制度沉淀。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">为民造福，不避难者进。实现目标，总会碰到吃力阶段，必须勇于啃硬骨头，向着最难处攻坚。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">江苏南京石榴新村，“握手楼”曾随处可见，部分房屋甚至是D级危房，改造势在必行。棘手的是，群众诉求多元，且产权关系错综复杂。怎么办？当地迎难而上，相关单位负责人每天拎着小板凳挨家挨户座谈，设计方案经过约70轮修改，户型经过20轮调整，形成由20个面积段、36种户型平面相结合的改造设计方案。最终，45天里签约率达到97%。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">为民办实事，容不得重易轻难、避重就轻、挑肥拣瘦。问题越复杂、越艰难，越需要干部主动担当、攻坚克难。起而行之、担重担难，才能把民生实事办到群众心坎上。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">保障和改善民生是一项长期、系统、艰巨、复杂的工程。把目标意识和阶段意识结合起来，必须保持战略定力，像“拧螺丝”一样，一圈接着一圈拧。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">14</span>
+                <div class="para-text">上海30余年久久为功，以燕子垒窝的韧劲，下足绣花功夫，历史性解决“拎马桶”这一民生难题；广东中山安阜涌，一度河面垃圾漂浮、岸线脏乱，当地痛下决心、壮士断腕，历时4年，让人人掩鼻的“黑臭河”，恢复成水清岸绿的“生态廊”，阔别已久的龙舟鼓声再次擂响。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">15</span>
+                <div class="para-text">改善民生不可能一蹴而就。一步一个脚印、一点一滴推进，小步快跑、久久为功，就能积微成著、积厚成势。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">16</span>
+                <div class="para-text">“树立和践行正确政绩观，最终要落到为民造福上。”既有目标意识，也有阶段意识，持续解决群众急难愁盼问题，民生答卷将不断写下温暖篇章。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+做好民生工作既要有目标意识，锚定改善民生的大方向不动摇、尽力而为；也要有阶段意识，量力而行，成熟一个推进一个、实施一项做成一项。
+
+**分论点：**
+1. 民生工作关键在实，需针对不同阶段的具体问题精准发力，将群众期盼化为解题思路与制度沉淀。
+2. 为民造福不避难者进，在实现目标的吃力阶段必须勇于啃硬骨头，向着最难处攻坚。
+3. 保障和改善民生是长期系统工程，需保持战略定力，将目标意识与阶段意识结合，久久为功。
+
+**立意高度：**
+文章立足于新时代保障和改善民生的时代背景，将“尽力而为”与“量力而行”进行辩证统一，深刻体现了以人民为中心的发展思想，并落脚于树立和践行正确政绩观，展现了极高的政治站位与深邃的战略眼光。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（中间分论点呈递进式）
+
+**结构图示：**
+开篇引入（民生新变化） → 提出中心论点（目标意识与阶段意识结合） → 分论点1（关键在实，破解具体问题） → 分论点2（迎难而上，啃硬骨头） → 分论点3（保持定力，久久为功） → 结尾升华（树立正确政绩观，写下温暖篇章）
+
+**过渡技巧：**
+文章采用“观点领起+案例支撑+分析升华”的段落内闭环结构。段落间通过“民生工作关键在实”“为民造福，不避难者进”“保障和改善民生是一项长期、系统、艰巨、复杂的工程”等核心观点句进行自然衔接，层层递进，脉络清晰，逻辑严密。
+
+## 【佳句】
+
+1. 既要有目标意识，锚定改善民生的大方向不动摇，尽力而为；也要有阶段意识，量力而行，不好高骛远，成熟一个推进一个、实施一项做成一项。
+2. 一步一个脚印、一点一滴推进，小步快跑、久久为功，就能积微成著、积厚成势。
+3. 既有目标意识，也有阶段意识，持续解决群众急难愁盼问题，民生答卷将不断写下温暖篇章。
+
+## 【解析】
+
+本文切入新时代民生建设这一宏大主题，以“目标意识”与“阶段意识”的辩证关系为突破口，精准契合树立和践行正确政绩观的时代要求，政治站位高远。在逻辑与结构上，全文采用总-分-总架构，中间三个分论点从“关键在实”的基础层面，到“不避难者进”的攻坚层面，再到“久久为功”的长期层面，层层递进，形成严密的逻辑闭环。
+
+在素材与论证方面，文章选取云南马关县托育、重庆“助浴快车”、南京石榴新村改造、上海解决“拎马桶”等一线素材，以小见大，兼具烟火气与针对性，使抽象的方法论具象化，极具说服力。语言风格上，文字质感扎实，既有“拧螺丝”“燕子垒窝”等生动比喻，又有“积微成著、积厚成势”等工整句式，实现了政治性与文学性的完美平衡。
+
+整体而言，该文不仅起到了澄清认识、舆论引导的作用，更为基层干部如何统筹“尽力而为”与“量力而行”提供了清晰的方法论指导，具有极强的现实针对性与入脑入心的传播效果。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1202</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>16</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
