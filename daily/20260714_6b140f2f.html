@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="以专业精度提升解纷效度（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="以专业精度提升解纷效度（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>以专业精度提升解纷效度（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">以专业精度提升解纷效度（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">以专业精度提升解纷效度（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年07月14日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0714/c461529-40759830.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                既要推动解纷资源下沉、工作方式革新，更要以群众视角校准治理坐标，以法治机制提升协同效能，让治理重心与群众期盼始终同频共振
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">化解复杂矛盾纠纷时，如何更好实现情绪降温，进而重建共识？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">引入更多本领域的“内行人”参与调解，在法律框架内寻求各方都能接受的方案，是一剂兼顾情理法的“良方”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">近年来，最高人民法院先后与全国工商联、全国总工会、住房城乡建设部等18家单位建立“总对总”多元化纠纷解决机制。这一机制打破部门壁垒，针对性引入行业专业调解力量，构建起一个权威且高效的解纷平台，有效提升了纠纷化解效率和力度，让群众的烦心事、揪心事不仅有人管，更能管到位。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">“病情”摸得准，“药方”才开得对。湖北建始县，面对一起积怨8年之久、牵涉1700余名业主的物业纠纷，当地法院没有“一判了之”，而是联动住建部门、镇政府、居委会协同调处。把大纠纷拆成小问题，厘清矛盾焦点与责任边界，不仅解决了眼前的纠纷，还协调双方对小区物业管理内容进一步细化，从源头防范风险隐患。这样的专业化调解，让当事人权益得到更好维护，让治理触角延伸到更前端，让社会公共利益得到更有力保障。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">当前，社会公众法治意识不断增强，越来越多的人倾向于通过诉讼途径维护自身权益，这是法治进步的体现。但与此同时，物业、网络侵权、知识产权等领域纠纷常见多发，新类型纠纷持续增多，呈现出专业性强、法律关系复杂、处理难度大，甚至具有外溢性等特征，给社会治理带来了新的课题。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">解决好这类矛盾纠纷，更好满足群众新期待，不能只靠司法部门单打独斗。加强与行政主管部门、行业协会、社会力量的“点对点”对接，把法律、政策与实践经验融为一体，才能既解“法结”也解“心结”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">良好的治理效果，是过程与结果的统一，有效的纠纷化解亦是如此。审限内结案率、民事调解撤诉率等数据是过程性指标，矛盾实质化解率、权益兑现效果、群众满意度才是最终衡量标准。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">从这个意义上讲，建立健全专业化、多元化纠纷解决机制，主动集成整合调解资源，不只是为了降低解纷成本、提高解纷效率，更是要发挥法治固根本、稳预期、利长远的保障作用，以实现社会关系的全面修复与长效和谐。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">把矛盾纠纷化解在基层、化解在萌芽状态，既要推动解纷资源下沉、工作方式革新，更要以群众视角校准治理坐标，以法治机制提升协同效能，让治理重心与群众期盼始终同频共振。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">例如，针对新就业形态劳动者，北京昌平区引入仲裁员、调解员、劳动关系协调员、律师、专家学者等力量，共同参与纠纷一揽子调处；面向肢体残疾人，内蒙古呼和浩特托克托县法院提供专人陪同代办、优先快速立案等服务，以“绿色通道”彰显司法温度……随着时代变迁和社会发展，精准识别不同群体的差异化需求，方能提升治理成效、厚植为民底色。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">善治必达情，达情必近人。“十五五”规划纲要提出，有效维护社会安全稳定。从个案精准调处到共性问题源头治理，从被动化解矛盾到主动防范风险，说到底要突出一个“人”字。为当事人多找一些办法、多整合一些资源，进一步畅通和规范群众诉求表达、利益协调、权益保障通道，必能推动更多矛盾纠纷源头化解、多元化解、有序化解，让群众切实感受到公平正义就在身边。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+通过引入专业力量与建立多元化纠纷解决机制，以群众视角校准治理坐标，以法治机制提升协同效能，从而全面提升矛盾纠纷化解的精度与效度。
+
+**分论点：**
+1. 引入专业力量与构建多元协同机制，是应对新类型复杂纠纷、提升解纷效率的关键路径。
+2. 良好的治理效果是过程与结果的统一，解纷效度的最终衡量标准在于矛盾实质化解与群众满意度。
+3. 提升解纷效度必须坚持以人为本，精准识别并对接不同群体的差异化需求，实现源头治理。
+
+**立意高度：**
+文章站位在推进国家治理体系和治理能力现代化、建设法治中国的高度，紧扣“十五五”规划关于维护社会安全稳定的时代背景，聚焦基层社会治理痛点，彰显了“法治为民”的根本政治立场与源头治理的时代要求。
+
+## 【结构】
+
+**结构类型：**
+递进式与总-分-总相结合。
+
+**结构图示：**
+开篇设问引入 → 提出核心观点（引入专业力量） → 案例佐证（最高法机制、建始县案例） → 分析现实背景（纠纷复杂化） → 提出协同对策（多元对接） → 深化认识（评价标准与法治保障） → 结尾升华（以人为本，源头化解）。
+
+**过渡技巧：**
+文章采用设问过渡（“如何更好实现情绪降温……”）引发思考，运用转折过渡（“但与此同时……”）剖析现实痛点，借助逻辑递进过渡（“从这个意义上讲……”“说到底……”）实现从具体方法到治理理念的升华。段落间环环相扣，由表及里，逻辑链条严密。
+
+## 【佳句】
+
+1. 引入更多本领域的“内行人”参与调解，在法律框架内寻求各方都能接受的方案，是一剂兼顾情理法的“良方”。
+2. 善治必达情，达情必近人。
+3. 为当事人多找一些办法、多整合一些资源，进一步畅通和规范群众诉求表达、利益协调、权益保障通道，必能推动更多矛盾纠纷源头化解、多元化解、有序化解，让群众切实感受到公平正义就在身边。
+
+## 【解析】
+
+本文立足推进国家治理体系和治理能力现代化的时代背景，以基层矛盾纠纷化解为切入点，深刻阐释了“以专业精度提升解纷效度”的核心命题。文章逻辑严密，呈现层层递进的论证闭环：从引入专业力量的破题，到剖析新类型纠纷复杂化的现实挑战，再到厘清解纷的过程与结果标准，最终落脚于“以人为本”的价值旨归。在素材运用上，作者巧妙穿插建始县物业纠纷、北京昌平新就业形态调处、呼和浩特助残绿色通道等一线素材，以小见大，增强了论证的针对性与说服力。语言风格上，文章实现了政治性与文学性的精妙平衡，“既解‘法结’也解‘心结’”“善治必达情，达情必近人”等表述兼具烟火气与思想深度。总体而言，该文不仅是一篇优秀的舆论引导力作，更为基层法治实践提供了极具操作性的方法论指导，真正做到了入脑入心、指引实践。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1218</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>11</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
