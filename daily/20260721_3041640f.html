@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="以治理效能更好激发创新效益（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="以治理效能更好激发创新效益（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>以治理效能更好激发创新效益（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">以治理效能更好激发创新效益（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">以治理效能更好激发创新效益（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年07月21日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0721/c461529-40764545.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">近年来的一些热点现象，联系起来看，引人深思。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">家用车体积不断变大，车宽屡超2米，多数停车位仍沿用多年前设计标准，“车大位小”矛盾凸显；AI（人工智能）智能体加速落地，能自主调用数据并独立完成任务，但信息安全、隐私保护与权责边界等问题相伴而生；预制菜产业规模扩大，公众对其概念定义、安全水平等问题更加关注……</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">今日中国，新技术、新产品、新业态层出不穷，彰显发展活力，这也对配套的标准和规范提出更高要求。如何以治理效能更好激发创新效益？这是推进高质量发展的一道现实课题。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">增强预见性，才能既兜住底线，又拓宽空间。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">随着新能源汽车产业迅猛发展，我国即将迎来动力电池规模化退役。国家有关部门早有预判，前瞻性制定一系列国家标准，引领带动动力电池回收利用，促使企业采用标准通用、节约资源、易拆解、易回收利用的产品设计，推动全行业绿色低碳可持续发展。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">完善制度和规范，既要解决老问题，也要提高对新问题的预见性。从为数字经济、未来产业等提供政策支撑，到前瞻性制定智能驾驶等细分领域标准……登高望远，下好先手棋，才能既有效应对风险，也为创新发展引领方向、留足空间。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">提高精准度，才能既“管得好”，又“放得活”。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">智能问诊、智能导购、家政机器人……AI拟人化互动服务不断涌现，如何规范和管理？不久前出台的相关办法，采取包容审慎、分类分级监管理念，既划出红线，严禁危害国家安全和社会稳定的内容，也预留空间，鼓励在文化、养老等民生领域进行探索。这样的精细操作，既满足安全需求，也不会抑制创新。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">我国地域广阔，不同行业情况各异，必然要求精准施策。顶层设计划定底线、边界，细分标准则需区分情况、对接现实。坚持因地制宜，不搞“一刀切”，才能兼顾制度刚性与弹性，为发展增强韧性。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">注重“小快灵”，才能更好跟紧时代的节拍、创新的步子。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">外卖行业的监管与规范就是例证。早期聚焦商户资质审核，根治“无证上线”乱象；随后，逐步推开“明厨亮灶”后厨直播、配送人员健康管理等举措。今年，监管部门不仅下大力气整治“幽灵外卖”，而且出台规定，要求外卖在出餐前必须加贴食安封签。这些制度规范直击痛点、紧盯细节，有力回应消费者关切。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">12</span>
+                <div class="para-text">习近平总书记指出：“要研究丰富立法形式，可以搞一些‘大块头’，也要搞一些‘小快灵’，增强立法的针对性、适用性、可操作性。”在保持政策、制度稳定性的同时，以法治手段及时回应新变化、新挑战，有利于更好推动经济社会发展。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">13</span>
+                <div class="para-text">发展就是破题、解题的动态过程。时代在发展，环境在变化，人民对美好生活的向往更加强烈，必须以现代化的国家治理适应社会发展新趋势新要求。不断提高治理体系和治理能力的现代化水平，日新又新的中国必将给世界带来更多惊喜。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+必须以现代化的国家治理适应社会发展新趋势新要求，以治理效能更好激发创新效益，推进高质量发展。
+
+**分论点：**
+1. 增强预见性，下好先手棋，既兜住底线又拓宽空间。
+2. 提高精准度，坚持因地制宜，既“管得好”又“放得活”。
+3. 注重“小快灵”，增强针对性与可操作性，跟紧时代与创新的步子。
+
+**立意高度：**
+文章立足于推进高质量发展和中国式现代化的时代背景，将“治理效能”与“创新效益”进行辩证统一，展现了统筹发展与安全的顶层设计思维，深刻体现了推进国家治理体系和治理能力现代化的政治站位。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（并列式展开）
+
+**结构图示：**
+开篇列举现象引出课题 → 提出中心论点 → 分论点一（增强预见性） → 分论点二（提高精准度） → 分论点三（注重“小快灵”） → 结尾升华
+
+**过渡技巧：**
+文章采用段首排比式分论点进行并列过渡，句式整齐，逻辑清晰；段落内部采用“观点+案例+说理”的闭环结构，段与段之间通过内在逻辑（从宏观预见、中观精准到微观灵活）自然衔接，气韵贯通。
+
+## 【佳句】
+
+1. 如何以治理效能更好激发创新效益？这是推进高质量发展的一道现实课题。
+2. 增强预见性，才能既兜住底线，又拓宽空间。
+3. 不断提高治理体系和治理能力的现代化水平，日新又新的中国必将给世界带来更多惊喜。
+
+## 【解析】
+
+本文立足推进高质量发展的时代背景，以“治理效能”与“创新效益”的辩证关系为切入点，政治站位高远，具有强烈的现实针对性。文章采用“总-分-总”结构，三个分论点从“增强预见性”“提高精准度”到“注重‘小快灵’”，层层递进又互为补充，形成了严密的逻辑闭环。在素材运用上，作者选取动力电池退役、AI拟人化监管、外卖行业规范等一线素材，以小见大，既有宏观视野又有微观落点，针对性与说服力极强。语言风格上，文字兼具政治性与文学性，分论点句式整齐对仗，“兜住底线与拓宽空间”“管得好与放得活”等表述富有节奏感与烟火气，实现了硬主题的软表达。总体而言，该文不仅厘清了规范与发展的辩证统一，更为基层实践提供了方法论指导，起到了良好的舆论引导作用，让宏大叙事入脑入心，彰显了党报评论的思想深度与现实温度。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1092</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>13</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
