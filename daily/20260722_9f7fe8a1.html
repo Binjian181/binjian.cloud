@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="将“就业友好”融入发展过程（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="将“就业友好”融入发展过程（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>将“就业友好”融入发展过程（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">将“就业友好”融入发展过程（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">将“就业友好”融入发展过程（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年07月22日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0722/c461529-40765326.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                确保各类政策相互衔接、有机统一，是提升宏观经济治理效能的题中应有之义
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">就业是民生之本。习近平总书记强调，“构建就业友好型发展方式”。如何把“就业友好”理念落实到发展实际中？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">前不久，湖南印发《推进稳岗扩容提质行动若干措施》，加强产业与就业的协调联动，进一步深化就业影响评估机制，全年开展就业政策一致性评价不少于500件次。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">把就业影响评估嵌入重大发展决策的全过程，有助于确保在产业转型升级的同时，实现劳动力转岗就业平稳过渡。这是坚持投资于物和投资于人紧密结合的生动实践，也在宏观政策取向一致性评估中突出了“就业友好”理念。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">为什么就业市场会存在“有活没人干”和“有人没活干”的供需不匹配？产业规划与教育布局、就业安排未能统筹，是导致结构性就业矛盾的重要原因之一。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">全面促进高质量充分就业，就得在决策时充分考虑就业因素——管产业就要管就业、促消费就要促就业、上项目就要扩就业。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">这样的改革探索，在全国各地已有不少。浙江天台县建立重大项目就业影响评估机制，让决策有了“含岗量”的硬标尺；贵州实施“六六就业稳岗计划”，促进就业目标与经济发展目标深度融合……从决策把关到精准服务再到制度创新，使就业优先成为“硬约束”，不断推动产业发展与就业提升协同共进，方能让经济增长始终蕴含“就业友好”的温度。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">宏观政策是一个囊括财政、货币、就业、产业、区域、科技、环保等方面的复杂体系，每项政策都有各自侧重，同时又对其他领域产生直接或间接的影响。构建就业友好型发展方式，需要推动就业政策与其他经济社会政策协调联动、形成合力。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">在投资政策中，推动更多资金资源投资于人，让人力资源更加匹配岗位需求；在财政政策中，用好社会保险补贴、税费减免等政策，激励民营企业更多吸纳高校毕业生就业；在科技创新领域，根据高校毕业生等青年群体特点和需求，推广“科技成果+创业”“民生需求+创业”等模式……坚持系统观念，着眼经济发展全局，从严从细把握各项政策对经济总量和结构、供给和需求、行业和区域、就业和预期等的影响，确保各类政策相互衔接、有机统一，是提升宏观经济治理效能的题中应有之义。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">“就业是家事，更是国事。”增强宏观政策取向一致性和有效性，让产业转型升级与就业扩容提质互促共进，让高质量发展与高质量充分就业同频共振，这是塑造中国经济新优势的必然要求。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+将“就业友好”理念融入宏观政策和发展决策全过程，推动产业发展与就业扩容提质协同共进，实现高质量充分就业。
+
+**分论点：**
+1. 将就业影响评估嵌入重大发展决策全过程，使就业优先成为“硬约束”。
+2. 推动就业政策与其他经济社会政策协调联动，确保各类宏观政策相互衔接、有机统一。
+
+**立意高度：**
+文章立足“就业是民生之本”的政治站位，紧扣“构建就业友好型发展方式”的时代命题，从宏观经济治理效能的高度，探讨如何通过顶层设计协同破解结构性就业矛盾，深刻体现了以人民为中心的发展思想与系统观念。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（融合递进式）
+
+**结构图示：**
+开篇破题（提出“就业友好”理念） → 基层实践（将就业评估嵌入决策，提出“管产业就要管就业”） → 宏观协同（推动就业政策与其他宏观政策协调联动） → 结尾升华（强调政策一致性，实现高质量发展与就业同频共振）
+
+**过渡技巧：**
+文章采用“由微观到宏观”“由地方实践到国家治理”的过渡技巧。通过设问（“为什么就业市场会存在……”）自然过渡到对策分析；通过“这样的改革探索，在全国各地已有不少”承上启下，从湖南个案拓展到全国普遍经验；通过“宏观政策是一个囊括……”将视角从地方决策机制拉升至国家宏观经济治理层面，逻辑衔接紧密，层层递进。
+
+## 【佳句】
+
+1. 管产业就要管就业、促消费就要促就业、上项目就要扩就业。
+2. 从决策把关到精准服务再到制度创新，使就业优先成为“硬约束”，不断推动产业发展与就业提升协同共进，方能让经济增长始终蕴含“就业友好”的温度。
+3. 增强宏观政策取向一致性和有效性，让产业转型升级与就业扩容提质互促共进，让高质量发展与高质量充分就业同频共振，这是塑造中国经济新优势的必然要求。
+
+## 【解析】
+
+本文立足“就业是民生之本”的时代背景，以“构建就业友好型发展方式”为切入点，将宏观政策治理与微观民生福祉紧密结合，政治站位高远。文章采用“总-分-总”与层层递进相结合的逻辑结构，从地方决策评估的“微观切口”自然过渡到宏观政策协同的“全局视野”，深刻阐释了经济发展与就业扩容的辩证关系，形成了严密的逻辑闭环。
+
+在素材运用上，文章坚持“以小见大”，精选湖南、浙江天台、贵州等一线基层实践素材，生动论证了就业影响评估机制的落地成效，增强了文章的针对性与说服力。语言风格上，既保持了党报评论的政治高度与严谨性，又巧妙融入“含岗量”“硬约束”“温度”等兼具烟火气与节奏感的词汇，实现了政治性与文学性的平衡。
+
+总体而言，该文不仅为各地破解结构性就业矛盾提供了清晰的方法论指导，更有效发挥了舆论引导作用。文章让“就业友好”理念入脑入心，具有极强的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>914</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>9</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
