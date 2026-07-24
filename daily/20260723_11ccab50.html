@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="在区域协同中激发经济活力（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="在区域协同中激发经济活力（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>在区域协同中激发经济活力（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">在区域协同中激发经济活力（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">在区域协同中激发经济活力（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年07月23日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0723/c461529-40766078.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                从战略叠加中捕捉机遇、从区域联动中寻找空间、从扬长补短中强化优势，各地就能找到差异化发展之路，不断积累发展胜势
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">三江交汇处，转型引深思。四川宜宾，一度“化工围江、污染绕城”，如今切入新能源赛道，全世界每10块动力电池，就有1块是宜宾造。今年上半年，当地动力电池产业增加值同比增长37.8%，经济发展量质齐升。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">宜宾为什么能实现蝶变？</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">从全国发展一盘棋的视角来观察，能洞悉发展密码。作为区域经济的重要支点，宜宾积极参与成渝地区双城经济圈汽车产业高质量协同发展，与成渝两地形成产业链深度协作。同时，立足长江经济带高质量发展，充分运用长江黄金水道降低物流成本。在主动融入国家区域发展战略中夯实产业基础、加速要素流动，宜宾抓住了转型升级的机遇。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">新时代以来，以习近平同志为核心的党中央不断丰富完善区域协调发展的理念、战略和政策体系，推动经济发展空间格局持续向纵深拓展，我国逐步构建起主体功能明显、优势互补、高质量发展的区域经济布局。随着全国统一大市场加快建设，各区域间相互赋能，激发区域协调发展新的化学反应，为各地发展带来新活力、新机遇。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">区域协调，加速要素自由流通，为创新聚合势能。比如长三角一体化之于长江经济带，在科技创新上，从G60科创走廊城市携手打造创新策源地，到上海加强对沿江城市科技辐射，“研发在长三角、转化在长江经济带”的协同创新格局加快形成；在要素流动上，通过区域之间的制度创新和产业承接，长江经济带“聚产业、强节点”的作用更加凸显。各个区域既各美其美，又美美与共，才能协同提升发展效能。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">破壁联通，重塑区位优势，为发展拓宽空间。比如西部陆海新通道连接“一带一路”，让内陆变成开放前沿，让腹地打开增量空间。又如珠江—西江经济带规划建设，为广西梧州承接粤港澳大湾区产业转移创造有利条件，研发在深圳、制造在梧州、物流走西江水运到珠三角出海，不仅激活了欠发达地区的发展潜力，也为粤港澳大湾区打开了新的发展空间。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">以跨区域跨流域大通道为基础，以城市群联动发展为载体，统筹推进区域内发展战略实施和区域间联动发展，有利于发挥战略叠加效应。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">放眼全国，广东深圳既锚定建设中国特色社会主义先行示范区锐意改革，又以粤港澳大湾区国际科技创新中心为引擎矢志创新，成为全国创新高地；湖北武汉依托中部崛起战略和长江经济带发展战略，在光电子信息等新兴产业赛道锻造长板；重庆凭借新时代西部大开发和西部陆海新通道，让新能源汽车畅销海外……融入全国发展大局，从战略叠加中捕捉机遇、从区域联动中寻找空间、从扬长补短中强化优势，各地就能找到差异化发展之路，不断积累发展胜势。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">中国经济高质量发展，既需要发挥重点区域增长极作用，也需要跨区域经济带穿针引线、贯通经纬。为各地发挥比较优势创造条件，让发展的增长极更加稳固，让循环的大通道愈发畅通，将推动中国号巨轮劈波斩浪、一往无前。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+各地应主动融入国家区域发展战略，在区域协同与战略叠加中捕捉机遇、寻找空间、强化优势，从而激发经济活力，推动高质量发展。
+
+**分论点：**
+1. 区域协调能加速要素自由流通，为创新聚合势能。
+2. 破壁联通能重塑区位优势，为发展拓宽空间。
+3. 发挥战略叠加效应，统筹区域内战略实施与区域间联动发展，能助力各地找到差异化发展之路。
+
+**立意高度：**
+文章立足新时代区域协调发展战略与全国统一大市场建设的时代背景，从全国发展“一盘棋”的宏观政治站位出发，探讨地方经济如何通过打破“一亩三分地”思维、融入国家大局来实现高质量发展，体现了胸怀“国之大者”的战略视野与辩证思维。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（内含并列式分论点与递进式论证）
+
+**结构图示：**
+案例引入（宜宾蝶变） → 设问过渡（剖析密码） → 时代背景（区域协调战略） → 分论点1（区域协调/创新势能） → 分论点2（破壁联通/发展空间） → 理论深化（战略叠加效应） → 案例印证（深圳/武汉/重庆） → 结尾升华（巨轮前行）
+
+**过渡技巧：**
+1. **设问过渡**：以“宜宾为什么能实现蝶变？”自然引出下文对全国发展一盘棋视角的剖析，引人入胜。
+2. **逻辑过渡**：在宏观背景阐述后，用“区域协调，加速要素自由流通……”与“破壁联通，重塑区位优势……”两个句式对仗的段落首句引领分论点，衔接紧密、条理清晰。
+3. **递进过渡**：在分论点论述后，先以“以跨区域跨流域大通道为基础……”进行理论总结，随后用“放眼全国”引出深圳、武汉、重庆的排比案例，将论证从“面”聚焦到“点”，最后自然过渡到结尾的宏观升华，气韵贯通。
+
+## 【佳句】
+
+1. 从战略叠加中捕捉机遇、从区域联动中寻找空间、从扬长补短中强化优势，各地就能找到差异化发展之路，不断积累发展胜势。
+2. 中国经济高质量发展，既需要发挥重点区域增长极作用，也需要跨区域经济带穿针引线、贯通经纬。
+3. 为各地发挥比较优势创造条件，让发展的增长极更加稳固，让循环的大通道愈发畅通，将推动中国号巨轮劈波斩浪、一往无前。
+
+## 【解析】
+
+本文立足新时代区域协调发展战略与全国统一大市场建设的时代背景，以四川宜宾的产业蝶变为切入点，生动阐释了“在全国发展一盘棋中谋划地方发展”的政治站位。文章采用经典的“总-分-总”结构，逻辑严密、层层递进。从微观案例剖析到宏观战略解读，再提炼出“要素流通”“破壁联通”“战略叠加”三个维度的分论点，形成了完整的逻辑闭环。
+
+在素材运用上，文章兼顾“一线素材”与“宏观视野”，既有宜宾动力电池、梧州承接产业转移等接地气的微观案例，又有长三角、西部陆海新通道等中观布局，以小见大，极具针对性与说服力。语言风格上，实现了政治性与文学性的完美平衡，“穿针引线、贯通经纬”“各美其美，又美美与共”等表述富有节奏感与画面感，兼具思想深度与文字质感。
+
+总体而言，该文不仅起到了凝聚共识、舆论引导的作用，更为各地如何融入国家大局提供了清晰的方法论指导。文章将顶层设计转化为基层实践的行动指南，真正做到了入脑入心，具有极强的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1109</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>9</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
