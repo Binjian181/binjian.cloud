@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="攻克“无人区”，更要有定力（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="攻克“无人区”，更要有定力（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>攻克“无人区”，更要有定力（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">攻克“无人区”，更要有定力（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">攻克“无人区”，更要有定力（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2026年07月24日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2026/0724/c461529-40766830.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                当下的产业突围和科技突破，多大程度上回应了那些长周期的基础、关键问题，往往决定了它们能走多远、能产生多大影响和价值
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">当一些领域从跟跑、并跑转向领跑，更多的“无人区”，已横亘在科技创新的前进道路上。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">看产业端，我国首次成功实施运载火箭一子级可控回收，首条第8.6代AMOLED生产线实现量产，在全球半导体领域首次提出指导产业发展的新原则……产业创新提出的科学问题越来越多，我们不仅要在已知领域守住阵地，更要在“无人区”里闯出新路。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">看科研端，不久前发布的自然指数2026科研领导者榜单显示，中国继续位居全球科研产出榜首。在自然指数追踪的7个学科领域中，中国在5个学科领域位居全球第一。身处这样的科研生态位，已很难从别人的“博物馆”里找到答案，更多时候需要拿着自己的“罗盘”寻找突破口。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">步入创新的“无人区”，自主提出科学问题、定义前沿方向的能力变得至关重要。这不仅需要持之以恒的努力和拼搏，更考验着静待花开的耐心与智慧。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">前不久，中国科学院院士、中国科学院大连化学物理研究所研究员张涛团队凭借“单原子催化”成果，获得国家自然科学奖一等奖。长期以来，催化微观机理晦涩难解，被视作科研“黑匣子”。团队立足国家战略需求，付出近20年的努力，将催化研究尺度从纳米级推进至原子级。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">20年沉潜，周期不可谓不长，但这样的久久为功，必不可少，极其值得。催化技术作为现代工业核心支撑，广泛应用于粮食生产、能源转化、精细化工等领域。张涛团队的这一成果，开创了全新研究范式，有望破解催化机理模糊的行业难题，吸引了百余个国家、数千个课题组跟进研究，今后可能会产生难以估量的巨大价值。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">放眼整个人类科技文明的发展史，重大原始创新、颠覆性创新、引领式创新始终是至关重要的变量，能带来经济结构和产业形态的重大变革。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">由此而言，当下的产业突围和科技突破，多大程度上回应了那些长周期的基础、关键问题，往往决定了它们能走多远、能产生多大影响和价值。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">也要看到，在科技“无人区”跋涉，难度高、不确定性大。涵养着眼长周期的历史耐心，不能寄望于少数人的远见和决心，而要依托系统化的制度设计。从经费分配、成果评价到人才培养、资源支持等，每一个环节都要留出接口和“气口”，让科研人员心无旁骛研究真问题、大问题、深问题。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">10</span>
+                <div class="para-text">比如，完善长周期评价机制，以代表作和科学贡献的“里程碑”为标尺，包容“十年不鸣”，静待“一鸣惊人”；创新重大非共识项目遴选和资助机制，支持高风险、高价值基础研究；发展耐心资本，为周期长、投入大的科创领域注入活力……今日之中国，越来越多创新主体触及科学研究的边界，要进一步强化政策协同、资源统筹、评价联动，以更长远的视野、更灵活的机制，加大对“从0到1”科研的支持，为经济社会发展注入更多源头活水。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">11</span>
+                <div class="para-text">自主创新没有捷径，注定是一场漫长的跋涉。放眼长远、保持定力，前方有无限风光，前行是辽阔天地。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+攻克科技创新“无人区”需要保持历史耐心与战略定力，依托系统化的制度设计支持长周期的基础研究和原始创新。
+
+**分论点：**
+1. 步入创新“无人区”，自主提出科学问题、定义前沿方向的能力至关重要，需要持之以恒的努力和静待花开的耐心。
+2. 重大原始创新能带来经济结构和产业形态的重大变革，回应长周期基础问题决定了产业和科技突破的最终价值。
+3. 涵养着眼长周期的历史耐心不能仅靠个人远见，必须依托系统化的制度设计，在评价、资助、资本等方面给予全方位支持。
+
+**立意高度：**
+文章立足实现高水平科技自立自强的时代背景，聚焦我国科技创新从“跟跑并跑”向“领跑”转变的关键节点。将基础研究长周期规律与体制机制改革相结合，深刻体现了党中央关于科技创新的顶层设计与战略考量，具有极高的政治站位与时代敏锐度。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（递进式）
+
+**结构图示：**
+开篇引入（产业端与科研端进入“无人区”的现实图景） → 提出论点（步入“无人区”需要耐心与智慧/定力） → 案例论证（张涛团队20年沉潜攻克“单原子催化”，证明长周期基础研究的巨大价值） → 对策论证（涵养历史耐心需依托系统化制度设计，完善评价、资助与耐心资本机制） → 结尾升华（自主创新是漫长跋涉，放眼长远、保持定力方能天地辽阔）。
+
+**过渡技巧：**
+文章段落衔接自然，逻辑层层递进。首先通过“看产业端”“看科研端”的现象铺垫，自然过渡到“步入创新的‘无人区’”的本质要求；其次，由张涛团队的个案，用“放眼整个人类科技文明的发展史”过渡到对重大原始创新规律的宏观总结；最后，用“也要看到”进行转折，从主观层面的“需要耐心”深入到客观层面的“依托系统化制度设计”，实现了从“为什么”到“怎么做”的平滑过渡。
+
+## 【佳句】
+
+1. 当下的产业突围和科技突破，多大程度上回应了那些长周期的基础、关键问题，往往决定了它们能走多远、能产生多大影响和价值。
+2. 身处这样的科研生态位，已很难从别人的“博物馆”里找到答案，更多时候需要拿着自己的“罗盘”寻找突破口。
+3. 自主创新没有捷径，注定是一场漫长的跋涉。放眼长远、保持定力，前方有无限风光，前行是辽阔天地。
+
+## 【解析】
+
+本文立足高水平科技自立自强的时代背景，以科技创新步入“无人区”为切入点，深刻阐释了攻克关键核心技术必须具备历史耐心与战略定力的核心要义。文章采用“总-分-总”的递进式结构，逻辑闭环严密。从产业端与科研端的现实图景破题，自然引出“无人区”需自主定义方向的论点；随后以张涛团队20年沉潜的“单原子催化”成果为一线素材，以小见大，论证了长周期基础研究的颠覆性价值；进而笔锋一转，从主观的“耐心”深入到客观的“制度设计”，提出完善评价机制、发展耐心资本等对策，实现了从“为什么”到“怎么做”的辩证统一。语言风格上，文章兼具政治高度与文学质感，“博物馆”与“罗盘”的比喻生动贴切，“十年不鸣”与“一鸣惊人”的对仗极具节奏感，将宏大的顶层设计转化为极具感染力的表达。全文不仅起到了澄清认知、凝聚共识的舆论引导作用，更为科研管理部门和创新主体提供了极具操作性的方法论指导，具有强烈的现实针对性与入脑入心的传播效果。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1114</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>11</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
