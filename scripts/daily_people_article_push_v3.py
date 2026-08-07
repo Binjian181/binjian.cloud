@@ -50,7 +50,7 @@ DB_CONFIG = {
 
 AI_CONFIG = {
     'enabled': True,
-    'api_key': 'sk-4b2bb2e5dc1c4ff0b1a79e2c4ffc0dfb',
+    'api_key': 'sk-ws-H.ERRMEML.y1fD.MEUCIQCzkMj80eh66900ACXhH0lFZCpeilFu21HPGkMr8N5rfQIgJbaifsgEEmzqLQx_B0tq_cH7PA0hIkcr8GpOYYDj3n8',
     'app_id': '1f605f0d7f89470d83a3c623f6eaeeb5',
     'wait_time_initial': 120,  # 首次等待 2 分钟
     'wait_time_retry': 60,     # 重试等待 1 分钟
