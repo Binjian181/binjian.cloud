@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="张彬健（Binjian）的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta name="author" content="张彬健">
+    <meta property="og:title" content="为何要重读抗战家书（人民时评）">
+    <meta property="og:description" content="张彬健的个人主页 - 高效办公、轻松生活、终身学习">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="zh_CN">
+    <meta property="og:site_name" content="张彬健的个人主页">
+    <meta property="article:author" content="张彬健">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="为何要重读抗战家书（人民时评）">
+    <meta name="twitter:description" content="张彬健的个人主页">
+    <link rel="canonical" href="https://binjian.cloud">
+    <title>为何要重读抗战家书（人民时评）</title>
+    <link rel="icon" href="/icons.png" type="image/png">
+    <link rel="stylesheet" href="/css/common.css">
+    <!-- JSON-LD 结构化数据 -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "张彬健",
+        "alternateName": "彬健",
+        "nickname": "Binjian",
+        "url": "https://binjian.cloud",
+        "description": "张彬健的个人主页 - 高效办公、轻松生活、终身学习"
+    }
+    </script>
+
+    <!-- Marked.js 用于Markdown渲染 -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+<style>
+    /* 时评精读主题色 - 粉色 */
+    :root {
+        --accent-color: #ec4899;
+        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
+    }
+
+    /* 返回链接 */
+    .back-link {
+        margin-bottom: 16px;
+    }
+
+    .back-link a {
+        color: var(--accent-color);
+        text-decoration: none;
+        font-size: 15px;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+    }
+
+    .back-link a:hover {
+        text-decoration: underline;
+    }
+
+    /* 文章头部 */
+    .article-header {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 32px;
+        margin-bottom: 24px;
+    }
+
+    .article-title {
+        font-size: 28px;
+        font-weight: 700;
+        color: var(--text-color);
+        line-height: 1.4;
+        margin-bottom: 16px;
+    }
+
+    .article-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .article-meta a {
+        color: var(--accent-color);
+        text-decoration: none;
+    }
+
+    .article-meta a:hover {
+        text-decoration: underline;
+    }
+
+    /* 内容区块通用样式 */
+    .content-section {
+        background: var(--card-bg);
+        border-radius: 12px;
+        border: 1px solid var(--border-color);
+        padding: 24px;
+        margin-bottom: 24px;
+    }
+
+    .content-section h2 {
+        font-size: 20px;
+        margin: 0 0 20px 0;
+        color: var(--accent-color);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    /* 正文全文样式 */
+    .article-fulltext .fulltext-content {
+        line-height: 2;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .article-fulltext .lead-paragraph {
+        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        border-left: 3px solid var(--accent-color);
+        padding: 16px 20px;
+        margin-bottom: 20px;
+        border-radius: 0 8px 8px 0;
+        font-size: 15px;
+        color: var(--secondary-text);
+        line-height: 1.8;
+    }
+
+    .article-fulltext .lead-label {
+        font-size: 12px;
+        color: var(--accent-color);
+        font-weight: 600;
+        margin-bottom: 6px;
+    }
+
+    .article-fulltext .paragraph-item {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 16px;
+        line-height: 2;
+    }
+
+    .article-fulltext .para-num {
+        flex-shrink: 0;
+        width: 28px;
+        height: 28px;
+        background: var(--accent-gradient);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 13px;
+        font-weight: 600;
+        margin-top: 4px;
+    }
+
+    .article-fulltext .para-text {
+        flex: 1;
+        text-align: justify;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    /* Markdown渲染内容样式 */
+    .markdown-content {
+        line-height: 1.9;
+        font-size: 16px;
+        color: var(--text-color);
+    }
+
+    .markdown-content h2 {
+        font-size: 22px;
+        color: var(--accent-color);
+        margin: 28px 0 16px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--accent-color);
+    }
+
+    .markdown-content h3 {
+        font-size: 18px;
+        color: var(--text-color);
+        margin: 20px 0 12px 0;
+    }
+
+    .markdown-content h4 {
+        font-size: 16px;
+        color: var(--secondary-text);
+        margin: 16px 0 10px 0;
+    }
+
+    .markdown-content p {
+        margin: 0 0 16px 0;
+        text-align: justify;
+    }
+
+    .markdown-content strong {
+        color: var(--accent-color);
+        font-weight: 600;
+    }
+
+    .markdown-content ul, .markdown-content ol {
+        margin: 12px 0;
+        padding-left: 24px;
+    }
+
+    .markdown-content li {
+        margin: 8px 0;
+        line-height: 1.8;
+    }
+
+    .markdown-content blockquote {
+        margin: 16px 0;
+        padding: 12px 20px;
+        border-left: 4px solid var(--accent-color);
+        background: rgba(236, 72, 153, 0.05);
+        border-radius: 0 8px 8px 0;
+        color: var(--secondary-text);
+    }
+
+    .markdown-content code {
+        background: var(--bg-color);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-size: 14px;
+        color: var(--accent-color);
+    }
+
+    .markdown-content pre {
+        background: var(--bg-color);
+        padding: 16px;
+        border-radius: 8px;
+        overflow-x: auto;
+        margin: 16px 0;
+    }
+
+    .markdown-content pre code {
+        background: none;
+        padding: 0;
+    }
+
+    .markdown-content hr {
+        border: none;
+        border-top: 1px dashed var(--border-color);
+        margin: 24px 0;
+    }
+
+    .markdown-content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 16px 0;
+    }
+
+    .markdown-content th, .markdown-content td {
+        border: 1px solid var(--border-color);
+        padding: 10px 14px;
+        text-align: left;
+    }
+
+    .markdown-content th {
+        background: var(--bg-color);
+        font-weight: 600;
+        color: var(--accent-color);
+    }
+
+    /* 段落分隔线 */
+    .section-divider {
+        text-align: center;
+        margin: 32px 0;
+        color: var(--muted-text);
+        font-size: 14px;
+    }
+
+    .section-divider::before,
+    .section-divider::after {
+        content: '———';
+        margin: 0 16px;
+        letter-spacing: 2px;
+    }
+
+    /* 统计徽章 */
+    .stats-badges {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .stat-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 14px;
+        background: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        font-size: 13px;
+        color: var(--secondary-text);
+    }
+
+    .stat-badge strong {
+        color: var(--accent-color);
+    }
+
+    /* 回到顶部按钮 */
+    .back-to-top {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 48px;
+        height: 48px;
+        background: var(--accent-gradient);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        transition: all 0.3s;
+        opacity: 0.9;
+        z-index: 999;
+    }
+
+    .back-to-top:hover {
+        opacity: 1;
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        transform: translateY(-2px);
+    }
+
+    /* 响应式 */
+    @media (max-width: 768px) {
+        .article-header {
+            padding: 20px;
+        }
+
+        .article-title {
+            font-size: 22px;
+        }
+
+        .content-section {
+            padding: 20px;
+        }
+
+        .markdown-content {
+            font-size: 15px;
+        }
+
+        .markdown-content h2 {
+            font-size: 20px;
+        }
+    }
+</style>
+
+</head>
+<body>
+    <!-- 移动端顶部栏 -->
+    <div class="top-bar" id="topBar">
+        <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </button>
+        <span class="page-title" id="pageTitle">为何要重读抗战家书（人民时评）</span>
+        <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+    </div>
+
+    <div class="container">
+        <!-- 统一导航栏 -->
+        <div class="nav-sidebar" id="navSidebar">
+            <nav class="nav-bar" aria-label="主导航">
+                <a href="/" class="nav-btn">🏠 返回主页</a>
+                <a href="/people-news.html" class="nav-btn">🇨🇳 时政观点</a>
+                <a href="/tech-news.html" class="nav-btn">📱 科技资讯</a>
+                <a href="/daily.html" class="nav-btn active">📖 时评精读</a>
+                <a href="/articles.html" class="nav-btn">📝 原创文章</a>
+                <button class="theme-toggle" id="themeToggle" title="切换主题" aria-label="切换主题" aria-pressed="false">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+                    <span class="theme-text">主题</span>
+                </button>
+            </nav>
+        </div>
+
+<main class="main-content">
+    <div class="back-link">
+        <a href="/daily.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+            返回时评精读列表
+        </a>
+    </div>
+
+    <header class="article-header">
+        <h1 class="article-title">为何要重读抗战家书（人民时评）</h1>
+        <div class="article-meta">
+            <span>📅 2025年07月30日</span>
+            <span>🔗 <a href="http://opinion.people.com.cn/n1/2025/0730/c1003-40532165.html">原文链接</a></span>
+        </div>
+    </header>
+
+    <!-- 正文全文 -->
+    <section class="content-section article-fulltext">
+        <h2>📄 正文全文</h2>
+        <div class="fulltext-content">
+            
+            <div class="lead-paragraph">
+                <div class="lead-label">📌 导语</div>
+                “儿不愿作个时代的落伍者，不愿落人后”“儿要为改造不合理的社会而奋斗”……
+            </div>
+            
+            
+            <div class="paragraph-item">
+                <span class="para-num">1</span>
+                <div class="para-text">前段时间，笔者参观中国人民大学家书博物馆，被一封抗日战争时期的家书所吸引。写信者是中国人民抗日军事政治大学女学员韩雅兰，她放弃优渥生活，奔赴延安投身抗战，希望得到父母理解。字里行间，满是青年人的救亡热血。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">2</span>
+                <div class="para-text">纸短情长，字重千钧。14年抗战，一寸山河一寸血。约一半国土被侵略者践踏，930余座城市被侵占，军民伤亡3500万人以上，令人痛心的数字，映照着中华民族的坚韧不屈。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">3</span>
+                <div class="para-text">烽火连三月，家书抵万金。重读抗战家书，就仿佛走进历史，见证劫难之际无数鲜活个体的人生境遇、使命抉择，让人无法不为那些衷肠倾诉而动容，无法不被伟大抗战精神所感染。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">4</span>
+                <div class="para-text">习近平总书记曾谆谆告诫党员、干部，“要经常重温党章，重温自己的入党誓言，重温革命烈士的家书”。聆听革命历史回响，倾听抗战先烈心声，更能懂得现在生活的来之不易，更能感悟初心使命的分量，更能激发砥砺前行的力量。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">5</span>
+                <div class="para-text">抗战家书里，有大无畏的英雄气魄。“希望你不要忘记你的母亲是为国而牺牲的！”怎能忘，受尽酷刑摧残的赵一曼，提笔写下对儿子的最后诀别，字句间皆是慷慨赴义的英勇。“为国家民族死之决心，海不清，石不烂”，怎能忘，枣宜会战，大敌当前，张自忠将军以“报国必死”的信念发出铮铮誓言。生命只有一次，他们不是不知道生命的宝贵，而是更加懂得，国难当前，义不容辞，哪怕需要付出生命的代价。正是凭借这般勇往直前以赴之、断头流血以从之，民族脊梁屹然挺立，破碎山河得以重整。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">6</span>
+                <div class="para-text">抗战家书里，有舍小家为大家的崇高情怀。“以进步来安慰自己，以进步来酬报别后衷情”，壮烈牺牲前几日，左权将军以信表达对妻子的深切思念，同时还不忘怀着对革命事业的无限忠诚彼此勉励。“家是我所恋的，双亲弟妹是我所爱的，但破碎的祖国，更是我所怀念热爱的”，尽管父母亲情难以割舍，但想到战火中的祖国，华侨白雪娇还是毅然投笔从戎。正是这般家国同心，让一个民族迸发出超乎寻常的凝聚力。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">7</span>
+                <div class="para-text">抗战家书里，有鼓舞人心的必胜信念。“希望你将来成为一个空中霸王”“你有把握，我有信心”，听闻飞行员丈夫刘粹刚的战绩，妻子许希麟的欣喜与自豪跃然纸上。“胜利的日子就快来了，今年就可以打败德国，明年就要反攻日本，那时候才是咱们团圆的时候”，“小兵张嘎”创作者、八路军战士徐光耀，无论形势如何，始终葆有革命乐观主义精神。纵有万难，志不可夺。必胜的信念照耀在前方，中华民族就打不垮、压不倒。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">8</span>
+                <div class="para-text">战火硝烟消散，中华民族巍然屹立，伟大祖国日益富强，但深植于抗战家书中的拳拳家国情怀，却从未褪色。“两弹一星”工程中科学家隐姓埋名，石油大会战中工人豪气干云，脱贫攻坚中基层干部扎根乡土……这份情怀始终薪火相传、生生不息，熔铸成中华民族的精神血脉，托举起一个个举世瞩目的中国奇迹。</div>
+            </div>
+            
+            <div class="paragraph-item">
+                <span class="para-num">9</span>
+                <div class="para-text">1945年，日本宣布无条件投降后，人们欢呼着冲出家门，奔走相告，共同庆祝百折不挠、血战到底赢得的胜利。铭记历史，更应奋勇前行。未来不可避免还会遇到疾风骤雨、艰难险阻，但怀着流淌在血脉深处的家国情怀，汇涓滴之力为江河澎湃，前行的征途上，我们不畏风雨。</div>
+            </div>
+            
+        </div>
+    </section>
+
+    
+    <!-- 分隔线 -->
+    <div class="section-divider">AI 精读分析</div>
+
+    <!-- AI分析内容（Markdown渲染） -->
+    <section class="content-section">
+        <div id="markdown-content" class="markdown-content" style="display:none;">## 【论点】
+
+**中心论点：**
+重读抗战家书，感悟初心使命，传承家国情怀，汲取砥砺前行的奋进力量。
+
+**分论点：**
+1. 抗战家书里，有大无畏的英雄气魄。
+2. 抗战家书里，有舍小家为大家的崇高情怀。
+3. 抗战家书里，有鼓舞人心的必胜信念。
+
+**立意高度：**
+文章立足铭记历史、赓续红色血脉的时代背景，从微观的“家书”切入，将弘扬伟大抗战精神与坚守初心使命紧密结合，具有极高的政治站位与强烈的现实针对性。
+
+## 【结构】
+
+**结构类型：**
+总 - 分 - 总（本论部分为并列式）
+
+**结构图示：**
+开篇引入（参观家书博物馆） → 提出论点（重读家书的时代意义） → 分论点1（英雄气魄） → 分论点2（崇高情怀） → 分论点3（必胜信念） → 现实传承（精神薪火相传） → 结尾升华（汇聚力量奋勇前行）
+
+**过渡技巧：**
+文章在主体论证部分，采用段首排比句“抗战家书里，有……”作为段落过渡，形成整齐的并列结构，使论证脉络一目了然；在由历史向现实转折时，以“战火硝烟消散……”一句实现时空跨越，自然衔接历史精神与新时代伟大实践，过渡平滑且富有张力。
+
+## 【佳句】
+
+1. 聆听革命历史回响，倾听抗战先烈心声，更能懂得现在生活的来之不易，更能感悟初心使命的分量，更能激发砥砺前行的力量。
+2. 正是凭借这般勇往直前以赴之、断头流血以从之，民族脊梁屹然挺立，破碎山河得以重整。
+3. 未来不可避免还会遇到疾风骤雨、艰难险阻，但怀着流淌在血脉深处的家国情怀，汇涓滴之力为江河澎湃，前行的征途上，我们不畏风雨。
+
+## 【解析】
+
+本文以“抗战家书”为切入点，将宏大历史叙事与微观个体情感巧妙结合，精准锚定赓续红色血脉的政治站位。文章采用“总-分-总”结构，本论部分以三个“抗战家书里，有……”构成并列论证，层层剖析英雄气魄、家国情怀与必胜信念，形成严密的逻辑闭环。在素材运用上，作者选取赵一曼、张自忠等先烈的真实家书，以小见大，通过带着“血泪痕”与“烟火气”的一线素材，极大增强了文章的说服力与感染力。语言风格上，文字兼具政治高度与文学温度，既有“纸短情长，字重千钧”的凝练对仗，又有“勇往直前以赴之”的磅礴气势，节奏感极强。文章从历史回望延伸至现实观照，将抗战精神与新时代实践相贯通，起到了深刻的舆论引导作用，让家国情怀入脑入心，具有强烈的现实指导意义。</div>
+        <div id="rendered-content" class="markdown-content"></div>
+    </section>
+
+    <!-- 文章数据统计 -->
+    
+    <section class="content-section">
+        <h2>📊 文章数据</h2>
+        <div class="stats-badges">
+            <span class="stat-badge">📝 总字数：<strong>1227</strong></span>
+            <span class="stat-badge">📄 总段落数：<strong>9</strong></span>
+        </div>
+    </section>
+    
+    
+
+</main>
+
+<!-- 回到顶部按钮 -->
+<button class="back-to-top" id="backToTopBtn" onclick="backToTop()" title="回到顶部">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+</button>
+
+    </div>
+
+    <!-- 底部备案信息 -->
+    <footer class="site-footer">
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">琼ICP备2026001320号</a></p>
+    </footer>
+
+    <script src="/js/common.js"></script>
+
+<script>
+function backToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+// 渲染Markdown内容
+document.addEventListener('DOMContentLoaded', function() {
+    var markdownSource = document.getElementById('markdown-content');
+    var renderedContent = document.getElementById('rendered-content');
+
+    if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // 配置marked
+        marked.setOptions({
+            breaks: true,
+            gfm: true
+        });
+
+        // 渲染Markdown
+        renderedContent.innerHTML = marked.parse(markdownSource.textContent);
+    }
+});
+</script>
+
+</body>
+</html>
