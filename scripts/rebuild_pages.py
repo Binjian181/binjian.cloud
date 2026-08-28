@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import pymysql
 import re
+import datetime
 from jinja2 import Environment, FileSystemLoader
 
 CONFIG = {
@@ -126,7 +127,7 @@ html = template.render(
     page_type=PAGE_CONFIGS['tech']['page_type'],
     theme_color=PAGE_CONFIGS['tech']['theme_color'],
     theme_color_secondary=PAGE_CONFIGS['tech']['theme_color_secondary'],
-    update_time=__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     update_schedule=PAGE_CONFIGS['tech']['update_schedule'],
     canonical_path=PAGE_CONFIGS['tech']['canonical_path'],
     CONFIG={
@@ -154,7 +155,7 @@ html = template.render(
     page_type=PAGE_CONFIGS['people']['page_type'],
     theme_color=PAGE_CONFIGS['people']['theme_color'],
     theme_color_secondary=PAGE_CONFIGS['people']['theme_color_secondary'],
-    update_time=__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     update_schedule=PAGE_CONFIGS['people']['update_schedule'],
     canonical_path=PAGE_CONFIGS['people']['canonical_path'],
     CONFIG={
@@ -182,7 +183,7 @@ html = template.render(
     page_type=PAGE_CONFIGS['original']['page_type'],
     theme_color=PAGE_CONFIGS['original']['theme_color'],
     theme_color_secondary=PAGE_CONFIGS['original']['theme_color_secondary'],
-    update_time=__import__('datetime').datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
+    update_time=datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
     update_schedule=PAGE_CONFIGS['original']['update_schedule'],
     canonical_path=PAGE_CONFIGS['original']['canonical_path'],
     CONFIG={

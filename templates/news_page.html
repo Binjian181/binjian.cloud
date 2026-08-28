@@ -1,18 +1,8 @@
 {% extends "base.html" %}
 
-{% block extra_css %}
-<style>
-    /* 页面主题色 */
-    :root {
-        --accent-color: {{ theme_color | default('#667eea') }};
-        --accent-gradient: linear-gradient(135deg, {{ theme_color | default('#667eea') }} 0%, {{ theme_color_secondary | default('#764ba2') }} 100%);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
 <main class="main-content">
-    <header class="page-header" style="background: var(--accent-gradient);">
+    <header class="page-header">
         <h1>{{ page_title }}</h1>
         <div class="update-time">最后更新：{{ update_time }}{% if update_schedule %} | {{ update_schedule }}{% endif %}</div>
     </header>

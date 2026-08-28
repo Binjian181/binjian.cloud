@@ -14,7 +14,6 @@ from bs4 import BeautifulSoup
 import datetime
 import json
 import os
-import sys
 from urllib.parse import urljoin
 import time
 import re
@@ -184,7 +183,7 @@ def fetch_36kr():
         try:
             session.get("https://36kr.com/", headers=headers, timeout=10, verify=False)
             time.sleep(1)
-        except:
+        except Exception:
             pass
         
         # 尝试用 RSS 方式获取（更稳定）
@@ -213,7 +212,7 @@ def fetch_36kr():
                             try:
                                 dt = datetime.datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %z")
                                 time_str = dt.astimezone(datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")
-                            except:
+                            except Exception:
                                 time_str = pub_date[:16]
                         
                         # 清理 HTML 标签
@@ -387,10 +386,10 @@ def get_article_summary_from_detail(url, headers):
         # 尝试多种编码
         try:
             html_content = response.content.decode('GB18030')
-        except:
+        except Exception:
             try:
                 html_content = response.content.decode('GBK')
-            except:
+            except Exception:
                 html_content = response.content.decode('UTF-8', errors='replace')
         
         soup = BeautifulSoup(html_content, "html.parser")
@@ -400,7 +399,6 @@ def get_article_summary_from_detail(url, headers):
         if time_elem:
             time_str = time_elem.get_text().strip()
             # 格式化时间：2026年03月28日08:58 -> 2026年03月28日 08:58
-            import re
             time_str = re.sub(r'(日)(\d{2}:)', r'\1 \2', time_str)
         
         # 找正文内容 - 人民网主要在 #rm_txt_zw
@@ -476,10 +474,10 @@ def fetch_people_opinion():
                     # 使用 GBK 编码解码
                     try:
                         html_content = response.content.decode('GB18030')
-                    except:
+                    except Exception:
                         try:
                             html_content = response.content.decode('GBK')
-                        except:
+                        except Exception:
                             html_content = response.content.decode('UTF-8', errors='replace')
 
                     soup = BeautifulSoup(html_content, "html.parser")
@@ -553,7 +551,7 @@ def main():
         os.system("pip install feedparser --break-system-packages -q")
         try:
             import feedparser
-        except:
+        except Exception:
             print("⚠️  feedparser 安装失败，将使用备用爬取方案")
     
     # 爬取科技资讯（少数派 + 36 氪）
@@ -617,7 +615,7 @@ def main():
             if '新增' in line and '篇文章' in line:
                 try:
                     original_new_count = int(line.split('新增')[1].split('篇')[0].strip())
-                except:
+                except Exception:
                     pass
     except Exception as e:
         print(f"⚠️  处理原创文章异常：{e}")

@@ -32,21 +32,15 @@
     </script>
 
 <style>
-    /* 每日申论精读主题色 - 粉色 */
-    :root {
-        --accent-color: #ec4899;
-        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-    }
-    
-    /* 今日更新置顶样式 */
+    /* 今日更新置顶样式 · 朱印标记（由 common.css 的 --seal / --seal-soft 驱动） */
     .article-card.is-today {
-        border: 2px solid var(--accent-color);
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
+        border: 2px solid var(--seal);
+        background: var(--seal-soft);
     }
 
     .article-card.is-today .today-badge {
-        background: var(--accent-gradient);
-        color: white;
+        background: var(--seal);
+        color: #fff;
         padding: 3px 12px;
         border-radius: 12px;
         font-size: 12px;
@@ -54,31 +48,12 @@
         white-space: nowrap;
         flex-shrink: 0;
         line-height: 1.4;
-    }
-    
-    /* 暗色模式适配 */
-    @media (prefers-color-scheme: dark) {
-    .article-card.is-today {
-        border: 2px solid var(--accent-color);
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
-    }
-
-    .article-card.is-today .today-badge {
-        background: var(--accent-gradient);
-        color: white;
-        padding: 3px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 500;
-        white-space: nowrap;
-        flex-shrink: 0;
-        line-height: 1.4;
-    }
     }
 </style>
 
 </head>
 <body>
+    <!-- impeccable:world=monyun-zhuyin seed=c0368a31 · 墨韵·朱印 · 宣纸/墨黑/朱砂，拒绝渐变 slop -->
     <!-- 移动端顶部栏 -->
     <div class="top-bar" id="topBar">
         <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
@@ -107,30 +82,30 @@
         </div>
 
 <main class="main-content">
-    <header class="page-header" style="background: var(--accent-gradient);">
+    <header class="page-header">
         <h1>📖 时评精读</h1>
-        <div class="update-time">最后更新：2026-08-27 07:02:44 | 每日早上 7 点更新</div>
+        <div class="update-time">最后更新：2026-08-28 17:36:21 | 每日早上 7 点更新</div>
     </header>
 
     <div class="article-list">
         
-            <a href="/daily/20250729_eb83ea01.html" class="article-link">
+            <a href="/daily/20260827_4a5027e3.html" class="article-link">
                 <article class="article-card is-today">
                     <div class="article-header">
-                        <h2 class="article-title">2025年07月29日 - “研发在中国”见证“中国磁吸力”（人民时评）</h2>
+                        <h2 class="article-title">2026年08月27日 06:12 - 呵护创新的每一道光芒（人民时评）</h2>
                         <span class="today-badge">📌 今日更新</span>
                     </div>
                     <div class="article-meta">
-                        <span>📅 2025年07月29日</span>
+                        <span>📅 2026年08月27日 06:12</span>
                         
-                        <span>📝 1291 字</span>
+                        <span>📝 1091 字</span>
                         
                         
-                        <span>📊 8 段</span>
+                        <span>📊 11 段</span>
                         
                     </div>
                     
-                    <p class="article-summary">观察外资在华兴业发展，“研发”是一个重要维度。</p>
+                    <p class="article-summary">近期，“五金爆改手办”话题在社交平台持续发酵：不少年轻人走进五金店，用几元钱的螺丝、螺母与弹簧垫圈，拼装出能倒水的机器人、造型各异的创意摆件。</p>
                     
                 </article>
             </a>
@@ -3407,6 +3382,27 @@
                     </div>
                     
                     <p class="article-summary">前段时间，笔者参观中国人民大学家书博物馆，被一封抗日战争时期的家书所吸引。写信者是中国人民抗日军事政治大学女学员韩雅兰，她放弃优渥生活，奔赴延安投身抗战，希望得到父母理解。字里行间，满是青年人的救亡热血。</p>
+                    
+                </article>
+            </a>
+        
+            <a href="/daily/20250729_eb83ea01.html" class="article-link">
+                <article class="article-card">
+                    <div class="article-header">
+                        <h2 class="article-title">2025年07月29日 - “研发在中国”见证“中国磁吸力”（人民时评）</h2>
+                        
+                    </div>
+                    <div class="article-meta">
+                        <span>📅 2025年07月29日</span>
+                        
+                        <span>📝 1291 字</span>
+                        
+                        
+                        <span>📊 8 段</span>
+                        
+                    </div>
+                    
+                    <p class="article-summary">观察外资在华兴业发展，“研发”是一个重要维度。</p>
                     
                 </article>
             </a>

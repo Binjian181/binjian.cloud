@@ -65,12 +65,8 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
     </script>
     
 <style>
-    /* 文章详情页主题色 */
-    :root {{
-        --accent-color: #16a34a;
-        --accent-gradient: linear-gradient(135deg, #16a34a 0%, #047857 100%);
-    }}
-    
+    /* 文章详情页 · 由 common.css 的 --seal 驱动（墨韵·朱印） */
+
     /* 文章详情容器 */
     .article-container {{
         max-width: 900px;
@@ -254,7 +250,7 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
     }}
     
     .random-jump-btn:hover {{
-        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        box-shadow: 0 4px 12px var(--seal-soft);
         transform: translateY(-1px);
     }}
     
@@ -277,7 +273,7 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        box-shadow: 0 4px 12px var(--seal-soft);
         transition: all 0.3s;
         opacity: 0.9;
         z-index: 999;
@@ -285,7 +281,7 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
     
     .back-to-top:hover {{
         opacity: 1;
-        box-shadow: 0 6px 16px rgba(22, 163, 74, 0.4);
+        box-shadow: 0 6px 16px var(--seal-soft);
         transform: translateY(-2px);
     }}
     
@@ -308,6 +304,7 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
 
 </head>
 <body>
+    <!-- impeccable:world=monyun-zhuyin seed=c0368a31 · 墨韵·朱印 · 宣纸/墨黑/朱砂，拒绝渐变 slop -->
     <!-- 移动端顶部栏 -->
     <div class="top-bar" id="topBar">
         <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">

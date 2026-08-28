@@ -14,8 +14,9 @@ from daily_people_article_push_v3 import (
     BASE_CONFIG, AI_CONFIG
 )
 import pymysql
-from datetime import datetime
+from datetime import datetime, date
 import json
+import re
 import time
 
 # ==================== 配置区域 ====================
@@ -28,6 +29,32 @@ LIMIT = 0
 
 # 每篇文章之间的间隔时间（秒），避免API频率限制
 INTERVAL = 5
+
+# ==================== 工具函数 ====================
+
+def parse_publish_date(publish_time):
+    """把 publish_time 解析成 date，无法解析时返回 None。
+
+    库中 publish_time 是 varchar(50)，存的是「2026年08月28日 16:16」这类中文日期
+    （有的不带时分，少数情况下也可能是 datetime 对象）。不能用 [:10] 按位截断：
+    那只对月日零填充的写法成立，遇到「2026年1月5日」就会得到错误结果。
+    """
+    if isinstance(publish_time, datetime):
+        return publish_time.date()
+
+    text = str(publish_time or '')
+    match = re.search(r'(\d{4})年(\d{1,2})月(\d{1,2})日', text)
+    if match:
+        year, month, day = match.groups()
+        return date(int(year), int(month), int(day))
+
+    match = re.match(r'(\d{4})-(\d{1,2})-(\d{1,2})', text)
+    if match:
+        year, month, day = match.groups()
+        return date(int(year), int(month), int(day))
+
+    return None
+
 
 # ==================== 主函数 ====================
 
@@ -51,12 +78,22 @@ def main():
                 SELECT id, title, url, source, publish_time 
                 FROM news_articles 
                 WHERE page_type = 'people' AND source = '人民网'
-                AND title LIKE '%%人民时评%%'
-                AND publish_time >= '{}'
+                AND title LIKE %s
                 ORDER BY publish_time DESC
-            """.format(START_DATE)
-            cursor.execute(sql)
+            """
+            # 标题过滤与 daily_people_article_push_v3.py 保持一致（全角括号）
+            cursor.execute(sql, ('%（人民时评）%',))
             articles = cursor.fetchall()
+
+        # publish_time 是中文日期字符串，与 ISO 日期做字符串比较并不可靠
+        # （此前 `publish_time >= '2026-01-01'` 只是碰巧成立），改为解析后再比较。
+        start_date = datetime.strptime(START_DATE, '%Y-%m-%d').date()
+        filtered = []
+        for article in articles:
+            publish_date = parse_publish_date(article['publish_time'])
+            if publish_date is not None and publish_date >= start_date:
+                filtered.append(article)
+        articles = filtered
 
         print(f"\n✅ 找到 {len(articles)} 篇符合条件的文章\n")
 
@@ -72,7 +109,7 @@ def main():
                 with open(list_file, 'r', encoding='utf-8') as f:
                     existing = json.load(f)
                     processed_urls = {a.get('original_url', '') for a in existing if a.get('original_url')}
-            except:
+            except Exception:
                 pass
 
         # 过滤已处理的文章
@@ -93,17 +130,14 @@ def main():
             print(f"{'='*60}")
 
             try:
-                # 格式化日期
-                publish_time = article['publish_time']
-                if isinstance(publish_time, datetime):
-                    publish_date = publish_time.strftime('%Y-%m-%d')
-                else:
-                    date_str = str(publish_time)[:10]
-                    if '年' in date_str:
-                        date_str = date_str.replace('年', '-').replace('月', '-').replace('日', '')
-                    publish_date = date_str
-
-                display_date = publish_date.replace('-', '年', 1).replace('-', '月', 1) + '日'
+                # 发布日期：统一解析，避免按位截断（原因见 parse_publish_date）
+                parsed_date = parse_publish_date(article['publish_time'])
+                if parsed_date is None:
+                    print(f"⚠️  无法解析日期：{article['publish_time']!r}，跳过")
+                    fail_count += 1
+                    continue
+                publish_date = parsed_date.strftime('%Y-%m-%d')
+                display_date = parsed_date.strftime('%Y年%m月%d日')
                 print(f"   时间：{display_date}")
 
                 # 获取文章内容

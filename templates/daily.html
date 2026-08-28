@@ -31,54 +31,9 @@
     }
     </script>
 
-<style>
-    /* 每日申论精读主题色 - 粉色 */
-    :root {
-        --accent-color: #ec4899;
-        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-    }
-    
-    /* 今日更新置顶样式 */
-    .article-card.is-today {
-        border: 2px solid var(--accent-color);
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
-    }
-
-    .article-card.is-today .today-badge {
-        background: var(--accent-gradient);
-        color: white;
-        padding: 3px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 500;
-        white-space: nowrap;
-        flex-shrink: 0;
-        line-height: 1.4;
-    }
-    
-    /* 暗色模式适配 */
-    @media (prefers-color-scheme: dark) {
-    .article-card.is-today {
-        border: 2px solid var(--accent-color);
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.05) 100%);
-    }
-
-    .article-card.is-today .today-badge {
-        background: var(--accent-gradient);
-        color: white;
-        padding: 3px 12px;
-        border-radius: 12px;
-        font-size: 12px;
-        font-weight: 500;
-        white-space: nowrap;
-        flex-shrink: 0;
-        line-height: 1.4;
-    }
-    }
-</style>
-
 </head>
 <body>
+    <!-- impeccable:world=monyun-zhuyin seed=c0368a31 · 墨韵·朱印 · 宣纸/墨黑/朱砂，拒绝渐变 slop -->
     <!-- 移动端顶部栏 -->
     <div class="top-bar" id="topBar">
         <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
@@ -107,7 +62,7 @@
         </div>
 
 <main class="main-content">
-    <header class="page-header" style="background: var(--accent-gradient);">
+    <header class="page-header">
         <h1>📖 时评精读</h1>
         <div class="update-time">最后更新：{{ update_time }} | 每日早上 7 点更新</div>
     </header>

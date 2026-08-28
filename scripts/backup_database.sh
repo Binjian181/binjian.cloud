@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 #
 # 数据库备份脚本
 # 功能：备份 MySQL 数据库到本地，保留最近 7 天的备份
@@ -23,7 +24,8 @@ echo "=========================================="
 echo "💾 正在备份数据库：${DB_NAME}"
 
 # 执行备份
-if mysqldump -u${DB_USER} -p${DB_PASSWORD} --single-transaction \
+# 密码通过 MYSQL_PWD 环境变量传入，避免出现在进程列表 (ps) 中
+if MYSQL_PWD="${DB_PASSWORD}" mysqldump -u${DB_USER} --single-transaction \
     --quick --lock-tables=false ${DB_NAME} | gzip > ${BACKUP_FILE}; then
     
     BACKUP_SIZE=$(du -h ${BACKUP_FILE} | cut -f1)

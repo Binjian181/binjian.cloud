@@ -13,11 +13,10 @@ import os
 import requests
 import pymysql
 from bs4 import BeautifulSoup
-from datetime import datetime, timedelta
+from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
 import json
 import hashlib
-import re
 import time
 from typing import List, Dict, Tuple, Optional
 
@@ -486,145 +485,6 @@ class BailianAsyncAnalyzer:
             return None
 
 
-# ==================== 结构脉络生成 ====================
-
-def extract_paragraph_roles_from_logic(logic_analysis: str, paragraphs: List[str]) -> List[Dict]:
-    """从逻辑拆解中提取每个段落的角色和核心大意（适配新格式）"""
-    roles = []
-    
-    if not logic_analysis:
-        # 如果没有逻辑拆解，使用默认角色
-        for i, para in enumerate(paragraphs):
-            if i == 0:
-                role = '开头破题'
-            elif i == len(paragraphs) - 1:
-                role = '结尾升华'
-            else:
-                role = '分论点支撑'
-            roles.append({
-                'role': role,
-                'summary': para[:30] + '...' if len(para) > 30 else para
-            })
-        return roles
-    
-            # 新格式解析：【段落分析】下的 "第N段|作用：xxx|大意：xxx"
-    para_section = re.search(r'【段落分析】\s*\n([\s\S]*?)(?=【论点结构】|$)', logic_analysis)
-    
-    if para_section:
-        for line in para_section.group(1).strip().split('\n'):
-            line = line.strip()
-            if not line:
-                continue
-            # 新格式：第N段|作用：xxx|大意：xxx（更宽松的匹配）
-            match = re.match(r'第\s*(\d+)\s*段\s*\|\s*作用[：:]\s*(.+?)\s*\|\s*大意[：:]\s*(.+)', line)
-            if match:
-                roles.append({
-                    'index': int(match.group(1)),
-                    'role': match.group(2).strip(),
-                    'summary': match.group(3).strip()[:50]
-                })
-    
-    # 如果解析数量不匹配，补充默认值
-    while len(roles) < len(paragraphs):
-        idx = len(roles)
-        if idx == 0:
-            role = '开头破题'
-        elif idx == len(paragraphs) - 1:
-            role = '结尾升华'
-        else:
-            role = '分论点支撑'
-        roles.append({
-            'index': idx + 1,
-            'role': role,
-            'summary': paragraphs[idx][:30] + '...' if len(paragraphs[idx]) > 30 else paragraphs[idx]
-        })
-    
-    return roles
-
-
-def generate_structure_outline(paragraphs: List[str], logic_analysis: str) -> str:
-    """生成文章结构脉络 HTML"""
-    roles = extract_paragraph_roles_from_logic(logic_analysis, paragraphs)
-    
-    # 按角色分组
-    sections = {
-        '开头': [],
-        '主体': [],
-        '结尾': []
-    }
-    
-    for i, (para, role_info) in enumerate(zip(paragraphs, roles)):
-        role = role_info['role']
-        summary = role_info['summary']
-        
-        if role in ['开头破题', '背景阐述']:
-            sections['开头'].append((i + 1, role, summary))
-        elif role in ['结尾升华']:
-            sections['结尾'].append((i + 1, role, summary))
-        else:
-            sections['主体'].append((i + 1, role, summary))
-    
-    # 角色对应的 CSS 类名
-    role_classes = {
-        '开头破题': 'role-kaitou',
-        '背景阐述': 'role-beijing',
-        '分论点': 'role-lundian',
-        '分论点支撑': 'role-lundian',
-        '过渡衔接': 'role-guodu',
-        '举例论证': 'role-lundian',
-        '对比论证': 'role-lundian',
-        '引用论证': 'role-lundian',
-        '数据论证': 'role-lundian',
-        '结尾升华': 'role-jiewei',
-    }
-    
-    html = ''
-    
-    # 生成各部分（添加锚点跳转）
-    for section_name, items in sections.items():
-        if not items:
-            continue
-        
-        html += f'<div class="structure-part">\n'
-        html += f'  <div class="part-title">{section_name}</div>\n'
-        html += f'  <div class="part-items">\n'
-        
-        for para_idx, role, summary in items:
-            css_class = role_classes.get(role, 'role-lundian')
-            html += f'    <div class="structure-item" onclick="scrollToPara({para_idx})">\n'
-            html += f'      <span class="item-role {css_class}">{role}</span>\n'
-            html += f'      <a href="#para-{para_idx}" class="item-content">段落{para_idx}：{summary}</a>\n'
-            html += f'    </div>\n'
-        
-        html += f'  </div>\n'
-        html += f'</div>\n'
-    
-    return html
-
-
-def generate_structure_stats(stats: Dict) -> List[str]:
-    """生成结构统计徽章"""
-    result = []
-    
-    result.append(f'📊 总段落：<strong>{stats.get("total_paras", 0)}</strong>')
-    result.append(f'📝 总字数：<strong>{stats.get("total_words", 0)}</strong>')
-    
-    if stats.get('main_points', 0) > 0:
-        result.append(f'🎯 总论点：<strong>{stats["main_points"]}</strong>')
-    
-    if stats.get('sub_points', 0) > 0:
-        result.append(f'📌 分论点：<strong>{stats["sub_points"]}</strong>')
-    
-    technique_counts = stats.get('technique_counts', {})
-    if technique_counts:
-        # 取使用最多的3种手法
-        top_techniques = sorted(technique_counts.items(), key=lambda x: x[1], reverse=True)[:3]
-        for name, count in top_techniques:
-            result.append(f'✨ {name}：<strong>{count}次</strong>')
-    
-    return result
-
-
 # ==================== 段落分析器 ====================
 
 class ParagraphAnalyzer:
@@ -898,7 +758,6 @@ def regenerate_list_page(env: Environment):
     def parse_date(article):
         date_str = article.get('date', '')
         # 格式：2026年02月12日 -> 20260212
-        import re
         match = re.match(r'(\d{4})年(\d{2})月(\d{2})日', date_str)
         if match:
             return f"{match.group(1)}{match.group(2)}{match.group(3)}"
@@ -959,7 +818,6 @@ def main():
         
         # 处理带时分的时间格式：2026年03月30日 08:56 或 2026-03-30 08:56
         if date_str and '年' in date_str:
-            import re
             match = re.match(r'(\d{4})年(\d{2})月(\d{2})日\s*(\d{2}:\d{2})?', date_str)
             if match:
                 year, month, day, time_part = match.groups()
@@ -974,7 +832,6 @@ def main():
         else:
             # 从 URL 中提取日期作为备选
             # URL 格式：http://opinion.people.com.cn/n1/2025/0429/c1003-40470344.html
-            import re
             url_match = re.search(r'/n1/(\d{4})/(\d{4})/', url)
             if url_match:
                 year = url_match.group(1)

@@ -225,7 +225,6 @@ def main():
                 print(f'       正文段数: {old_body} → {new_body}（总段落数已更新）')
         else:
             # 即使没改 HTML，也同步 list.json 里的 para_count
-            _, _, cur_body, _, _ = fix_html_file.__wrapped__(fpath) if hasattr(fix_html_file, '__wrapped__') else (None, None, new_body, None, None)
             url_to_new_count[url] = new_body
 
     print(f'\n共修复 {changed_count} 篇（共 {len(html_files)} 篇）')

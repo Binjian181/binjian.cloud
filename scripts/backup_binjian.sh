@@ -1,4 +1,5 @@
 #!/bin/bash
+set -eo pipefail
 # Auto backup binjian.cloud (website + database) to GitHub
 cd /var/www/binjian.cloud/
 
@@ -12,7 +13,8 @@ DATE=$(date +%Y%m%d)
 mkdir -p ${DB_DIR}
 
 # Dump database (only keep the latest dump in git)
-mysqldump -u${DB_USER} -p${DB_PASSWORD} --single-transaction --quick \
+# 密码通过 MYSQL_PWD 环境变量传入，避免出现在进程列表 (ps) 中
+MYSQL_PWD="${DB_PASSWORD}" mysqldump -u${DB_USER} --single-transaction --quick \
     --lock-tables=false ${DB_NAME} | gzip > ${DB_DIR}/${DB_NAME}_${DATE}.sql.gz
 
 # Remove old dumps in db/ (keep only today's)
@@ -25,7 +27,7 @@ cp ${DB_DIR}/${DB_NAME}_${DATE}.sql.gz ${LOCAL_BACKUP_DIR}/${DB_NAME}_$(date +%Y
 find ${LOCAL_BACKUP_DIR} -name "${DB_NAME}_*.sql.gz" -type f -mtime +7 -delete
 
 # --- Sync scripts ---
-cp -u /home/ubuntu/*.py /home/ubuntu/backup_database.sh /home/ubuntu/backup_binjian.sh scripts/ 2>/dev/null
+cp -u /home/ubuntu/*.py /home/ubuntu/backup_database.sh /home/ubuntu/backup_binjian.sh scripts/ 2>/dev/null || true
 
 # --- Git backup ---
 # Add all changes (website files + database dump + scripts)

@@ -36,11 +36,6 @@
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
 <style>
-    /* 时评精读主题色 - 粉色 */
-    :root {
-        --accent-color: #ec4899;
-        --accent-gradient: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-    }
 
     /* 返回链接 */
     .back-link {
@@ -122,7 +117,7 @@
     }
 
     .article-fulltext .lead-paragraph {
-        background: linear-gradient(135deg, rgba(236, 72, 153, 0.08) 0%, rgba(190, 24, 93, 0.08) 100%);
+        background: var(--seal-soft);
         border-left: 3px solid var(--accent-color);
         padding: 16px 20px;
         margin-bottom: 20px;
@@ -219,7 +214,7 @@
         margin: 16px 0;
         padding: 12px 20px;
         border-left: 4px solid var(--accent-color);
-        background: rgba(236, 72, 153, 0.05);
+        background: rgba(177, 52, 43, 0.05);
         border-radius: 0 8px 8px 0;
         color: var(--secondary-text);
     }
@@ -323,7 +318,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+        box-shadow: 0 4px 12px rgba(177, 52, 43, 0.3);
         transition: all 0.3s;
         opacity: 0.9;
         z-index: 999;
@@ -331,7 +326,7 @@
 
     .back-to-top:hover {
         opacity: 1;
-        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        box-shadow: 0 6px 16px rgba(177, 52, 43, 0.4);
         transform: translateY(-2px);
     }
 
@@ -539,6 +534,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var renderedContent = document.getElementById('rendered-content');
 
     if (markdownSource && renderedContent && markdownSource.textContent.trim()) {
+        // marked 由 CDN 提供；若加载失败（网络受限）则降级为纯文本，避免 AI 精读区块空白
+        if (typeof marked === 'undefined') {
+            renderedContent.textContent = markdownSource.textContent;
+            return;
+        }
+
         // 配置marked
         marked.setOptions({
             breaks: true,

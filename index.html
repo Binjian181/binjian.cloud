@@ -15,11 +15,7 @@
     <link rel="icon" href="/icons.png" type="image/png">
         <link rel="stylesheet" href="/css/common.css">
     <style>
-        /* 主页特有样式 */
-        :root {
-            --accent-color: #ff8c00;
-            --accent-gradient: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
-        }
+        /* 主页特有样式 · 由 common.css 的 --seal 驱动（墨韵·朱印） */
         
         /* 主页容器 - 三栏布局 */
         .home-container {
@@ -98,17 +94,20 @@
             gap: 16px;
         }
         
-        /* 轮播图 */
+        /* 轮播图 · 宣纸面板 + 朱批顶栏 */
         .banner {
-            background: var(--accent-gradient);
-            border-radius: 8px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-top: 3px solid var(--seal);
+            border-radius: 4px;
             height: 320px;
             padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            color: #fff;
+            color: var(--text-color);
             margin-bottom: 8px;
+            box-shadow: 0 1px 2px var(--shadow-color);
         }
         
         .banner-title {
@@ -123,68 +122,11 @@
         }
         
         /* 文章卡片 */
-        .article-card {
-            background: var(--card-bg);
-            border-radius: 8px;
-            border: 1px solid var(--border-color);
-            padding: 24px;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .article-card:hover {
-            box-shadow: 0 8px 24px var(--shadow-color);
-            transform: translateY(-2px);
-        }
-        
-        .article-title {
-            font-size: 18px;
+        .brand-name {
             font-weight: 600;
             color: var(--text-color);
-            margin-bottom: 12px;
-            line-height: 1.5;
         }
-        
-        .article-summary {
-            font-size: 15px;
-            color: var(--secondary-text);
-            margin-bottom: 16px;
-            line-height: 1.7;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .article-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--muted-text);
-        }
-        
-        .author {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .avatar {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--accent-color);
-        }
-        
-        .tag {
-            background-color: var(--bg-color);
-            color: var(--accent-color);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-        }
-        
+
         /* 右侧边栏 */
         .sidebar-right {
             display: flex;
@@ -214,7 +156,7 @@
             width: 80px;
             height: 80px;
             border-radius: 50%;
-            background: var(--accent-gradient);
+            background: var(--seal);
             margin: 0 auto 12px;
             display: flex;
             align-items: center;
@@ -251,52 +193,35 @@
         }
         
         .quick-card {
-            border-radius: 12px;
+            border-radius: 6px;
             padding: 24px;
             color: white;
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
+            box-shadow: 0 2px 12px var(--shadow-color);
         }
         
         .quick-card:hover {
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px var(--shadow-color);
         }
         
+        /* 印学调和色板：权威红 / 石青 / 赭黄 / 石绿 */
         .quick-card-red {
-            background: linear-gradient(135deg, #c8102e 0%, #8b0000 100%);
-            box-shadow: 0 2px 12px rgba(200, 16, 46, 0.2);
+            background: #b1342b;
         }
         
-        .quick-card-red:hover {
-            box-shadow: 0 8px 24px rgba(200, 16, 46, 0.3);
-        }
-        
-        .quick-card-purple {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            box-shadow: 0 2px 12px rgba(102, 126, 234, 0.2);
-        }
-        
-        .quick-card-purple:hover {
-            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);
+        .quick-card-blue {
+            background: #3f5d7a;
         }
         
         .quick-card-green {
-            background: linear-gradient(135deg, #16a34a 0%, #047857 100%);
-            box-shadow: 0 2px 12px rgba(22, 163, 74, 0.2);
+            background: #2f6f5b;
         }
         
-        .quick-card-green:hover {
-            box-shadow: 0 8px 24px rgba(22, 163, 74, 0.3);
-        }
-        
-        .quick-card-pink {
-            background: linear-gradient(135deg, #ec4899 0%, #be185d 100%);
-            box-shadow: 0 2px 12px rgba(236, 72, 153, 0.2);
-        }
-        
-        .quick-card-pink:hover {
-            box-shadow: 0 8px 24px rgba(236, 72, 153, 0.3);
+        .quick-card-amber {
+            background: #b07a2a;
         }
         
         .quick-card-icon {
@@ -358,12 +283,13 @@
     </style>
 </head>
 <body>
+    <!-- impeccable:world=monyun-zhuyin seed=c0368a31 · 墨韵·朱印 · 宣纸/墨黑/朱砂，拒绝渐变 slop -->
     <!-- 移动端导航 -->
     <div class="top-bar">
         <button class="menu-toggle" id="menuToggle" title="显示菜单" aria-label="打开导航菜单" aria-expanded="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
         </button>
-        <span style="font-weight: 600; color: var(--text-color);">Binjian</span>
+        <span class="brand-name">Binjian</span>
         <button class="theme-toggle-mobile" id="themeToggleMobile" title="切换主题" aria-label="切换主题" aria-pressed="false">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
         </button>
@@ -420,14 +346,14 @@
                     <div class="quick-card-title">时政观点</div>
                     <div class="quick-card-desc">官方观点 权威发布</div>
                 </a>
-                <a href="/tech-news.html" class="quick-card quick-card-purple" aria-label="查看科技资讯">
+                <a href="/tech-news.html" class="quick-card quick-card-blue" aria-label="查看科技资讯">
                     <div class="quick-card-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"></rect><line x1="12" y1="18" x2="12.01" y2="18"></line></svg>
                     </div>
                     <div class="quick-card-title">科技资讯</div>
                     <div class="quick-card-desc">少数派 + 36氪 每日更新</div>
                 </a>
-                <a href="/daily.html" class="quick-card quick-card-pink" aria-label="查看时评精读">
+                <a href="/daily.html" class="quick-card quick-card-amber" aria-label="查看时评精读">
                     <div class="quick-card-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 0 3-3h7z"></path></svg>
                     </div>

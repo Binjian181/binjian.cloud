@@ -1,17 +1,8 @@
 {% extends "base.html" %}
 
-{% block extra_css %}
-<style>
-    :root {
-        --accent-color: #ff8c00;
-        --accent-gradient: linear-gradient(135deg, #ff8c00 0%, #ff6b00 100%);
-    }
-</style>
-{% endblock %}
-
 {% block content %}
 <main class="main-content">
-    <header class="page-header" style="background: var(--accent-gradient);">
+    <header class="page-header">
         <h1>📝 原创文章</h1>
         <div class="update-time">最后更新：{{ update_time }}</div>
     </header>

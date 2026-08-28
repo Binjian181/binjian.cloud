@@ -1,46 +1,83 @@
 /**
  * 公共 CSS 文件 - 所有页面共用
- * 版本: 2.0
+ * 版本: 3.0 · 墨韵·朱印（ink-and-paper Chinese editorial system）
+ *
+ * impeccable world contract:
+ *   THESIS  — a reading room, not a portal; content-first calm built from 古籍/碑帖/印学
+ *             grammar, refusing the incumbent indigo→purple→orange→pink gradient slop and the
+ *             generic "cream + serif + terracotta" AI default.
+ *   OWN-WORLD — 宣纸 warm-paper ground, 墨黑 ink text, a single committed 朱砂/印泥红 (cinnabar)
+ *             accent; material discipline from 朱丝栏 column rules, 印章 seal chips, 句读 vermilion
+ *             marks. CJK 宋体 reading face, system sans for UI.
+ *   STORY    — the reader understands this is a personal hand-curated 精读 space; the vermilion
+ *             seal marks the human-chosen daily read.
+ *   FIRST VIEWPORT — 宣纸 panel, ink masthead, nav active state as a 朱批 block, 精读 card carrying
+ *             a 朱印.
+ *   FORM     — replacement world, brief-pinned (rolled catalog worlds unfit); seed c0368a31 noted,
+ *             set aside on factual grounds.
+ *   FINISH   — unreviewed and undocumented is unfinished; this build ends with the finish review,
+ *             the verdict, DESIGN.md, and every shipping raster carrying its provenance.
  */
 
 /* ========== CSS 变量定义 ========== */
 :root {
-    /* 亮色模式 */
-    --bg-color: #f5f7fa;
-    --text-color: #333;
-    --card-bg: #fff;
-    --border-color: #e5e5e5;
-    --secondary-text: #8c8c8c;
-    --muted-text: #999;
-    --shadow-color: rgba(0, 0, 0, 0.06);
-    
-    /* 默认主题色 */
-    --accent-color: #667eea;
-    --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    /* 亮色模式 · 宣纸暖白 */
+    --bg-color: #f3ecdd;          /* 宣纸 paper ground */
+    --text-color: #211c15;        /* 墨 ink */
+    --card-bg: #fbf6ea;           /* 米白 card */
+    --border-color: #e2d7c2;      /* 界栏 hairline border */
+    --secondary-text: #6a5f4f;    /* 淡墨 */
+    --muted-text: #9c9080;        /* 落墨灰 */
+    --shadow-color: rgba(33, 28, 21, 0.08);
+
+    /* 单一强调色 · 朱砂 / 印泥红（克制 restraints，非渐变 slop） */
+    --accent-color: #b1342b;
+    --accent-gradient: #b1342b;   /* 扁平化：移除渐变，使用实色朱砂 */
+
+    /* 世界专属令牌 */
+    --seal: #b1342b;              /* 朱印 */
+    --seal-soft: rgba(177, 52, 43, 0.10);
+    --rule: rgba(33, 28, 21, 0.14); /* 朱丝栏 / 界行 */
+
+    /* 字体：阅读用宋体（古籍气），UI 用系统无衬线 */
+    --font-serif: 'Songti SC', 'STSong', 'Source Han Serif SC', 'Noto Serif SC', 'SimSun', serif;
+    --font-sans: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
-/* 暗色模式 - 跟随系统 */
+/* 暗色模式 - 跟随系统（夜色暖黑，非冷蓝） */
 @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-        --bg-color: #1a1a2e;
-        --text-color: #e0e0e0;
-        --card-bg: #16213e;
-        --border-color: #2a2a4a;
-        --secondary-text: #a0aec0;
-        --muted-text: #718096;
-        --shadow-color: rgba(0, 0, 0, 0.3);
+        --bg-color: #16130d;
+        --text-color: #ece1cf;
+        --card-bg: #1f1a12;
+        --border-color: #342d20;
+        --secondary-text: #b3a78e;
+        --muted-text: #8a7e69;
+        --shadow-color: rgba(0, 0, 0, 0.45);
+
+        --accent-color: #d9543f;
+        --accent-gradient: #d9543f;
+        --seal: #d9543f;
+        --seal-soft: rgba(217, 84, 63, 0.16);
+        --rule: rgba(236, 225, 207, 0.16);
     }
 }
 
 /* 暗色模式 - 手动切换 */
 [data-theme="dark"] {
-    --bg-color: #1a1a2e;
-    --text-color: #e0e0e0;
-    --card-bg: #16213e;
-    --border-color: #2a2a4a;
-    --secondary-text: #a0aec0;
-    --muted-text: #718096;
-    --shadow-color: rgba(0, 0, 0, 0.3);
+    --bg-color: #16130d;
+    --text-color: #ece1cf;
+    --card-bg: #1f1a12;
+    --border-color: #342d20;
+    --secondary-text: #b3a78e;
+    --muted-text: #8a7e69;
+    --shadow-color: rgba(0, 0, 0, 0.45);
+
+    --accent-color: #d9543f;
+    --accent-gradient: #d9543f;
+    --seal: #d9543f;
+    --seal-soft: rgba(217, 84, 63, 0.16);
+    --rule: rgba(236, 225, 207, 0.16);
 }
 
 /* ========== 基础重置 ========== */
@@ -58,7 +95,7 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    font-family: var(--font-sans);
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -72,6 +109,18 @@ body {
 a {
     color: inherit;
     text-decoration: none;
+}
+
+/* 阅读体：正文与标题使用宋体（古籍气） */
+.page-header h1,
+.article-title,
+.article-summary,
+.content-section h2,
+.markdown-content,
+.article-fulltext .para-text,
+.article-fulltext .lead-paragraph,
+.article-content {
+    font-family: var(--font-serif);
 }
 
 /* ========== 布局容器 ========== */
@@ -136,34 +185,39 @@ a {
 .nav-bar {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
     position: sticky;
     top: 20px;
 }
 
 .nav-btn {
-    padding: 12px 16px;
-    border-radius: 8px;
+    padding: 11px 16px;
+    border-radius: 6px;
     text-decoration: none;
     font-weight: 500;
     transition: all 0.2s;
     display: flex;
     align-items: center;
     gap: 8px;
-    background: var(--card-bg);
-    color: var(--accent-color);
-    border: 1px solid var(--accent-color);
+    background: transparent;
+    color: var(--secondary-text);
+    border: 1px solid var(--border-color);
 }
 
 .nav-btn.active {
-    background: var(--accent-color);
-    color: white;
-    border: none;
+    background: var(--seal);
+    color: #fff;
+    border-color: var(--seal);
 }
 
 .nav-btn:hover {
-    transform: translateX(4px);
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+    transform: translateX(3px);
+    color: var(--text-color);
+    border-color: var(--seal);
+}
+
+.nav-btn.active:hover {
+    color: #fff;
 }
 
 /* ========== 主题切换按钮 ========== */
@@ -172,8 +226,8 @@ a {
     border: none;
     cursor: pointer;
     color: var(--secondary-text);
-    padding: 12px;
-    border-radius: 8px;
+    padding: 11px 16px;
+    border-radius: 6px;
     transition: all 0.2s;
     text-align: left;
     width: 100%;
@@ -185,6 +239,7 @@ a {
 
 .theme-toggle:hover {
     background-color: var(--card-bg);
+    color: var(--text-color);
 }
 
 .theme-toggle svg,
@@ -194,32 +249,38 @@ a {
 }
 
 /* ========== 页面标题头部 ========== */
+/* 宣纸面板 + 朱批顶栏，弃用渐变 */
 .page-header {
-    padding: 40px 20px;
-    border-radius: 12px;
+    padding: 34px 28px;
+    border-radius: 4px;
     margin-bottom: 30px;
-    color: white;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: var(--text-color);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-top: 3px solid var(--seal);
+    box-shadow: 0 1px 0 var(--rule);
 }
 
 .page-header h1 {
     font-size: 32px;
-    font-weight: 600;
+    font-weight: 700;
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     gap: 12px;
+    letter-spacing: 0.02em;
 }
 
 .page-header .update-time {
     opacity: 0.9;
     font-size: 14px;
+    color: var(--muted-text);
 }
 
 /* ========== 文章列表 ========== */
 .article-list {
     display: grid;
-    gap: 20px;
+    gap: 18px;
 }
 
 .article-link {
@@ -230,11 +291,11 @@ a {
 
 .article-card {
     background: var(--card-bg);
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 2px 12px var(--shadow-color);
+    border-radius: 4px;
+    padding: 22px 24px;
+    box-shadow: 0 1px 2px var(--shadow-color);
     transition: all 0.3s ease;
-    border-left: 4px solid transparent;
+    border: 1px solid var(--border-color);
     cursor: pointer;
     overflow: hidden;
     min-width: 0;
@@ -243,7 +304,25 @@ a {
 .article-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 24px var(--shadow-color);
-    border-left-color: var(--accent-color);
+    border-left-color: var(--seal);
+}
+
+/* 今日更新置顶 · 朱印标记（时评精读列表页） */
+.article-card.is-today {
+    border: 2px solid var(--seal);
+    background: var(--seal-soft);
+}
+
+.article-card.is-today .today-badge {
+    background: var(--seal);
+    color: #fff;
+    padding: 3px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    flex-shrink: 0;
+    line-height: 1.4;
 }
 
 .article-header {
@@ -268,11 +347,12 @@ a {
 
 .article-source {
     padding: 4px 10px;
-    border-radius: 20px;
+    border-radius: 3px;
     font-size: 12px;
     font-weight: 500;
     white-space: nowrap;
     flex-shrink: 0;
+    font-family: var(--font-sans);
 }
 
 .article-meta {
@@ -282,12 +362,13 @@ a {
     color: var(--muted-text);
     margin-bottom: 12px;
     flex-wrap: wrap;
+    font-family: var(--font-sans);
 }
 
 .article-summary {
     color: var(--secondary-text);
     font-size: 14px;
-    line-height: 1.6;
+    line-height: 1.7;
     display: -webkit-box;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
@@ -304,51 +385,67 @@ a {
     margin-top: 12px;
     font-size: 12px;
     color: var(--muted-text);
+    font-family: var(--font-sans);
 }
 
-/* ========== 来源标签样式 ========== */
+/* ========== 来源标签 · 印学调和色板 ========== */
+/* 权威红 → 朱砂；科技 → 石青；36氪 → 石绿；澎湃 → 暖灰；原创 → 缃黄 */
 .source-sspai,
 .source-少数派 {
-    background-color: #7c3aed;
-    color: #ffffff;
+    background-color: #3f5d7a;
+    color: #f3ecdd;
 }
 
 .source-36kr,
 .source-36氪 {
-    background-color: #2b6cb0;
-    color: #ebf8ff;
+    background-color: #2f6f5b;
+    color: #f3ecdd;
 }
 
 .source-人民网 {
-    background-color: #c8102e;
-    color: #ffffff;
+    background-color: var(--seal);
+    color: #fff;
 }
 
 .source-澎湃 {
-    background-color: #6b7280;
-    color: #ffffff;
-}
-
-[data-theme="dark"] .source-澎湃 {
-    background-color: #4b5563;
-    color: #ffffff;
+    background-color: #6f6757;
+    color: #f3ecdd;
 }
 
 .source-original {
-    background-color: #fff7e6;
-    color: #fa8c16;
+    background-color: var(--seal-soft);
+    color: var(--seal);
 }
 
-[data-theme="dark"] .source-original {
-    background-color: #553c2a;
-    color: #ffbd69;
+[data-theme="dark"] .source-sspai,
+[data-theme="dark"] .source-少数派 {
+    background-color: #5a7da0;
+    color: #16130d;
+}
+
+[data-theme="dark"] .source-36kr,
+[data-theme="dark"] .source-36氪 {
+    background-color: #3f8d74;
+    color: #16130d;
+}
+
+[data-theme="dark"] .source-人民网 {
+    background-color: #cf4a3d;
+    color: #16130d;
+}
+
+[data-theme="dark"] .source-澎湃 {
+    background-color: #8c8270;
+    color: #16130d;
 }
 
 /* ========== 空状态 ========== */
-.empty-state {
+.empty-state,
+.no-articles {
     text-align: center;
     padding: 80px 20px;
-    color: #8c8c8c;
+    color: var(--muted-text);
+    font-family: var(--font-serif);
 }
 
 /* ========== 响应式设计 ========== */
@@ -356,11 +453,11 @@ a {
     .nav-sidebar {
         display: none;
     }
-    
+
     .top-bar {
         display: flex;
     }
-    
+
     .nav-sidebar.open {
         display: block;
         position: fixed;
@@ -381,20 +478,20 @@ a {
         padding: 20px;
         gap: 0;
     }
-    
+
     .page-header h1 {
         font-size: 24px;
     }
-    
+
     .article-header {
         flex-direction: column;
         gap: 8px;
     }
-    
+
     .article-title {
         font-size: 18px;
     }
-    
+
     .article-meta {
         gap: 8px;
     }
@@ -409,6 +506,7 @@ footer {
     text-align: center;
     color: var(--muted-text);
     font-size: 13px;
+    font-family: var(--font-sans);
 }
 
 .site-footer a,
@@ -420,5 +518,181 @@ footer a {
 
 .site-footer a:hover,
 footer a:hover {
-    color: var(--accent-color);
+    color: var(--seal);
+}
+
+/* ========== 输入方式区分（触摸 / 鼠标） ========== */
+/* 触摸设备用 :active 反馈替代 hover，避免点按后 hover 态卡住 */
+@media (hover: none) {
+    .article-card:active {
+        background: var(--seal-soft);
+    }
+    .nav-btn:active {
+        background: var(--seal-soft);
+    }
+    .quick-card:active {
+        filter: brightness(0.94);
+    }
+}
+
+/* 触摸设备放大可点目标，满足 ≥44px（含平板抽屉导航） */
+@media (pointer: coarse) {
+    .nav-btn,
+    .theme-toggle,
+    .menu-toggle,
+    .theme-toggle-mobile {
+        min-height: 44px;
+    }
+    .article-source {
+        padding: 5px 12px;
+    }
+}
+
+/* ========== 超小屏兜底（≤390px，兼容低端机 / 窄屏） ========== */
+@media (max-width: 390px) {
+    .container {
+        padding: 14px;
+    }
+    .home-container {
+        padding: 0 14px;
+    }
+    .top-bar {
+        padding: 10px 14px;
+    }
+    .page-header {
+        padding: 22px 16px;
+        margin-bottom: 20px;
+    }
+    .page-header h1 {
+        font-size: 21px;
+    }
+    .article-card {
+        padding: 18px 16px;
+    }
+    .article-title {
+        font-size: 17px !important;
+    }
+    .article-summary {
+        font-size: 13px;
+    }
+    .nav-btn,
+    .theme-toggle {
+        padding: 12px 14px;
+    }
+}
+
+/* ========== 打印适配（导出 PDF / 纸质阅读） ========== */
+@media print {
+    :root {
+        --bg-color: #ffffff !important;
+        --text-color: #000000 !important;
+        --card-bg: #ffffff !important;
+        --border-color: #cccccc !important;
+        --secondary-text: #333333 !important;
+        --muted-text: #555555 !important;
+        --shadow-color: transparent !important;
+        --seal: #b1342b !important;
+        --seal-soft: transparent !important;
+        --rule: #cccccc !important;
+    }
+
+    html,
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    /* 隐藏导航、菜单、浮层按钮、返回链接、页脚、首页装饰 */
+    .top-bar,
+    .nav-sidebar,
+    .nav-bar,
+    .menu-toggle,
+    .theme-toggle,
+    .theme-toggle-mobile,
+    .back-to-top,
+    .random-jump-btn,
+    .back-link,
+    .site-footer,
+    footer,
+    .sidebar-left,
+    .sidebar-right,
+    .quick-entry,
+    .banner,
+    .discussion-container,
+    .today-badge {
+        display: none !important;
+    }
+
+    /* 回到单栏、去外边距 */
+    .container,
+    .home-container,
+    .article-container,
+    .main-content,
+    .content-main {
+        display: block !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        gap: 0 !important;
+    }
+
+    /* 卡片 / 区块去阴影边框，留白排版 */
+    .article-card,
+    .content-section,
+    .article-header,
+    .article-content,
+    .markdown-content {
+        background: #ffffff !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 0 16px !important;
+    }
+
+    /* 朱印标题：保留朱砂顶栏作为品牌印记，其余黑字 */
+    .page-header {
+        background: #ffffff !important;
+        border: none !important;
+        border-top: 3px solid var(--seal) !important;
+        color: #000000 !important;
+        padding: 12px 0 !important;
+        margin-bottom: 18px !important;
+    }
+
+    .page-header h1,
+    .article-title {
+        color: #000000 !important;
+    }
+
+    a {
+        color: #000000 !important;
+        text-decoration: underline;
+    }
+
+    /* 展开链接地址，便于纸质 / PDF 溯源 */
+    .article-meta a[href]::after {
+        content: " (" attr(href) ")";
+        font-size: 11px;
+        color: #555555;
+    }
+
+    /* 合理分页，避免内容截断 */
+    .article-card,
+    .content-section,
+    .article-content,
+    h2,
+    h3 {
+        page-break-inside: avoid;
+    }
+
+    .page-header,
+    .article-header {
+        page-break-after: avoid;
+    }
+
+    /* 正文图片保留细边框，避免与白底融掉 */
+    .article-content img,
+    .markdown-content img {
+        border: 1px solid #cccccc;
+    }
 }
