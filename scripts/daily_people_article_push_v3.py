@@ -10,6 +10,7 @@
 
 import sys
 import os
+import re
 import requests
 import pymysql
 from bs4 import BeautifulSoup
