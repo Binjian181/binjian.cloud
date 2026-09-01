@@ -634,15 +634,18 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
 /* ---- 回收：index.html 首页 ---- */
 .home-container {
     flex: 1;
-    max-width: 1200px;
+    /* 原为 1200px 三列（200 + 1fr + 300）；右侧栏移除后按 876px 定宽 + auto 外边距居中，
+       使「左栏 + 中间内容」整体居中。中间内容宽度与改版前一致。 */
+    width: 876px;
+    max-width: calc(100% - 40px);
     margin: 24px auto;
-    padding: 0 20px;
-    display: grid;
-    grid-template-columns: 200px 1fr 300px;
+    display: flex;
+    justify-content: center;
     gap: 24px;
 }
 
 .sidebar-left {
+    flex: 0 0 200px;
     background: var(--card-bg);
     border-radius: 8px;
     padding: 16px 0;
@@ -699,96 +702,15 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
 }
 
 .content-main {
+    flex: 0 1 652px;
     display: flex;
     flex-direction: column;
     gap: 16px;
-}
-
-.banner {
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    border-top: 3px solid var(--seal);
-    border-radius: 4px;
-    height: 320px;
-    padding: 40px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    color: var(--text-color);
-    margin-bottom: 8px;
-    box-shadow: 0 1px 2px var(--shadow-color);
-}
-
-.banner-title {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 12px;
-}
-
-.banner-desc {
-    font-size: 16px;
-    opacity: 0.95;
 }
 
 .brand-name {
     font-weight: 600;
     color: var(--text-color);
-}
-
-.sidebar-right {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-}
-
-.widget {
-    background: var(--card-bg);
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    padding: 20px;
-}
-
-.widget-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 16px;
-    color: var(--text-color);
-}
-
-.profile-card {
-    text-align: center;
-}
-
-.profile-avatar {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: var(--seal);
-    margin: 0 auto 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    overflow: hidden;
-}
-
-.profile-avatar img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.profile-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.profile-bio {
-    font-size: 14px;
-    color: var(--secondary-text);
-    margin-bottom: 16px;
 }
 
 .quick-entry {
@@ -1375,8 +1297,12 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
         overflow-y: auto;
     }
 
+    /* 窄于定宽 876px：由定宽 876px 切换为随视口收放，仍留 40px 总外边距居中。
+       注意：这里不能写 width: auto —— body 是 column flex，而 .home-container 带
+       margin: 24px auto，横向 auto 外边距会禁用交叉轴 stretch，容器退化成
+       fit-content（实测 1000px 视口下只有 407px）。必须显式给宽度。 */
     .home-container {
-        grid-template-columns: 1fr 300px;
+        width: calc(100% - 40px);
     }
 
     .sidebar-left {
@@ -1407,21 +1333,18 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
         gap: 8px;
     }
 
+    /* 左栏收进抽屉后，中间内容独占并撑满整屏（只留 14px 呼吸边）。
+       width 同理不能写 auto，否则 .home-container 会被横向 auto 外边距压成
+       fit-content（实测 390px 手机上只有 195px，四个卡片只剩半屏宽）。 */
     .home-container {
-        grid-template-columns: 1fr;
+        width: 100%;
+        max-width: none;
+        padding: 0 14px;
     }
 
-    .sidebar-right {
-        display: none;
-    }
-
-    .banner {
-        height: 240px;
-        padding: 24px;
-    }
-
-    .banner-title {
-        font-size: 22px;
+    .content-main {
+        flex-basis: auto;
+        width: 100%;
     }
 
     .quick-entry {
@@ -1476,8 +1399,6 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
 }
 
 @media (max-width: 390px) {
-    /* 注：.home-container 原在 390 块内写 padding: 0 14px，但被 .home-container 顶层规则
-    （padding: 0 20px）以同特异性 + 更靠后的源码顺序压过，等于从未生效。 阶段 2 保持零变化，故此处不修 —— 待阶段 4 一并处理。 */
     /* 数据可视化例外：速查表四列在窄屏改为横向滚动，避免挤压换行 */
     .ref-table-wrap {
         overflow-x: auto;
@@ -1612,7 +1533,7 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
     }
 
     /* 隐藏导航、菜单、浮层按钮、返回链接、页脚、首页装饰 */
-    .top-bar, .nav-sidebar, .nav-bar, .menu-toggle, .theme-toggle, .theme-toggle-mobile, .back-to-top, .random-jump-btn, .back-link, .site-footer, footer, .sidebar-left, .sidebar-right, .quick-entry, .banner, .discussion-container, .today-badge {
+    .top-bar, .nav-sidebar, .nav-bar, .menu-toggle, .theme-toggle, .theme-toggle-mobile, .back-to-top, .random-jump-btn, .back-link, .site-footer, footer, .sidebar-left, .quick-entry, .discussion-container, .today-badge {
         display: none !important;
     }
 

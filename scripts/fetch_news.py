@@ -13,7 +13,6 @@ import requests
 from bs4 import BeautifulSoup
 import datetime
 import json
-import os
 from urllib.parse import urljoin
 import time
 import re
@@ -166,127 +165,162 @@ def fetch_sspai():
     return articles
 
 
+# 36 氪官方接口（36kr.com 自 2026-08 起全站启用 JS 反爬挑战，HTML/RSS 一律返回验证页）
+KR_GATEWAY = "https://gateway.36kr.com/api/mis/nav"
+KR_SUBNAV_FLOW = KR_GATEWAY + "/ifm/subNav/flow"       # 栏目文章流
+KR_NEWSFLASH_FLOW = KR_GATEWAY + "/newsflash/flow"     # 快讯流
+# 36 氪信息流下的栏目 nick，web_news 为科技频道
+KR_SUBNAV_NICKS = ["web_news"]
+KR_PAGE_SIZE = 30
+KR_MAX_PAGES = 3
+# 两个流的配额之和为 MAX_ARTICLES_PER_SOURCE，避免文章把快讯全部挤掉
+KR_ARTICLE_QUOTA = 40
+KR_NEWSFLASH_QUOTA = MAX_ARTICLES_PER_SOURCE - KR_ARTICLE_QUOTA
+
+
+def _kr_post(url, param, timeout=15):
+    """调用 36 氪网关接口。注意：首屏 pageEvent=0（传 1 会报「请求分页回调值不能为空」）"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+                      "(KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        "Origin": "https://36kr.com",
+        "Referer": "https://36kr.com/",
+    }
+    payload = {"partner_id": "wap", "timestamp": 0, "param": param}
+    resp = requests.post(
+        url,
+        headers=headers,
+        data=json.dumps(payload, ensure_ascii=False).encode("utf-8"),
+        timeout=timeout,
+        verify=False
+    )
+    body = resp.json()
+    if body.get("code") != 0:
+        raise RuntimeError(body.get("msg") or f"code={body.get('code')}")
+    return body.get("data") or {}
+
+
+def _kr_fetch_items(url, base_param, max_items):
+    """按分页拉取条目，返回原始 item 列表"""
+    items = []
+    callback = ""
+    for page in range(KR_MAX_PAGES):
+        param = dict(base_param)
+        param["pageSize"] = KR_PAGE_SIZE
+        param["pageEvent"] = 0 if page == 0 else 1
+        param["pageCallback"] = callback
+
+        try:
+            data = _kr_post(url, param)
+        except Exception as e:
+            print(f"36 氪接口请求失败（第 {page + 1} 页）：{e}")
+            break
+
+        batch = data.get("itemList") or []
+        if not batch:
+            break
+
+        items.extend(batch)
+        callback = data.get("pageCallback") or ""
+        if not data.get("hasNextPage") or not callback or len(items) >= max_items:
+            break
+
+        time.sleep(1)
+
+    return items[:max_items]
+
+
+def _kr_parse_item(item, default_score):
+    """把接口条目转成入库结构；识别不出标题/链接时返回 None"""
+    material = item.get("templateMaterial") or {}
+    item_id = item.get("itemId") or material.get("itemId")
+    title = (material.get("widgetTitle") or "").strip()
+    if not title or not item_id:
+        return None
+
+    # 快讯 itemType=20 → /newsflashes/；其余（文章为 10）→ /p/
+    is_flash = item.get("itemType") == 20
+    url = f"https://36kr.com/newsflashes/{item_id}" if is_flash else f"https://36kr.com/p/{item_id}"
+
+    # publishTime 为毫秒时间戳
+    publish_time = material.get("publishTime")
+    if publish_time:
+        try:
+            time_str = datetime.datetime.fromtimestamp(publish_time / 1000).strftime("%Y-%m-%d %H:%M")
+        except Exception:
+            time_str = ""
+    else:
+        time_str = ""
+
+    summary = (material.get("summary") or material.get("widgetContent") or "").strip()
+
+    return {
+        "title": title,
+        "summary": summary[:500],
+        "url": url,
+        "source": "36 氪",
+        "time": time_str,
+        "score": default_score,
+        "author": (material.get("authorName") or "").strip(),
+        "like_count": 0,
+        "comment_count": 0
+    }
+
+
 # 爬取 36kr 最新文章
 def fetch_36kr():
-    """爬取 36 氪文章"""
+    """爬取 36 氪文章（科技栏目 + 快讯）
+
+    原方案抓 36kr.com 的 RSS/HTML，现全站被 JS 反爬挑战拦截（任何路径都返回同一个
+    验证页，feedparser 静默拿到 0 条），因此改用官方网关接口。
+    """
     articles = []
     try:
-        headers = {
-            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
-            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
-            "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        }
-        
-        session = requests.Session()
-        
-        # 先访问首页获取 cookie
-        try:
-            session.get("https://36kr.com/", headers=headers, timeout=10, verify=False)
-            time.sleep(1)
-        except Exception:
-            pass
-        
-        # 尝试用 RSS 方式获取（更稳定）
-        try:
-            import feedparser
-            feeds = [
-                "https://36kr.com/feed-article",
-                "https://36kr.com/hot-list/rss"
-            ]
-            
-            for feed_url in feeds:
-                try:
-                    feed = feedparser.parse(feed_url)
-                    for entry in feed.entries[:20]:
-                        title = entry.get("title", "")
-                        link = entry.get("link", "")
-                        description = entry.get("description", "")
-                        pub_date = entry.get("published", "")
-                        
-                        if not title or not link:
-                            continue
-                        
-                        # 解析时间
-                        time_str = ""
-                        if pub_date:
-                            try:
-                                dt = datetime.datetime.strptime(pub_date, "%a, %d %b %Y %H:%M:%S %z")
-                                time_str = dt.astimezone(datetime.timezone(datetime.timedelta(hours=8))).strftime("%Y-%m-%d %H:%M")
-                            except Exception:
-                                time_str = pub_date[:16]
-                        
-                        # 清理 HTML 标签
-                        if description:
-                            description = BeautifulSoup(description, "html.parser").get_text(strip=True)[:500]
-                        
-                        articles.append({
-                            "title": title,
-                            "summary": description,
-                            "url": link,
-                            "source": "36 氪",
-                            "time": time_str,
-                            "score": 60,
-                            "author": "",
-                            "like_count": 0,
-                            "comment_count": 0
-                        })
-                    
-                    if articles:
-                        break
-                except Exception as e:
-                    print(f"36kr RSS 解析失败：{e}")
-                    continue
-                    
-        except ImportError:
-            print("未安装 feedparser，尝试网页爬取...")
-            # 备用方案：网页爬取
-            response = session.get("https://36kr.com/information-web_news", headers=headers, timeout=15, verify=False)
-            time.sleep(3)
-            
-            if response.status_code == 200:
-                soup = BeautifulSoup(response.text, "html.parser")
-                items = soup.select(".information-flow-item, .article-item")
-                
-                for item in items[:30]:
-                    title_elem = item.select_one("h1, h2, h3, .article-title")
-                    url_elem = item.select_one("a")
-                    summary_elem = item.select_one(".article-summary, .summary, .desc")
-                    time_elem = item.select_one(".time, .publish-time")
-                    
-                    if not title_elem or not url_elem:
-                        continue
-                    
-                    title = title_elem.text.strip()
-                    url = urljoin("https://36kr.com/", url_elem.get("href", ""))
-                    summary = summary_elem.text.strip() if summary_elem else ""
-                    time_str = time_elem.text.strip() if time_elem else ""
-                    
-                    if title and url:
-                        articles.append({
-                            "title": title,
-                            "summary": summary[:500],
-                            "url": url,
-                            "source": "36 氪",
-                            "time": time_str,
-                            "score": 55,
-                            "author": "",
-                            "like_count": 0,
-                            "comment_count": 0
-                        })
-        
-        # 去重
-        seen_urls = set()
-        unique_articles = []
-        for article in articles:
-            if article["url"] not in seen_urls and article["title"]:
-                seen_urls.add(article["url"])
-                unique_articles.append(article)
-        
-        articles = unique_articles[:MAX_ARTICLES_PER_SOURCE]
-        
+        # 科技栏目文章
+        for nick in KR_SUBNAV_NICKS:
+            param = {
+                "siteId": 1,
+                "platformId": 2,
+                "subnavType": 1,
+                "subnavNick": nick,
+            }
+            items = _kr_fetch_items(KR_SUBNAV_FLOW, param, KR_ARTICLE_QUOTA)
+            for item in items:
+                parsed = _kr_parse_item(item, default_score=60)
+                if parsed:
+                    articles.append(parsed)
+            if nick != KR_SUBNAV_NICKS[-1]:
+                time.sleep(1)
+
+        # 快讯
+        flash_items = _kr_fetch_items(
+            KR_NEWSFLASH_FLOW,
+            {"siteId": 1, "platformId": 2},
+            KR_NEWSFLASH_QUOTA
+        )
+        for item in flash_items:
+            parsed = _kr_parse_item(item, default_score=55)
+            if parsed:
+                articles.append(parsed)
+
     except Exception as e:
         print(f"爬取 36 氪失败：{e}")
-    
+
+    # 去重：同 url 去重，再按标题去重（同一条可能同时出现在栏目流和快讯流）
+    seen_urls = set()
+    seen_titles = set()
+    unique_articles = []
+    for article in articles:
+        if article["url"] in seen_urls or article["title"] in seen_titles:
+            continue
+        seen_urls.add(article["url"])
+        seen_titles.add(article["title"])
+        unique_articles.append(article)
+
+    articles = unique_articles[:MAX_ARTICLES_PER_SOURCE]
+
     print(f"✅ 爬取到 {len(articles)} 篇 36 氪文章")
     return articles
 
@@ -542,17 +576,6 @@ def main():
     print("=" * 60)
     print(f"🕒 开始时间：{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
-    
-    # 安装依赖
-    try:
-        import feedparser
-    except ImportError:
-        print("正在安装 feedparser...")
-        os.system("pip install feedparser --break-system-packages -q")
-        try:
-            import feedparser
-        except Exception:
-            print("⚠️  feedparser 安装失败，将使用备用爬取方案")
     
     # 爬取科技资讯（少数派 + 36 氪）
     print("\n📱 正在爬取科技资讯...")
