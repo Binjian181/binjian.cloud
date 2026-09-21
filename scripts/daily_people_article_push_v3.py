@@ -50,7 +50,7 @@ DB_CONFIG = {
 
 AI_CONFIG = {
     'enabled': True,
-    'api_key': 'REDACTED_LLM_API_KEY',
+    'api_key': os.environ.get('LLM_API_KEY', ''),
     'app_id': '1f605f0d7f89470d83a3c623f6eaeeb5',
     'wait_time_initial': 120,  # 首次等待 2 分钟
     'wait_time_retry': 60,     # 重试等待 1 分钟
