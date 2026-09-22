@@ -47,7 +47,7 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
     <link rel="canonical" href="https://binjian.cloud{url}">
     <title>{title} - 张彬健</title>
     <link rel="icon" href="/icons.png" type="image/png">
-    <link rel="stylesheet" href="/css/common.css?v=20260829">
+    <link rel="stylesheet" href="/css/common.css?v=20260922b">
     <!-- JSON-LD 结构化数据 -->
     <script type="application/ld+json">
     {{

@@ -19,7 +19,7 @@ import sys
 from pathlib import Path
 
 SITE = Path('/var/www/binjian.cloud')
-VER = '20260829'
+VER = '20260922b'
 WRITE = '--check' not in sys.argv
 
 TARGETS = []
@@ -34,7 +34,7 @@ for rel in ('templates/base.html', 'templates/news_page.html',
     TARGETS.append(SITE / rel)
 TARGETS.append(Path('/home/ubuntu/process_original_articles.py'))
 
-STRIP = re.compile(r'/css/common\.css\?v=[0-9]+')
+STRIP = re.compile(r'/css/common\.css\?v=[0-9a-z]+')
 
 
 def canonical(text):

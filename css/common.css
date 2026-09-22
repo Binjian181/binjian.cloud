@@ -28,6 +28,8 @@ this build ends with the finish review, *             the verdict, DESIGN.md, an
     /* 世界专属令牌 */
     --seal: #b1342b;
     /* 朱印 */
+    --on-seal: #fff;
+    /* 朱砂实心面上的前景色（亮色白字 6.2:1） */
     --seal-soft: rgba(177, 52, 43, 0.10);
     --rule: rgba(33, 28, 21, 0.14);
     /* 朱丝栏 / 界行 */
@@ -71,6 +73,8 @@ this build ends with the finish review, *             the verdict, DESIGN.md, an
         --accent-color: #d9543f;
         --accent-gradient: #d9543f;
         --seal: #d9543f;
+        /* 亮化的朱砂面上白字仅 3.97:1，故暗色沿用来源签的墨字约定（4.67:1） */
+        --on-seal: #16130d;
         --seal-soft: rgba(217, 84, 63, 0.16);
         --rule: rgba(236, 225, 207, 0.16);
         /* 数据可视化例外 · 栏目分级四色（暗色变体） */
@@ -100,6 +104,8 @@ this build ends with the finish review, *             the verdict, DESIGN.md, an
     --accent-color: #d9543f;
     --accent-gradient: #d9543f;
     --seal: #d9543f;
+    /* 亮化的朱砂面上白字仅 3.97:1，故暗色沿用来源签的墨字约定（4.67:1） */
+    --on-seal: #16130d;
     --seal-soft: rgba(217, 84, 63, 0.16);
     --rule: rgba(236, 225, 207, 0.16);
     /* 数据可视化例外 · 栏目分级四色（暗色变体） */
@@ -412,7 +418,7 @@ a {
 }
 
 /* ========== 来源标签 · 印学调和色板 ========== */
-/* 权威红 → 朱砂；科技 → 石青；36氪 → 石绿；澎湃 → 暖灰；原创 → 缃黄 */
+/* 权威红 → 朱砂；科技 → 石青；36氪 → 石绿；澎湃 → 暖灰；浙江宣传 → 紫泥；原创 → 缃黄 */
 .source-sspai, .source-少数派 {
     background-color: #3f5d7a;
     color: #f3ecdd;
@@ -433,13 +439,20 @@ a {
     color: #f3ecdd;
 }
 
+/* 浙江宣传 · 紫泥（紫檀印泥色），色相 327° 离朱砂/暖灰/石绿/石青最远 */
+.source-浙江宣传 {
+    background-color: #6b4a5c;
+    color: #f3ecdd;
+}
+
 .source-original {
     background-color: var(--seal-soft);
     color: var(--seal);
 }
 
 [data-theme="dark"] .source-sspai, [data-theme="dark"] .source-少数派 {
-    background-color: #5a7da0;
+    /* 由 #5a7da0 提亮：墨字对比 4.30 → 5.06，达到 4.5:1 底线 */
+    background-color: #6689ac;
     color: #16130d;
 }
 
@@ -449,13 +462,71 @@ a {
 }
 
 [data-theme="dark"] .source-人民网 {
-    background-color: #cf4a3d;
+    /* 由 #cf4a3d 提亮：墨字对比 4.15 → 4.85，达到 4.5:1 底线 */
+    background-color: #d75b4c;
     color: #16130d;
 }
 
 [data-theme="dark"] .source-澎湃 {
     background-color: #8c8270;
     color: #16130d;
+}
+
+[data-theme="dark"] .source-浙江宣传 {
+    background-color: #9c7189;
+    color: #16130d;
+}
+
+[data-theme="dark"] .source-original {
+    /* 暗色下 --seal 字压在 seal-soft 底上仅 3.95:1（tint 加深最多只到 4.33），故提亮字色至 5.5:1 */
+    color: #e9795f;
+}
+
+/* ========== 来源筛选栏 · 朱印签 ========== */
+/* 与卡片右上角来源签同源：未选 = 宣纸底 + 界栏发丝线，选中 = 朱砂实心印（同 nav-btn.active
+   的印章语言）。下缘一道界栏线把筛选带与列表收在同一张纸上，不再用悬浮面板/毛玻璃。 */
+.source-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0 0 20px;
+    padding: 0 0 12px;
+    border-bottom: 1px solid var(--rule);
+}
+
+.filter-btn {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--card-bg);
+    color: var(--secondary-text);
+    font-family: var(--font-sans);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: color 0.18s ease-out, background-color 0.18s ease-out, border-color 0.18s ease-out;
+}
+
+.filter-btn:hover {
+    color: var(--text-color);
+    border-color: var(--seal);
+}
+
+.filter-btn.active {
+    background: var(--seal);
+    border-color: var(--seal);
+    color: var(--on-seal);
+}
+
+.filter-btn:focus-visible {
+    outline: 2px solid var(--seal);
+    outline-offset: 2px;
 }
 
 /* ========== 空状态 ========== */
@@ -1396,6 +1467,39 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
         padding: 20px;
         font-size: 16px;
     }
+
+    /* 朱印签筛选栏：窄屏收成单行横滑，不再换行撑高把列表推下去。
+       4px 内边距给 focus 环留出空间，负外边距抵消以保持与内容列左对齐。 */
+    .source-filter {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        padding: 4px 4px 12px;
+        margin: -4px -4px 20px;
+        scroll-padding-inline: 4px;
+    }
+
+    .source-filter::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* 有溢出时两端渐隐，提示还有未露出的来源；滚到端点的一侧即收边 */
+    .source-filter[data-overflow] {
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 calc(100% - 16px), transparent 100%);
+    }
+
+    .source-filter[data-overflow][data-at-start] {
+        -webkit-mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 16px), transparent 100%);
+        mask-image: linear-gradient(90deg, #000 0, #000 calc(100% - 16px), transparent 100%);
+    }
+
+    .source-filter[data-overflow][data-at-end] {
+        -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 100%);
+        mask-image: linear-gradient(90deg, transparent 0, #000 16px, #000 100%);
+    }
 }
 
 @media (max-width: 390px) {
@@ -1451,6 +1555,11 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
     .quick-card:active {
         filter: brightness(0.94);
     }
+
+    .filter-btn:active {
+        background: var(--seal-soft);
+        border-color: var(--seal);
+    }
 }
 
 /* 触摸设备放大可点目标，满足 ≥44px（含平板抽屉导航） */
@@ -1461,6 +1570,11 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
 
     .article-source {
         padding: 5px 12px;
+    }
+
+    .filter-btn {
+        min-height: 44px;
+        padding: 10px 16px;
     }
 }
 
@@ -1533,7 +1647,7 @@ process_original_articles.py 的 ARTICLE_TEMPLATE / templates/discussion_page.ht
     }
 
     /* 隐藏导航、菜单、浮层按钮、返回链接、页脚、首页装饰 */
-    .top-bar, .nav-sidebar, .nav-bar, .menu-toggle, .theme-toggle, .theme-toggle-mobile, .back-to-top, .random-jump-btn, .back-link, .site-footer, footer, .sidebar-left, .quick-entry, .discussion-container, .today-badge {
+    .top-bar, .nav-sidebar, .nav-bar, .menu-toggle, .theme-toggle, .theme-toggle-mobile, .back-to-top, .random-jump-btn, .back-link, .site-footer, footer, .sidebar-left, .quick-entry, .discussion-container, .today-badge, .source-filter {
         display: none !important;
     }
 

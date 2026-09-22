@@ -7,15 +7,99 @@
         <div class="update-time">最后更新：{{ update_time }}{% if update_schedule %} | {{ update_schedule }}{% endif %}</div>
     </header>
     
+    {# 来源显示名：仅影响展示与筛选键，数据库原值不动。键为去掉空格的规范名 #}
+    {% set source_labels = {'36氪': '36 氪', '浙江宣传': '浙宣'} %}
+    {% set source_list = articles | map(attribute='source') | reject('none') | unique | list %}
+    {% if source_list | length > 1 %}
+    <div class="source-filter" id="sourceFilter" role="group" aria-label="按来源筛选">
+        <button type="button" class="filter-btn active" data-filter="all" aria-pressed="true">全部</button>
+        {% for src in source_list %}
+        {% set src_key = src | replace(' ', '') %}
+        <button type="button" class="filter-btn" data-filter="{{ src_key }}" aria-pressed="false">{{ source_labels.get(src_key, src_key) }}</button>
+        {% endfor %}
+    </div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var filterBar = document.getElementById('sourceFilter');
+        if (!filterBar) return;
+        var btns = Array.prototype.slice.call(filterBar.querySelectorAll('.filter-btn'));
+
+        // 溢出状态驱动两端渐隐提示（样式见 common.css 的 ≤768px 段落）
+        function syncOverflow() {
+            var max = filterBar.scrollWidth - filterBar.clientWidth;
+            if (max > 1) {
+                filterBar.setAttribute('data-overflow', '');
+                if (filterBar.scrollLeft <= 1) {
+                    filterBar.setAttribute('data-at-start', '');
+                } else {
+                    filterBar.removeAttribute('data-at-start');
+                }
+                if (filterBar.scrollLeft >= max - 1) {
+                    filterBar.setAttribute('data-at-end', '');
+                } else {
+                    filterBar.removeAttribute('data-at-end');
+                }
+            } else {
+                filterBar.removeAttribute('data-overflow');
+                filterBar.removeAttribute('data-at-start');
+                filterBar.removeAttribute('data-at-end');
+            }
+        }
+
+        // 点到的标签若被横滑遮住，滑回视野（贴近哪端就靠哪端，不来回跳）
+        function revealChip(btn) {
+            var left = btn.offsetLeft - filterBar.offsetLeft;
+            var right = left + btn.offsetWidth;
+            var target = null;
+            if (left < filterBar.scrollLeft) {
+                target = left - 4;
+            } else if (right > filterBar.scrollLeft + filterBar.clientWidth) {
+                target = right - filterBar.clientWidth + 4;
+            }
+            if (target === null) return;
+            target = Math.max(0, target);
+            if (filterBar.scrollTo) {
+                filterBar.scrollTo({ left: target, behavior: 'smooth' });
+            } else {
+                filterBar.scrollLeft = target;
+            }
+        }
+
+        filterBar.addEventListener('scroll', syncOverflow, { passive: true });
+        window.addEventListener('resize', syncOverflow);
+        syncOverflow();
+
+        btns.forEach(function (btn) {
+            btn.addEventListener('click', function () {
+                var filter = btn.getAttribute('data-filter');
+                btns.forEach(function (b) {
+                    var on = b === btn;
+                    b.classList.toggle('active', on);
+                    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+                });
+                var cards = document.querySelectorAll('.article-link');
+                Array.prototype.forEach.call(cards, function (card) {
+                    var src = card.getAttribute('data-source');
+                    card.style.display = (filter === 'all' || src === filter) ? '' : 'none';
+                });
+                revealChip(btn);
+                syncOverflow();
+            });
+        });
+    });
+    </script>
+    {% endif %}
+
     <div class="article-list">
         {% if articles %}
             {% for article in articles %}
-            <a href="{{ article.url }}" rel="noopener noreferrer" class="article-link">
+            <a href="{{ article.url }}" rel="noopener noreferrer" class="article-link" data-source="{{ article.source | replace(' ', '') }}">
                 <article class="article-card">
                     <div class="article-header">
                         <h2 class="article-title">{{ article.title | e }}</h2>
                         {% if article.source %}
-                        <span class="article-source source-{{ article.source | replace(' ', '') | lower }}"> {{ article.source }}</span>
+                        {% set src_key = article.source | replace(' ', '') | lower %}
+                        <span class="article-source source-{{ src_key }}"> {{ source_labels.get(src_key, article.source) }}</span>
                         {% endif %}
                     </div>
                     <div class="article-meta">

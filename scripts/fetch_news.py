@@ -572,6 +572,112 @@ def fetch_people_opinion():
     return articles
 
 
+def get_zjxc_summary(url, headers):
+    """从浙江宣传详情页获取摘要和发布时间"""
+    summary = ""
+    time_str = ""
+    
+    try:
+        response = requests.get(url, headers=headers, timeout=15)
+        html_content = response.content.decode('UTF-8', errors='replace')
+        soup = BeautifulSoup(html_content, "html.parser")
+        
+        # 提取发布时间：2026-09-14 11:04 -> 2026年09月14日 11:04
+        m = re.search(r'(202\d)-(\d{2})-(\d{2})\s+(\d{2}:\d{2})', soup.get_text())
+        if m:
+            time_str = f"{m.group(1)}年{m.group(2)}月{m.group(3)}日 {m.group(4)}"
+        
+        # 正文在 div.content
+        content_elem = soup.select_one('div.content')
+        if not content_elem:
+            content_elem = soup.select_one('.main.details')
+        if not content_elem:
+            return summary, time_str
+        
+        paragraphs = []
+        for p in content_elem.find_all('p'):
+            text = p.get_text().strip()
+            if len(text) > 50 and not any(k in text for k in [
+                '版权所有', '举报', '分享到', '责编', '客户端', '二维码'
+            ]):
+                paragraphs.append(text)
+                if len(paragraphs) >= 3:
+                    break
+        
+        if paragraphs:
+            summary = ' '.join(paragraphs[:2])
+            if len(summary) > 200:
+                summary = summary[:200] + '...'
+        
+        return summary, time_str
+        
+    except Exception as e:
+        print(f"获取摘要失败：{url} - {e}")
+        return summary, time_str
+
+
+def fetch_zjxc():
+    """爬取浙江宣传文章"""
+    articles = []
+    seen_urls = set()
+    
+    try:
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+        }
+        
+        page_url = "https://zjnews.zjol.com.cn/zjxc/"
+        response = requests.get(page_url, headers=headers, timeout=15)
+        
+        if response.status_code == 200:
+            html_content = response.content.decode('UTF-8', errors='replace')
+            soup = BeautifulSoup(html_content, "html.parser")
+            
+            for link in soup.find_all('a', href=True):
+                href = link.get('href', '')
+                
+                # 只抓取浙江宣传栏目下的文章链接
+                if '/zjxc/' not in href or not href.endswith('.shtml'):
+                    continue
+                
+                title = link.text.strip()
+                
+                # 过滤无效标题
+                if not title or len(title) < 6:
+                    continue
+                
+                url = urljoin('https://zjnews.zjol.com.cn', href)
+                if url in seen_urls:
+                    continue
+                seen_urls.add(url)
+                
+                # 获取摘要和时间（访问详情页）
+                summary, detail_time = get_zjxc_summary(url, headers)
+                
+                articles.append({
+                    "title": title,
+                    "summary": summary,
+                    "url": url,
+                    "source": "浙江宣传",
+                    "time": detail_time,
+                    "score": 80,
+                    "author": "",
+                    "like_count": 0,
+                    "comment_count": 0
+                })
+                
+                if len(articles) >= MAX_ARTICLES_PER_SOURCE:
+                    break
+        
+        print(f"✅ 爬取到 {len(articles)} 篇浙江宣传文章")
+    
+    except Exception as e:
+        print(f"爬取浙江宣传失败：{e}")
+    
+    return articles
+
+
 def main():
     print("=" * 60)
     print(f"🕒 开始时间：{datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -602,6 +708,10 @@ def main():
     print("-" * 60)
     
     people_articles = fetch_people_opinion()
+    time.sleep(1)
+    
+    zjxc_articles = fetch_zjxc()
+    people_articles = people_articles + zjxc_articles
     print(f"📊 时政观点共计：{len(people_articles)} 篇")
     
     # 保存到数据库
