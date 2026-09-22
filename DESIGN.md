@@ -31,6 +31,7 @@ AI default.
 | `--muted-text` | `#9c9080` | `#8a7e69` | captions / meta |
 | `--seal` / `--accent-color` | `#b1342b` | `#d9543f` | 朱砂 accent (only saturated color) |
 | `--seal-soft` | `rgba(177,52,43,.10)` | `rgba(217,84,63,.16)` | 朱印 tint fields |
+| `--on-seal` | `#fff` (6.2:1) | `#16130d` (4.67:1) | foreground on solid 朱砂 surfaces |
 | `--rule` | `rgba(33,28,21,.14)` | `rgba(236,225,207,.16)` | 界栏 / 朱丝栏 hairline |
 
 Gradients are removed everywhere; `--accent-gradient` is defined as a flat seal color only for
@@ -39,7 +40,14 @@ backward-compat with inline `var(--accent-gradient)` usages, which now render so
 ### Source-tag harmonized palette (印学)
 Per-source chips keep recognizable distinct hues but are muted into the world: 人民网 → 朱砂
 `--seal`; 少数派/sspai → 石青 `#3f5d7a`; 36氪 → 石绿 `#2f6f5b`; 澎湃 → 暖灰 `#6f6757`;
-原创 → 缃黄 (`--seal-soft` bg, `--seal` text). Dark-mode variants provided.
+浙江宣传 → 紫泥 `#6b4a5c`（紫檀印泥，色相 327°，离其余四色最远）；原创 → 缃黄 (`--seal-soft` bg,
+`--seal` text). Dark variants carry ink text on lightened grounds, all ≥4.5:1: 少数派 `#6689ac`
+(5.06), 人民网 `#d75b4c` (4.85), 浙江宣传 `#9c7189`, 36氪 `#3f8d74`, 澎湃 `#8c8270`; 原创's
+text lightens to `#e9795f` (5.5) because its tinted ground cannot deepen far enough (caps at 4.33).
+
+Chip label and filter key both come from a display layer: `news_page.html` maps 浙江宣传 → 浙宣
+via `source_labels`（仅展示，数据库与爬虫原值不动）, and filter keys are space-normalized
+(`replace(' ','')`) so the 36氪 / "36 氪" DB variants collapse to one hue and one filter.
 
 ### Data-viz exception (documented, intentional)
 `article/f6ba6edd.html` holds a reference comparison table (`.ref-table`) whose rows are
@@ -70,6 +78,12 @@ indigo/purple/orange/pink gradient *themes* (a separate concern).
   documented raise.
 - **界栏 hover** — article cards are uniform-bordered; on hover the left edge turns 朱砂 (the
   朱丝栏 → 朱印 transition). Avoids the always-on colored side-border tell.
+- **朱印签筛选栏** — `.source-filter` / `.filter-btn` (科技资讯 / 时政观点) are the 印章 language
+  applied to a control: 宣纸 chip + hairline border, active = solid 朱砂 block (same as
+  `nav-btn.active`); the row sits on a 界栏 hairline, not a floating glass panel. Foreground on
+  solid 朱砂 is `--on-seal` — white in light (6.2:1), ink in dark (4.67:1, following the dark
+  source-chip convention rather than the white-on-seal badge's 3.97:1). On narrow screens the row
+  becomes a single-line horizontal strip whose edge fades appear only while chips overflow.
 
 ## Component language (cross-surface)
 
@@ -96,3 +110,24 @@ crawler-regenerated) is restyled inline to match.
 - No raster assets were produced; the world is type/CSS-only, so no image provenance is owed.
 - Finish: detected (web, degraded regex mode) → `common.css` clean; residual `side-tab` on
   semantic blockquote/导语 rules accepted as intentional raises.
+- Refinement (2026-09-22, v4.3.1): 来源筛选栏 rebuilt from its ad-hoc inline style
+  (glass panel + rounded pills + `#667eea` indigo fallback) into the world as 朱印签; added the
+  `--on-seal` token and the single-line overflow strip. Detector vs the HEAD baseline: the old
+  bar's real violation (`#fff on #667eea`, 3.7:1) is gone; the remaining findings are pre-existing
+  raises (7× `side-tab` 朱批/导语 rules, `border-accent-on-rounded` on the 朱批 page-header) plus
+  one cross-scope false positive — degraded regex mode pairs dark `--on-seal #16130d` with light
+  `--seal #b1342b`, which never co-occur (each theme defines the pair together: 6.18:1 light,
+  4.67:1 dark; the same mode also pairs the print-only tokens `#000 on #b1342b`).
+- Refinement (2026-09-22, v4.3.1 · 来源签): 浙江宣传 chip added (紫泥 `#6b4a5c` light / `#9c7189`
+  dark — it previously rendered with no chip at all). WCAG audit of every chip pair against the
+  4.5:1 floor found three dark-mode failures, fixed under the fix-only-the-failing-values scope:
+  two grounds lightened (人民网 `#cf4a3d` 4.15 → `#d75b4c` 4.85, 少数派 `#5a7da0` 4.30 → `#6689ac`
+  5.06) and one text lightened (原创 3.95 → `#e9795f` 5.5, the tint-deepening route capping at
+  4.33). Provenance gap noted, not fixed: dark chip variants key on `[data-theme="dark"]` only, so
+  first-time system-dark visitors (no `data-theme` attribute) still get the light chips — they
+  remain legible there, so this degrades gracefully; a `prefers-color-scheme` variant would be the
+  fix if it ever matters. Cache note: the chip edits initially shipped under the unchanged
+  `?v=20260922` and were invisible to anyone who had already loaded that URL (nginx `expires 1y`,
+  and `.article-source` has no base background, so a missing rule = an invisible chip). All 190
+  pages + templates + `ARTICLE_TEMPLATE` now point at `?v=20260922b`;
+  **every `css/common.css` edit must bump the version via `/home/ubuntu/add_cache_version.py`**.
