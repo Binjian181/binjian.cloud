@@ -162,7 +162,6 @@ def main():
                     paragraphs,
                     article['url'],
                     publish_date,
-                    display_date,
                     analyzer,
                     analyzer.ai_result
                 )

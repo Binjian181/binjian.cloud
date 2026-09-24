@@ -591,7 +591,7 @@ def is_lead_paragraph(para: str) -> bool:
     last_char = para[-1]
     return last_char not in '。！？.'
 
-def generate_web_page(title: str, paragraphs: List[str], original_url: str, publish_date: str, display_datetime: str, analyzer: ParagraphAnalyzer, ai_result: Dict):
+def generate_web_page(title: str, paragraphs: List[str], original_url: str, publish_date: str, analyzer: ParagraphAnalyzer, ai_result: Dict):
     """生成网页"""
     
     print("\n🎨 正在生成网页...")
@@ -664,8 +664,8 @@ def generate_web_page(title: str, paragraphs: List[str], original_url: str, publ
     
     print(f"✅ 详情页已生成：/daily/{filename}")
     
-    # 更新列表
-    update_article_list(title, display_datetime, original_url, filename, actual_paragraphs, ai_result)
+    # 更新列表（列表只显示日期，不带具体时分）
+    update_article_list(title, display_date, original_url, filename, actual_paragraphs, ai_result)
     
     # 重新生成列表页
     regenerate_list_page(env)
@@ -870,7 +870,7 @@ def main():
     
     # 生成网页
     print(f"\n🎨 步骤 4: 生成网页...")
-    generate_web_page(title, paragraphs, url, publish_date, display_datetime, analyzer, analyzer.ai_result)
+    generate_web_page(title, paragraphs, url, publish_date, analyzer, analyzer.ai_result)
     
     print("\n" + "=" * 70)
     print(f"✅ 完成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
