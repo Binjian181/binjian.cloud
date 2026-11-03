@@ -12,7 +12,7 @@ DATE=$(date +%Y%m%d)
 
 mkdir -p ${DB_DIR}
 
-# Dump database (only keep the latest dump in git)
+# Dump database (local only — db/ is gitignored, never pushed to the public repo)
 # 密码通过 MYSQL_PWD 环境变量传入，避免出现在进程列表 (ps) 中
 MYSQL_PWD="${DB_PASSWORD}" mysqldump -u${DB_USER} --single-transaction --quick \
     --lock-tables=false ${DB_NAME} | gzip > ${DB_DIR}/${DB_NAME}_${DATE}.sql.gz
@@ -30,7 +30,7 @@ find ${LOCAL_BACKUP_DIR} -name "${DB_NAME}_*.sql.gz" -type f -mtime +7 -delete
 cp -u /home/ubuntu/*.py /home/ubuntu/backup_database.sh /home/ubuntu/backup_binjian.sh scripts/ 2>/dev/null || true
 
 # --- Git backup ---
-# Add all changes (website files + database dump + scripts)
+# Add all changes (website files + scripts; db/ is excluded via .gitignore)
 git add -A
 
 # Check if there are changes to commit
@@ -43,4 +43,4 @@ fi
 git commit -m "auto backup: $(date '+%Y-%m-%d %H:%M')"
 git push origin main
 
-echo "[$(date)] Backup completed (website + database + scripts)"
+echo "[$(date)] Backup completed (website + scripts; DB dump kept locally)"

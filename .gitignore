@@ -9,3 +9,6 @@ Thumbs.db
 
 # Log files
 *.log
+
+# 数据库备份仅保留在服务器本地，不进入公开仓库
+db/
