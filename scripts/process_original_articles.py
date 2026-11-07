@@ -6,25 +6,22 @@
 """
 
 import os
+import re
+import sys
 import hashlib
 import datetime
-import re
-import pymysql
+import subprocess
 import markdown
 
 # 配置
+SITE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import store
+
 CONFIG = {
-    'original_dir': '/home/ubuntu/original_articles',
-    'output_dir': '/var/www/binjian.cloud',
-    'article_dir': '/var/www/binjian.cloud/article',
-    'mysql': {
-        'host': '127.0.0.1',
-        'port': 3306,
-        'user': 'root',
-        'password': '19930107ZBj',
-        'database': 'articles',
-        'charset': 'utf8mb4',
-    }
+    'original_dir': os.path.join(SITE_DIR, 'original_articles'),
+    'output_dir': SITE_DIR,
+    'article_dir': os.path.join(SITE_DIR, 'article'),
 }
 
 # HTML 模板
@@ -175,16 +172,6 @@ ARTICLE_TEMPLATE = '''<!DOCTYPE html>
 </html>'''
 
 
-def get_db_connection():
-    """获取数据库连接"""
-    try:
-        conn = pymysql.connect(**CONFIG['mysql'])
-        return conn
-    except Exception as e:
-        print(f"数据库连接失败：{e}")
-        return None
-
-
 def extract_title_from_md(md_content, filename):
     """从 Markdown 内容提取标题"""
     lines = md_content.strip().split('\n')
@@ -246,47 +233,50 @@ def generate_url_hash(title, date):
     return hashlib.md5(hash_str.encode('utf-8')).hexdigest()[:8]
 
 
-def is_article_in_db(conn, url):
-    """检查文章是否已在数据库中"""
+def file_publish_date(filepath):
+    """取 Markdown 的发布日期。
+
+    GitHub Actions 每次检出仓库都会把文件 mtime 刷成检出时间，只靠 mtime 会让
+    同一篇文章反复生成新 URL 并重复入库，因此优先取 git 提交日期。
+    """
     try:
-        with conn.cursor() as cursor:
-            cursor.execute("SELECT id FROM news_articles WHERE url = %s", (url,))
-            return cursor.fetchone() is not None
-    except Exception as e:
-        print(f"查询数据库失败：{e}")
-        return False
+        result = subprocess.run(
+            ['git', 'log', '-1', '--format=%ad', '--date=format:%Y-%m-%d', '--', filepath],
+            cwd=SITE_DIR, capture_output=True, text=True, timeout=30)
+        date = result.stdout.strip()
+        if re.fullmatch(r'\d{4}-\d{2}-\d{2}', date):
+            return date
+    except Exception:
+        pass
+    return datetime.datetime.fromtimestamp(os.path.getmtime(filepath)).strftime('%Y-%m-%d')
 
 
-def save_to_db(conn, title, summary, url, date):
-    """保存文章到数据库"""
+def is_article_in_db(url):
+    """检查文章是否已入库"""
+    return store.url_exists(url)
+
+
+def save_to_db(title, summary, url, date):
+    """保存文章到数据文件"""
     try:
-        with conn.cursor() as cursor:
-            sql = """
-            INSERT INTO news_articles 
-            (title, summary, url, source, publish_time, author, like_count, comment_count, score, page_type)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """
-            cursor.execute(sql, (
-                title,
-                summary,
-                url,
-                '原创',
-                date,
-                'Binjian',
-                0,
-                0,
-                100,  # 原创文章默认高分
-                'original'
-            ))
-            conn.commit()
-            return True
+        record = {
+            'title': title,
+            'summary': summary,
+            'url': url,
+            'source': '原创',
+            'publish_time': date,
+            'author': 'Binjian',
+            'like_count': 0,
+            'comment_count': 0,
+            'score': 100,  # 原创文章默认高分
+        }
+        return store.insert([record], 'original') > 0
     except Exception as e:
         print(f"入库失败：{e}")
-        conn.rollback()
         return False
 
 
-def process_markdown_file(filepath, conn):
+def process_markdown_file(filepath):
     """处理单个 Markdown 文件"""
     filename = os.path.basename(filepath)
     
@@ -302,9 +292,8 @@ def process_markdown_file(filepath, conn):
     title = extract_title_from_md(md_content, filename)
     summary = extract_summary(md_content)
     
-    # 使用文件修改时间作为发布日期
-    file_mtime = os.path.getmtime(filepath)
-    date = datetime.datetime.fromtimestamp(file_mtime).strftime('%Y-%m-%d')
+    # 发布日期
+    date = file_publish_date(filepath)
     
     # 生成 URL
     url_hash = generate_url_hash(title, date)
@@ -313,7 +302,7 @@ def process_markdown_file(filepath, conn):
     html_path = os.path.join(CONFIG['article_dir'], html_filename)
     
     # 检查是否已处理
-    if is_article_in_db(conn, url):
+    if is_article_in_db(url):
         print(f"⏭️  已存在：{title}")
         return False
     
@@ -342,7 +331,7 @@ def process_markdown_file(filepath, conn):
         return False
     
     # 入库
-    if save_to_db(conn, title, summary, url, date):
+    if save_to_db(title, summary, url, date):
         print(f"✅ 入库成功：{title}")
         return True
     else:
@@ -359,18 +348,11 @@ def main():
         print(f"❌ 原创文章目录不存在：{CONFIG['original_dir']}")
         return
     
-    # 获取数据库连接
-    conn = get_db_connection()
-    if not conn:
-        print("❌ 无法连接数据库")
-        return
-    
     # 扫描 Markdown 文件
     md_files = [f for f in os.listdir(CONFIG['original_dir']) if f.endswith('.md')]
     
     if not md_files:
         print("📂 没有找到 Markdown 文件")
-        conn.close()
         return
     
     print(f"📂 找到 {len(md_files)} 个 Markdown 文件")
@@ -380,11 +362,8 @@ def main():
     new_count = 0
     for md_file in sorted(md_files):
         filepath = os.path.join(CONFIG['original_dir'], md_file)
-        if process_markdown_file(filepath, conn):
+        if process_markdown_file(filepath):
             new_count += 1
-    
-    # 关闭数据库连接
-    conn.close()
     
     # 总结
     print("-" * 60)

@@ -6,30 +6,26 @@
   - 科技资讯：少数派、36氪、澎湃新闻科技频道
   - 时政观点：人民网观点频道
 定时任务：每 3 小时执行一次
-crontab: 0 */3 * * * cd /home/ubuntu && python3 fetch_news.py >> /home/ubuntu/fetch_news.log 2>&1
+crontab: 0 */3 * * * <项目目录>/scripts/run_task.sh fetch_news.py >> <项目目录>/fetch_news.log 2>&1
 """
 
 import requests
 from bs4 import BeautifulSoup
 import datetime
 import json
+import os
+import sys
 from urllib.parse import urljoin
 import time
 import re
-import pymysql
 from urllib3.exceptions import InsecureRequestWarning
 
 # 禁用 SSL 警告
 requests.packages.urllib3.disable_warnings(category=InsecureRequestWarning)
 
-# 数据库配置
-DB_CONFIG = {
-    'host': 'localhost',
-    'user': 'root',
-    'password': '19930107ZBj',
-    'database': 'articles',
-    'charset': 'utf8mb4'
-}
+SCRIPTS_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.insert(0, SCRIPTS_DIR)
+import store
 
 # 配置
 MAX_ARTICLES_PER_SOURCE = 50  # 每个来源最多爬取的文章数
@@ -55,70 +51,15 @@ def clean_summary(text):
 
 
 def get_db_connection():
-    """获取数据库连接"""
-    try:
-        conn = pymysql.connect(**DB_CONFIG)
-        return conn
-    except Exception as e:
-        print(f"数据库连接失败：{e}")
-        return None
+    """加载文件型数据（保持原有调用名）"""
+    return store.load_articles()
 
 
 def save_to_database(articles, page_type):
-    """保存文章到数据库"""
-    conn = get_db_connection()
-    if not conn:
-        return 0
-    
-    try:
-        cursor = conn.cursor()
-        
-        # 去重：检查已存在的 URL
-        existing_urls = set()
-        for article in articles:
-            if article['url']:
-                existing_urls.add(article['url'])
-        
-        if existing_urls:
-            placeholders = ','.join(['%s'] * len(existing_urls))
-            cursor.execute(f"SELECT url FROM news_articles WHERE url IN ({placeholders})", list(existing_urls))
-            existing_urls = {row[0] for row in cursor.fetchall()}
-        
-        # 插入新文章
-        count = 0
-        for article in articles:
-            if article['url'] in existing_urls:
-                continue
-            
-            sql = """
-            INSERT INTO news_articles 
-            (title, summary, url, source, publish_time, author, like_count, comment_count, score, page_type)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-            """
-            
-            cursor.execute(sql, (
-                article.get('title', '')[:500],
-                clean_summary(article.get('summary', '')),
-                article.get('url', ''),
-                article.get('source', ''),
-                article.get('time', ''),
-                article.get('author', ''),
-                article.get('like_count', 0),
-                article.get('comment_count', 0),
-                article.get('score', 0),
-                page_type
-            ))
-            count += 1
-        
-        conn.commit()
-        cursor.close()
-        conn.close()
-        
-        return count
-    except Exception as e:
-        print(f"保存数据失败：{e}")
-        conn.rollback()
-        return 0
+    """保存文章到数据文件，按 URL 去重"""
+    for article in articles:
+        article['summary'] = clean_summary(article.get('summary', ''))
+    return store.insert(articles, page_type)
 
 
 # 爬取少数派最新文章
@@ -734,8 +675,8 @@ def main():
     try:
         import subprocess
         result = subprocess.run(
-            ['python3', '/home/ubuntu/process_original_articles.py'],
-            cwd='/home/ubuntu',
+            [sys.executable, os.path.join(SCRIPTS_DIR, 'process_original_articles.py')],
+            cwd=SCRIPTS_DIR,
             capture_output=True,
             text=True,
             timeout=300
@@ -763,8 +704,8 @@ def main():
         try:
             import subprocess
             result = subprocess.run(
-                ['python3', '/home/ubuntu/rebuild_pages.py'],
-                cwd='/home/ubuntu',
+                [sys.executable, os.path.join(SCRIPTS_DIR, 'rebuild_pages.py')],
+                cwd=SCRIPTS_DIR,
                 capture_output=True,
                 text=True,
                 timeout=300

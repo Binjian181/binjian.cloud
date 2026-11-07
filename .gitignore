@@ -10,5 +10,27 @@ Thumbs.db
 # Log files
 *.log
 
-# 数据库备份仅保留在服务器本地，不进入公开仓库
+# 私密文件与本地环境
+.env.local
+.venv/
+__pycache__/
+
+# 旧服务器迁移下来的临时目录
 db/
+migration/
+
+# 本地自建站点时代的产物，改用 GitHub Actions 后不再需要
+Caddyfile
+scripts/update_dns.py
+scripts/backup_db.sh
+scripts/run_task.sh
+
+# 运行产物：列表页与文章数据每次抓取都会整体重写，
+# 提交进 main 会让仓库快速膨胀，它们分别保存在 gh-pages / site-data 分支
+/data/
+/tech-news.html
+/people-news.html
+/articles.html
+/daily.html
+/.state/
+/.publish/

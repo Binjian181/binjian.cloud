@@ -12,7 +12,6 @@ import sys
 import os
 import re
 import requests
-import pymysql
 from bs4 import BeautifulSoup
 from datetime import datetime
 from jinja2 import Environment, FileSystemLoader
@@ -32,20 +31,15 @@ except ImportError:
 
 # ==================== 配置区域 ====================
 
+SITE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import store
+
 BASE_CONFIG = {
-    'output_dir': '/var/www/binjian.cloud',
-    'templates_dir': '/var/www/binjian.cloud/templates',
+    'output_dir': SITE_DIR,
+    'templates_dir': os.path.join(SITE_DIR, 'templates'),
     'retry_times': 3,
     'retry_delay': 2,
-}
-
-DB_CONFIG = {
-    'host': '127.0.0.1',
-    'port': 3306,
-    'user': 'root',
-    'password': '19930107ZBj',
-    'database': 'articles',
-    'charset': 'utf8mb4',
 }
 
 AI_CONFIG = {
@@ -69,41 +63,32 @@ FILTER_KEYWORDS = [
 
 # ==================== 数据库操作 ====================
 
-def get_db_connection():
-    return pymysql.connect(**DB_CONFIG)
-
 def get_latest_unprocessed_article() -> Optional[Dict]:
     """获取最新一篇未处理的文章（优先选最新的，无新文章时从库里逆日期选未精读的）"""
-    conn = get_db_connection()
-    try:
-        with conn.cursor(cursor=pymysql.cursors.DictCursor) as cursor:
-            # 查询所有人民时评文章，按发布时间降序
-            # 注意：publish_time为空的排到最后，避免选到没有日期的文章
-            sql = """
-                SELECT id, title, url, source, publish_time 
-                FROM news_articles 
-                WHERE page_type = 'people' AND source = '人民网'
-                AND title LIKE '%（人民时评）%'
-                ORDER BY 
-                    CASE WHEN publish_time IS NULL OR publish_time = '' THEN 1 ELSE 0 END,
-                    publish_time DESC, id DESC
-            """
-            cursor.execute(sql)
-            articles = cursor.fetchall()
-        
-        processed_urls = get_processed_article_urls()
-        skipped_urls = get_skipped_article_urls()
-        
-        # 按日期逆序遍历，选第一篇未处理的
-        for article in articles:
-            if article['url'] not in processed_urls and article['url'] not in skipped_urls:
-                if is_valid_article(article):
-                    return article
-        
-        print("⚠️  所有人民时评文章都已处理过")
-        return None
-    finally:
-        conn.close()
+    # 与原 SQL 一致：page_type=people 且来源为人民网、标题含（人民时评）
+    # 空日期排最后，再按发布时间倒序、id 倒序
+    candidates = [
+        a for a in store.load_articles()
+        if a.get('page_type') == 'people'
+        and a.get('source') == '人民网'
+        and '（人民时评）' in (a.get('title') or '')
+    ]
+    candidates.sort(key=lambda a: (a.get('publish_time') or '', a.get('id') or 0), reverse=True)
+    # 有发布日期的优先，为空的排到最后
+    candidates = ([a for a in candidates if a.get('publish_time')]
+                  + [a for a in candidates if not a.get('publish_time')])
+
+    processed_urls = get_processed_article_urls()
+    skipped_urls = get_skipped_article_urls()
+
+    # 按日期逆序遍历，选第一篇未处理的
+    for article in candidates:
+        if article['url'] not in processed_urls and article['url'] not in skipped_urls:
+            if is_valid_article(article):
+                return article
+    
+    print("⚠️  所有人民时评文章都已处理过")
+    return None
 
 def get_processed_article_urls() -> set:
     list_file = os.path.join(BASE_CONFIG['output_dir'], 'daily', 'list.json')

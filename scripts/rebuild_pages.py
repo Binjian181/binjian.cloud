@@ -1,20 +1,17 @@
 #!/usr/bin/env python3
-import pymysql
+import os
 import re
 import datetime
+import sys
 from jinja2 import Environment, FileSystemLoader
 
+SITE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(SITE_DIR, 'scripts'))
+import store
+
 CONFIG = {
-    'output_dir': '/var/www/binjian.cloud',
-    'templates_dir': '/var/www/binjian.cloud/templates',
-    'mysql': {
-        'host': '127.0.0.1',
-        'port': 3306,
-        'user': 'root',
-        'password': '19930107ZBj',
-        'database': 'articles',
-        'charset': 'utf8mb4',
-    }
+    'output_dir': SITE_DIR,
+    'templates_dir': os.path.join(SITE_DIR, 'templates'),
 }
 
 # 摘要最大字符数（约3行）
@@ -107,17 +104,14 @@ PAGE_CONFIGS = {
     }
 }
 
-# 连接数据库
-conn = pymysql.connect(**CONFIG['mysql'], cursorclass=pymysql.cursors.DictCursor)
+ALL_ARTICLES = store.load_articles()
 generator = Environment(loader=FileSystemLoader(CONFIG['templates_dir']), autoescape=True)
 
 # 科技资讯页面
-with conn.cursor() as cursor:
-    cursor.execute('SELECT * FROM news_articles WHERE page_type = "tech" ORDER BY publish_time DESC, score DESC LIMIT 1000')
-    unique_tech = cursor.fetchall()
-    for item in unique_tech:
-        item['time'] = format_date(item['publish_time'])
-        item['summary'] = truncate_summary(item.get('summary', ''))
+unique_tech = store.latest(ALL_ARTICLES, 'tech')
+for item in unique_tech:
+    item['time'] = format_date(item['publish_time'])
+    item['summary'] = truncate_summary(item.get('summary', ''))
 
 template = generator.get_template('news_page.html')
 html = template.render(
@@ -140,12 +134,10 @@ with open(f"{CONFIG['output_dir']}/{PAGE_CONFIGS['tech']['output_file']}", 'w', 
 print("✅ 已重新生成: " + PAGE_CONFIGS['tech']['output_file'])
 
 # 时政观点页面
-with conn.cursor() as cursor:
-    cursor.execute('SELECT * FROM news_articles WHERE page_type = "people" ORDER BY publish_time DESC, score DESC LIMIT 1000')
-    people_articles = cursor.fetchall()
-    for item in people_articles:
-        item['time'] = format_date(item['publish_time'])
-        item['summary'] = truncate_summary(item.get('summary', ''))
+people_articles = store.latest(ALL_ARTICLES, 'people')
+for item in people_articles:
+    item['time'] = format_date(item['publish_time'])
+    item['summary'] = truncate_summary(item.get('summary', ''))
 
 template = generator.get_template('news_page.html')
 html = template.render(
@@ -168,12 +160,10 @@ with open(f"{CONFIG['output_dir']}/{PAGE_CONFIGS['people']['output_file']}", 'w'
 print("✅ 已重新生成: " + PAGE_CONFIGS['people']['output_file'])
 
 # 原创文章页面
-with conn.cursor() as cursor:
-    cursor.execute('SELECT * FROM news_articles WHERE page_type = "original" ORDER BY publish_time DESC, score DESC LIMIT 1000')
-    original_articles = cursor.fetchall()
-    for item in original_articles:
-        item['time'] = format_date(item['publish_time'])
-        item['summary'] = truncate_summary(item.get('summary', ''))
+original_articles = store.latest(ALL_ARTICLES, 'original')
+for item in original_articles:
+    item['time'] = format_date(item['publish_time'])
+    item['summary'] = truncate_summary(item.get('summary', ''))
 
 template = generator.get_template('news_page.html')
 html = template.render(
@@ -195,5 +185,4 @@ with open(f"{CONFIG['output_dir']}/{PAGE_CONFIGS['original']['output_file']}", '
     f.write(html)
 print("✅ 已重新生成: " + PAGE_CONFIGS['original']['output_file'])
 
-conn.close()
 print("\n所有页面重新生成完成，左侧导航都已添加时评精读入口")
