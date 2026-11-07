@@ -141,7 +141,8 @@ def get_and_clean_article(url: str) -> Tuple[List[str], str]:
         if url.startswith('https://'):
             url = url.replace('https://', 'http://')
         
-        response = requests.get(url, headers=headers, timeout=15)
+        # GitHub Actions 的海外出口访问人民网正文页经常超过 15 秒
+        response = requests.get(url, headers=headers, timeout=40)
         response.raise_for_status()
         
         html = response.content.decode('UTF-8', errors='replace')
