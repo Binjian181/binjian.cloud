@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-新闻爬虫脚本 - 爬取科技资讯和时政观点并存入数据库
+新闻爬虫脚本 - 爬取科技资讯和时政观点并存入 data/articles.jsonl
 数据源：
   - 科技资讯：少数派、36氪、澎湃新闻科技频道
   - 时政观点：人民网观点频道
-定时任务：每 3 小时执行一次
-crontab: 0 */3 * * * <项目目录>/scripts/run_task.sh fetch_news.py >> <项目目录>/fetch_news.log 2>&1
+定时任务：GitHub Actions .github/workflows/fetch.yml，每 3 小时一次
 """
 
 import requests
