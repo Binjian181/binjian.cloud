@@ -8,6 +8,7 @@ from jinja2 import Environment, FileSystemLoader
 SITE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(SITE_DIR, 'scripts'))
 import store
+from daily_people_article_push_v3 import regenerate_list_page
 
 CONFIG = {
     'output_dir': SITE_DIR,
@@ -184,5 +185,8 @@ html = template.render(
 with open(f"{CONFIG['output_dir']}/{PAGE_CONFIGS['original']['output_file']}", 'w', encoding='utf-8') as f:
     f.write(html)
 print("✅ 已重新生成: " + PAGE_CONFIGS['original']['output_file'])
+
+regenerate_list_page(generator)
+print("✅ 已重新生成: daily.html")
 
 print("\n所有页面重新生成完成，左侧导航都已添加时评精读入口")

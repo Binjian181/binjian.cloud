@@ -25,6 +25,9 @@ scripts/update_dns.py
 scripts/backup_db.sh
 scripts/run_task.sh
 
+# 一次性 DNS 切换工具，只在迁移时用
+scripts/switch_dns_to_pages.py
+
 # 运行产物：列表页与文章数据每次抓取都会整体重写，
 # 提交进 main 会让仓库快速膨胀，它们分别保存在 gh-pages / site-data 分支
 /data/

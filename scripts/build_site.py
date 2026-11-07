@@ -19,6 +19,10 @@ INCLUDE_SUFFIX = ('.html', '.png', '.jpg', '.jpeg', '.gif', '.svg',
                   '.ico', '.webmanifest')
 INCLUDE_FILES = {'CNAME', '.nojekyll', 'favicon', 'robots.txt', 'sitemap.xml'}
 
+# 缺少任何一个都说明生成步骤没跑全，宁可失败也不要把残缺站点推上去
+REQUIRED_PAGES = ('index.html', 'tech-news.html', 'people-news.html',
+                  'articles.html', 'daily.html')
+
 
 def clean(dest):
     """清空发布目录里上一次的内容，保留 git 元数据。"""
@@ -30,6 +34,11 @@ def clean(dest):
 
 
 def build(dest):
+    missing = [p for p in REQUIRED_PAGES
+               if not os.path.isfile(os.path.join(SITE_DIR, p))]
+    if missing:
+        raise SystemExit(f"❌ 缺少必需页面，拒绝发布：{' '.join(missing)}")
+
     copied, skipped = [], []
     os.makedirs(dest, exist_ok=True)
     clean(dest)

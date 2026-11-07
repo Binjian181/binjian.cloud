@@ -49,7 +49,7 @@ push_branch() { # $1=目录 $2=分支 $3=说明
   echo "   已推送 ${branch}"
 }
 
-echo "==> 1/5 恢复文章数据（分支 ${DATA_BRANCH}）"
+echo "==> 1/6 恢复文章数据（分支 ${DATA_BRANCH}）"
 prepare "$DATA_BRANCH" .state
 mkdir -p data
 if [ -f .state/articles.jsonl ]; then
@@ -60,14 +60,19 @@ else
 fi
 echo "   现有文章 $(wc -l < data/articles.jsonl) 条，URL 清单 $(wc -l < data/seen_urls.txt) 条"
 
-echo "==> 2/5 执行任务：${TASK}"
+echo "==> 2/6 执行任务：${TASK}"
 case "$TASK" in
   fetch) python scripts/fetch_news.py ;;
   daily) python scripts/daily_people_article_push_v3.py ;;
   *) echo "未知任务：$TASK" && exit 1 ;;
 esac
 
-echo "==> 3/5 提交生成物到 main"
+# 列表页是 gitignore 的生成物，检出的仓库里没有；每个任务只重建自己那部分，
+# 所以发布前统一重建全部页面，否则 gh-pages 会缺页。
+echo "==> 3/6 重建全部列表页"
+python scripts/rebuild_pages.py
+
+echo "==> 4/6 提交生成物到 main"
 git add -A daily article
 if git diff --cached --quiet; then
   echo "   main 无变化"
@@ -77,12 +82,12 @@ else
   echo "   已推送 main"
 fi
 
-echo "==> 4/5 发布 Pages（分支 ${PAGES_BRANCH}）"
+echo "==> 5/6 发布 Pages（分支 ${PAGES_BRANCH}）"
 prepare "$PAGES_BRANCH" .publish
 python scripts/build_site.py .publish
 push_branch .publish "$PAGES_BRANCH" "deploy: $(date -u '+%Y-%m-%d %H:%M') UTC"
 
-echo "==> 5/5 回写文章数据（分支 ${DATA_BRANCH}）"
+echo "==> 6/6 回写文章数据（分支 ${DATA_BRANCH}）"
 cp data/articles.jsonl data/seen_urls.txt .state/
 push_branch .state "$DATA_BRANCH" "data: $(date -u '+%Y-%m-%d %H:%M') UTC"
 
